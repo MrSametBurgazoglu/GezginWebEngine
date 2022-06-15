@@ -1,0 +1,8 @@
+//
+// Created by samet on 05.06.2022.
+//
+
+#ifndef UNTITLED_FIGCAPTION_DRAWER_H
+#define UNTITLED_FIGCAPTION_DRAWER_H
+
+#endif //UNTITLED_FIGCAPTION_DRAWER_H
