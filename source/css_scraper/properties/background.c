@@ -46,7 +46,7 @@ void background_image_property_set_value(struct css_properties* current_widget,c
     if(current_widget->background == NULL){
         current_widget->background = malloc(sizeof(struct css_background));
     }
-    current_widget->background->
+    //current_widget->background->
 }
 
 void background_position_property_set_value(struct css_properties* current_widget,char * value){

@@ -26,8 +26,6 @@ int main(int argc, char *argv[])
         exit(EXIT_FAILURE);
     }
 
-    get_text_and_rect(renderer, 0, 0, "hello, welcome to my world jackie", font, &texture1, &rect1);
-
     quit = 0;
     while (!quit) {
         while (SDL_PollEvent(&event) == 1) {

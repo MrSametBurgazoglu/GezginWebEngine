@@ -118,7 +118,7 @@ struct widget* scrape_html_from_file(char* file_name){
                 struct widget *new_widget = (struct widget*) malloc(sizeof(struct widget));
                 new_widget->html_tag = HTML_UNTAGGED_TEXT;
                 new_widget->widget_properties = malloc(sizeof(struct text_untagged));
-                new_widget->draw_widget =
+                //TODO iplement new_widget->draw_widget, new_widget->render_widget
                 new_widget->parent = current_widget;
                 current_widget->children_count = current_widget->children_count + 1;
                 current_widget->children = realloc(current_widget->children, current_widget->children_count * sizeof(struct widget*));

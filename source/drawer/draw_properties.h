@@ -11,6 +11,7 @@ struct draw_properties{
     SDL_Rect *rect;
     SDL_Texture *texture;
     TTF_Font *font;
+    SDL_Color color;
 };
 
 #endif //UNTITLED_DRAW_PROPERTIES_H

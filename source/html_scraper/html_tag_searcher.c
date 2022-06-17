@@ -6,7 +6,7 @@
 #include <string.h>
 #include <malloc.h>
 #include "html_tag_searcher.h"
-#include "../drawer/draw_functions.h"
+#include "../drawer/tag_draw_functions.h"
 
 //all supported elements names as string
 char* html_tag_list[] = {
