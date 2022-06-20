@@ -307,7 +307,7 @@ void set_background_size(struct css_background_size* cssBackgroundSize, char* va
 }
 
 void set_background_repeat_property(struct css_background* background, char* value){
-    int index = get_index_from_list_by_string(background_blend_mode_strings, value, BACKGROUND_BLEND_MODE_COUNT);
+    int index = get_index_from_list_by_string(background_repeat_strings, value, BACKGROUND_BLEND_MODE_COUNT);
     background->backgroundRepeatType = backgroundRepeatTypeList[index];
 }
 

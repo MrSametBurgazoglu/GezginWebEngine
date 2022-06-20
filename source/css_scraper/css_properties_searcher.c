@@ -63,7 +63,7 @@ struct css_property_function css_property_function_list[CSS_PROPERTY_COUNT] = {
         backface_visibility_property_set_value,
         background_property_set_value,
         background_attachment_property_set_value,
-        background_blend_property_set_value,
+        background_blend_mode_property_set_value,
         background_clip_property_set_value,
         background_color_property_set_value,
         background_image_property_set_value,

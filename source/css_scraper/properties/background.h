@@ -53,7 +53,7 @@ struct css_background{
     css_background_origin backgroundOrigin;
 };
 
-void background_blend_property_set_value(struct css_properties* current_widget,char * value);
+void background_blend_mode_property_set_value(struct css_properties* current_widget,char * value);
 
 void background_color_property_set_value(struct css_properties* current_widget,char * value);
 
