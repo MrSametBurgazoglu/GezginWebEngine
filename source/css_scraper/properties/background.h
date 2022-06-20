@@ -9,6 +9,9 @@
 #include "css_color.h"
 #include "../css_widget.h"
 
+
+// value1: left->0 right->1 center->2
+// value2: top->0 center->1 bottom->2
 struct css_background_position{
     css_background_position_type positionType;
     int value1;
@@ -16,15 +19,31 @@ struct css_background_position{
 };
 
 struct css_background_size{
-    css_background_size_type backgroundSizeType;
+    css_background_size_type backgroundSizeType1;
+    css_background_size_type backgroundSizeType2;
     int value1;
     int value2;
 };
 
+struct css_background_image_color{
+    struct color_rgba* color;
+    int percent;
+};
+
+
 struct css_background{
     struct color_rgba* background_color;
     char** background_image_list;
+    struct css_background_image_color** background_image_color_list;
+    css_background_type background_type;
     int background_image_count;
+    bool background_image_inherit;
+    bool background_position_inherit;
+    bool background_color_inherit;
+    bool background_repeat_inherit;
+    bool background_origin_inherit;
+    bool background_clip_inherit;
+    bool background_attachment_inherit;
     struct css_background_position* backgroundPosition;
     css_background_repeat_type backgroundRepeatType;
     struct css_background_size* backgroundSize;

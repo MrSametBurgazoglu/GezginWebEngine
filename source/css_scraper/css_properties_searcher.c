@@ -7,9 +7,10 @@
 #include "css_properties_searcher.h"
 #include "css_all_properties.h"
 
+#define CSS_PROPERTY_COUNT 26
 
 //TODO WILL "ALL" ADDED
-char* css_properties_list[] = {
+char* css_properties_list[CSS_PROPERTY_COUNT] = {
         "accent-color",
         "align-content",
         "align-items",
@@ -38,15 +39,13 @@ char* css_properties_list[] = {
         "color",
 };
 
-int css_property_count = 16;
-
 
 //function for testing
 //void func(struct css_properties* current_css_widget, char * value){
 //    current_css_widget->
 //}
 
-struct css_property_function css_property_function_list[] = {
+struct css_property_function css_property_function_list[CSS_PROPERTY_COUNT] = {
         accent_color_property_set_value,
         align_content_property_set_value,
         align_items_property_set_value,
@@ -62,10 +61,16 @@ struct css_property_function css_property_function_list[] = {
         animation_timing_function_property_set_value,
         backdrop_filter_property_set_value,
         backface_visibility_property_set_value,
-        /*background_property_set_value, NOT IMPLEMENTED YET
+        background_property_set_value,
         background_attachment_property_set_value,
         background_blend_property_set_value,
-         */
+        background_clip_property_set_value,
+        background_color_property_set_value,
+        background_image_property_set_value,
+        background_origin_property_set_value,
+        background_position_property_set_value,
+        background_repeat_property_set_value,
+        background_size_property_set_value,
         color_property_set_value,
 };
 
@@ -77,7 +82,7 @@ int css_property_search(char* property)
 {
     int l, m, r, result;
     l = 0;
-    r = css_property_count;
+    r = CSS_PROPERTY_COUNT;
 
     while (l <= r) {
         m = l + (r - l) / 2;

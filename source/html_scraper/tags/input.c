@@ -211,6 +211,7 @@ int choose_variable_for_input_tag(struct widget* current_widget, char* var_name,
     else if(!strcmp(var_name, "value")){
         widget_properties->value = var_value;
     }
+    return 0;
 }
 
 void set_widget_properties_for_input_tag(struct widget* current_widget){

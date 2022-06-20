@@ -24,6 +24,7 @@ struct css_properties{
     bool animation_inherit;
     bool backdropFilter_inherit;
     bool backface_visibility_inherit;
+    bool background_inherit;
     struct color_rgba* accent_color;
     css_align align_content;
     css_align align_items;

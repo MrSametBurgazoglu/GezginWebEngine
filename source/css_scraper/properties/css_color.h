@@ -15,6 +15,7 @@ struct color_rgba{
 //struct color_rgba* get_color_by_name(char*);
 
 struct color_rgba* get_color_by_rgb(int, int, int);
+struct color_rgba* get_color_by_rgba(int, int, int, int);
 
 struct color_rgba* get_color(char* value);
 
