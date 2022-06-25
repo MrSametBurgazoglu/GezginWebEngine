@@ -87,13 +87,19 @@ css_background_attachment backgroundAttachmentList[BACKGROUND_ATTACHMENT_TYPE_CO
         CSS_BACKGROUND_ATTACHMENT_SCROLL,
 };
 
-void set_background_blend_mode(struct css_properties* current_widget, char* value){
+void set_background_blend_mode(struct css_background* background, char* value){
     int index = get_index_from_list_by_string(background_blend_mode_strings, value, BACKGROUND_BLEND_MODE_COUNT);
-    current_widget->background->backgroundBlendMode = backgroundBlendModeList[index];
+    if (index != -1){
+        background->backgroundBlendMode = backgroundBlendModeList[index];
+    }
+    else{
+        background->backgroundBlendMode = CSS_BACKGROUND_BLEND_MODE_NORMAL;
+    }
+
 }
 
-void set_background_color(struct css_properties* current_widget, char* value){
-    current_widget->background->background_color = get_color(value);
+void set_background_color(struct css_background* background, char* value){
+    get_color(background->background_color, value);
 }
 
 void set_background_image_color(struct css_background_image_color** background_image_color_list, char* value){
@@ -108,7 +114,7 @@ void set_background_image_color(struct css_background_image_color** background_i
     while (value2 != NULL){
         char* color = strtok(value2, " ");
         if (color == NULL){
-            background_image_color_list[index2]->color = get_color(color);
+            get_color(background_image_color_list[index2]->color, color);
         }
         else{
             char* percent = strtok(NULL, " ");
@@ -308,43 +314,69 @@ void set_background_size(struct css_background_size* cssBackgroundSize, char* va
 
 void set_background_repeat_property(struct css_background* background, char* value){
     int index = get_index_from_list_by_string(background_repeat_strings, value, BACKGROUND_BLEND_MODE_COUNT);
-    background->backgroundRepeatType = backgroundRepeatTypeList[index];
+    if (index != -1){
+        background->backgroundRepeatType = backgroundRepeatTypeList[index];
+    }
+    else{
+        background->backgroundRepeatType = CSS_BACKGROUND_REPEAT_TYPE_NO_REPEAT;
+    }
+
 }
 
 void set_background_origin_property(struct css_background* background, char* value){
     int index = get_index_from_list_by_string(background_origin_strings, value, BACKGROUND_ORIGIN_TYPE_COUNT);
-    background->backgroundOrigin = backgroundOriginList[index];
+    if (index != -1) {
+        background->backgroundOrigin = backgroundOriginList[index];
+    }
+    else{
+        background->backgroundOrigin = CSS_BACKGROUND_ORIGIN_PADDING_BOX;
+    }
 }
 
 void set_background_clip_property(struct css_background* background, char* value){//origin strings because same
     int index = get_index_from_list_by_string(background_origin_strings, value, BACKGROUND_CLIP_TYPE_COUNT);
-    background->backgroundClip = backgroundClipList[index];
+    if (index != -1) {
+        background->backgroundClip = backgroundClipList[index];
+    }
+    else{
+        background->backgroundClip = CSS_BACKGROUND_CLIP_BORDER_BOX;
+    }
 }
 
 void set_background_attachment_property(struct css_background* background, char* value){//origin strings because same
     int index = get_index_from_list_by_string(background_attachment_strings, value, BACKGROUND_ATTACHMENT_TYPE_COUNT);
-    background->backgroundAttachment = backgroundAttachmentList[index];
+    if (index != -1) {
+        background->backgroundAttachment = backgroundAttachmentList[index];
+    }
+    else{
+        background->backgroundAttachment = CSS_BACKGROUND_ATTACHMENT_SCROLL;
+    }
 }
 
 void background_blend_mode_property_set_value(struct css_properties* current_widget, char* value){
     if(current_widget->background == NULL){
         current_widget->background = malloc(sizeof(struct css_background));
     }
-    set_background_blend_mode(current_widget, value);
+    set_background_blend_mode(current_widget->background, value);
 }
 
 void background_color_property_set_value(struct css_properties* current_widget, char* value){
     if(current_widget->background == NULL){
         current_widget->background = malloc(sizeof(struct css_background));
     }
-    if (!strcmp(value, "initial")){
-        current_widget->background->background_color = get_color_by_rgba(0, 0, 0, 0);//transparent
-    }
-    else if(!strcmp(value, "inherit")){
+    if(!strcmp(value, "inherit")){
         current_widget->background->background_color_inherit = true;
     }
     else{
-        set_background_color(current_widget, value);
+        if(current_widget->background->background_color == NULL){
+            current_widget->background->background_color = malloc(sizeof(struct color_rgba));
+        }
+        if (!strcmp(value, "initial")){
+            get_color_by_rgba(current_widget->background->background_color, 0, 0, 0, 0);//transparent
+        }
+        else{
+            set_background_color(current_widget->background, value);
+        }
     }
 }
 

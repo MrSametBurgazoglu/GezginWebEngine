@@ -15,73 +15,63 @@ int predefined_color_value_list[][4] = {
         {255, 255, 255, 255},
 };
 
-struct color_rgba* get_color_by_name(char* name){
-    struct color_rgba* new_color = (struct color_rgba*) malloc(sizeof(struct color_rgba));
+void get_color_by_name(struct color_rgba* color_struct, char* name){
     if (strcmp(name, "red") == 0){
-        new_color->alpha = 255;
-        new_color->red = 255;
-        new_color->green = 0;
-        new_color->blue = 0;
+        color_struct->alpha = 255;
+        color_struct->red = 255;
+        color_struct->green = 0;
+        color_struct->blue = 0;
     }
     else{// return default color
-        new_color->alpha = 255;
-        new_color->red = 0;
-        new_color->green = 0;
-        new_color->blue = 0;
+        color_struct->alpha = 255;
+        color_struct->red = 0;
+        color_struct->green = 0;
+        color_struct->blue = 0;
     }
-    return new_color;
 }
 
-struct color_rgba* get_color_by_rgb(int red, int green, int blue){
-    struct color_rgba* new_color = (struct color_rgba*) malloc(sizeof(struct color_rgba));
-    new_color->alpha = 255;
-    new_color->red = red;
-    new_color->green = green;
-    new_color->blue = blue;
-    return new_color;
+void get_color_by_rgb(struct color_rgba* color_struct, int red, int green, int blue){
+    color_struct->alpha = 255;
+    color_struct->red = red;
+    color_struct->green = green;
+    color_struct->blue = blue;
 }
 
-struct color_rgba* get_color_by_rgba(int alpha, int red, int green, int blue){
-    struct color_rgba* new_color = (struct color_rgba*) malloc(sizeof(struct color_rgba));
-    new_color->alpha = alpha;
-    new_color->red = red;
-    new_color->green = green;
-    new_color->blue = blue;
-    return new_color;
+void get_color_by_rgba(struct color_rgba* color_struct, int alpha, int red, int green, int blue){
+    color_struct->alpha = alpha;
+    color_struct->red = red;
+    color_struct->green = green;
+    color_struct->blue = blue;
 }
 
 //TODO USE FORMULA TO TRANSFORM
-struct color_rgba* get_color_by_hsl(int color, int gray, int lightness){
-    struct color_rgba* new_color = (struct color_rgba*) malloc(sizeof(struct color_rgba));
-    new_color->alpha = 0;
-    new_color->red = 0;
-    new_color->green = 0;
-    new_color->blue = 0;
-    return new_color;
+void get_color_by_hsl(struct color_rgba* color_struct, int color, int gray, int lightness){
+    color_struct->alpha = 0;
+    color_struct->red = 0;
+    color_struct->green = 0;
+    color_struct->blue = 0;
 }
 
-struct color_rgba* get_color_by_hsla(int color, int gray, int lightness, int alpha){
-    struct color_rgba* new_color = (struct color_rgba*) malloc(sizeof(struct color_rgba));
-    new_color->alpha = alpha;
-    new_color->red = 0;
-    new_color->green = 0;
-    new_color->blue = 0;
-    return new_color;
+void get_color_by_hsla(struct color_rgba* color_struct, int color, int gray, int lightness, int alpha){
+    color_struct->alpha = alpha;
+    color_struct->red = 0;
+    color_struct->green = 0;
+    color_struct->blue = 0;
 }
 
 
 //TODO MAKE TRANSFORM
 //DON'T FORGET FIRST CHARACTER IS '#'
-struct color_rgba* get_color_by_hex(char* value){
+void get_color_by_hex(struct color_rgba* color_struct, char* value){
     struct color_rgba* new_color = (struct color_rgba*) malloc(sizeof(struct color_rgba));
-    new_color->alpha = 0;
-    new_color->red = 0;
-    new_color->green = 0;
-    new_color->blue = 0;
-    return new_color;
+    color_struct->alpha = 0;
+    color_struct->red = 0;
+    color_struct->green = 0;
+    color_struct->blue = 0;
 }
 
-struct color_rgba* get_color(char* value){
+
+void get_color(struct color_rgba* colorRgba, char* value){
     char* start_index = strchr(value, '(');
     char* end_index = strchr(value, ')');
     if (start_index != NULL && end_index != NULL){
@@ -101,7 +91,7 @@ struct color_rgba* get_color(char* value){
             while ((value2 = strtok(NULL, ",")) != NULL && index < 3){
                 function_parameters[index++] = (int) strtol(value2, NULL, 10);
             }
-            return get_color_by_rgb(function_parameters[0], function_parameters[1], function_parameters[2]);
+            get_color_by_rgb(colorRgba, function_parameters[0], function_parameters[1], function_parameters[2]);
         }
         else if(!strcmp(function_name, "rgba")){
             char* value2 = strtok(parameters, ",");
@@ -111,7 +101,7 @@ struct color_rgba* get_color(char* value){
             while ((value2 = strtok(NULL, ",")) != NULL && index < 4){
                 function_parameters[index++] = (int) strtol(value2, NULL, 10);
             }
-            return get_color_by_rgba(function_parameters[0], function_parameters[1], function_parameters[2], function_parameters[3]);
+            get_color_by_rgba(colorRgba, function_parameters[0], function_parameters[1], function_parameters[2], function_parameters[3]);
         }
         else if(!strcmp(function_name, "hsl")){
             char* value2 = strtok(parameters, ",");
@@ -121,7 +111,7 @@ struct color_rgba* get_color(char* value){
             while ((value2 = strtok(NULL, ",")) != NULL && index < 3){
                 function_parameters[index++] = (int) strtol(value2, NULL, 10);
             }
-            return get_color_by_hsl(function_parameters[0], function_parameters[1], function_parameters[2]);
+            get_color_by_hsl(colorRgba, function_parameters[0], function_parameters[1], function_parameters[2]);
         }
         else if(!strcmp(function_name, "hsla")){
             char* value2 = strtok(parameters, ",");
@@ -131,7 +121,7 @@ struct color_rgba* get_color(char* value){
             while ((value2 = strtok(NULL, ",")) != NULL && index < 4){
                 function_parameters[index++] = (int) strtol(value2, NULL, 10);
             }
-            return get_color_by_hsla(function_parameters[0], function_parameters[1], function_parameters[2], function_parameters[3]);
+            get_color_by_hsla(colorRgba, function_parameters[0], function_parameters[1], function_parameters[2], function_parameters[3]);
         }
         else{
             return get_color_by_rgb(0, 0, 0);
@@ -139,10 +129,17 @@ struct color_rgba* get_color(char* value){
     }
     else if(start_index == NULL && end_index == NULL){
         if(value[0] == '#'){//TODO IS THIS NECESSARY?
-            return get_color_by_hex(value);
+            get_color_by_hex(colorRgba, value);
         }
     }
     else{//TODO this must be default value
-        return get_color_by_rgb(0, 0, 0);
+        get_color_by_rgb(colorRgba, 0, 0, 0);
     }
+}
+//TODO CHECK COLOR STRUCT IS EMPTY HERE
+void sync_color(struct color_rgba* source, struct color_rgba* dest){
+    dest->alpha = source->alpha;
+    dest->red = source->red;
+    dest->green = source->green;
+    dest->blue = source->blue;
 }

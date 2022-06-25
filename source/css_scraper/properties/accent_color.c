@@ -12,12 +12,14 @@
 
 void accent_color_property_set_value(struct css_properties* current_css_widget, char* value){
     if(!strcmp(value, "auto") || !strcmp(value ,"initial")){
-        current_css_widget->accent_color = get_color_by_rgb(ACCENT_DEFAULT_VALUE);
+        get_color_by_rgb(current_css_widget->accent_color, ACCENT_DEFAULT_VALUE);
+        current_css_widget->accent_color_inherit = false;
     }
     else if (!strcmp(value, "inherit")){
         current_css_widget->accent_color_inherit = true;
     }
     else{
-        current_css_widget->accent_color =  get_color(value);
+        get_color(current_css_widget->accent_color, value);
+        current_css_widget->accent_color_inherit = false;
     }
 }

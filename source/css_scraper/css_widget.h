@@ -7,7 +7,6 @@
 
 #include <stdbool.h>
 #include "properties/css_color.h"
-#include "properties/border.h"
 #include "properties/box_shadow.h"
 #include "properties/clip.h"
 #include "properties/column.h"
@@ -25,6 +24,7 @@ struct css_properties{
     bool backdropFilter_inherit;
     bool backface_visibility_inherit;
     bool background_inherit;
+    bool border_inherit;
     struct color_rgba* accent_color;
     css_align align_content;
     css_align align_items;

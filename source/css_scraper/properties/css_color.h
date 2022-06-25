@@ -12,11 +12,13 @@ struct color_rgba{
     int blue;
 };
 
-//struct color_rgba* get_color_by_name(char*);
+void get_color_by_name(struct color_rgba*, char*);
 
-struct color_rgba* get_color_by_rgb(int, int, int);
-struct color_rgba* get_color_by_rgba(int, int, int, int);
+void get_color_by_rgb(struct color_rgba*, int, int, int);
+void get_color_by_rgba(struct color_rgba*, int, int, int, int);
 
-struct color_rgba* get_color(char* value);
+void get_color(struct color_rgba*, char* value);
+
+void sync_color(struct color_rgba* source, struct color_rgba* dest);
 
 #endif //UNTITLED_CSS_COLOR_H
