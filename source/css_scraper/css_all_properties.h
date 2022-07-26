@@ -17,5 +17,7 @@
 #include "properties/backdrop_filter.h"
 #include "properties/backface_visibility.h"
 #include "properties/background.h"
+#include "properties/border.h"
+#include "properties/font.h"
 
 #endif //UNTITLED_CSS_ALL_PROPERTIES_H

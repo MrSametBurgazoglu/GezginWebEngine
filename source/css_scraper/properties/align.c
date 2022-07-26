@@ -82,7 +82,7 @@ void align_items_property_set_value(struct css_properties* current_css_widget, c
         current_css_widget->align_items = CSS_ALIGN_STRETCH;
     }
     else{
-        set_align_content(current_css_widget, value);
+        set_align_items(current_css_widget, value);
     }
 }
 
@@ -94,6 +94,6 @@ void align_self_property_set_value(struct css_properties* current_css_widget, ch
         current_css_widget->align_self = CSS_ALIGN_STRETCH;
     }
     else{
-        set_align_content(current_css_widget, value);
+        set_align_self(current_css_widget, value);
     }
 }

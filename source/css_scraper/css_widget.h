@@ -12,9 +12,9 @@
 #include "properties/column.h"
 #include "properties/edge.h"
 #include "properties/flex.h"
-#include "properties/font.h"
 #include "properties/gap.h"
 
+//MAKE IT ALPHABETIC AFTER FINISHED
 struct css_properties{
     bool accent_color_inherit;
     bool align_content_inherit;
@@ -25,6 +25,15 @@ struct css_properties{
     bool backface_visibility_inherit;
     bool background_inherit;
     bool border_inherit;
+    bool font_inherit;
+    bool text_align_inherit;
+    bool text_align_last_inherit;
+    bool text_decoration_inherit;
+    bool text_indent;
+    bool text_justify_inherit;
+    bool text_overflow_inherit;
+    bool text_shadow_inherit;
+    bool text_transform_inherit;
     struct color_rgba* accent_color;
     css_align align_content;
     css_align align_items;
@@ -35,6 +44,14 @@ struct css_properties{
     css_visibility backfaceVisibility;
     struct css_background* background;
     struct css_border* border;
+    struct font* font;
+    css_text_align_type textAlign;
+    css_text_align_type textAlignLast;
+    struct text_decoration* textDecoration;
+    struct text_indent* textIndent;
+    css_text_justify_type textJustify;
+    css_text_overflow_type textOverflow;
+    struct text_shadow* textShadow;
     struct edge_position* edgePosition;
     css_box_decoration_break_type boxDecorationBreakType;
     struct box_shadow* boxShadow;
@@ -66,13 +83,6 @@ struct css_properties{
     struct flex* flex;
     struct flex_flow* flexFlow;
     css_float_type floatType;
-    struct font* font;
-    //TODO font_feature_settings
-    css_property_value_type font_kerning;
-    struct font_size* fontSize;
-    //TODO font_size_adjust
-    css_font_stretch_type fontStretch;
-    css_font_variant_caps_type fontVariantCaps;
     struct gap* gap;
 
 };

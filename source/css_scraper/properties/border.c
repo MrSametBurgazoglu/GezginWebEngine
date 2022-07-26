@@ -108,7 +108,7 @@ void set_border_style(struct css_border* border, char* value){
     char* value2;
     int index = 0;
     value2 = strtok(value, " ");
-    while (value2 != NULL && index < 4){
+    while (value2 != NULL && index < 5){
         values[index++] = value2;
         value2 = strtok(NULL, " ");
     }
@@ -136,6 +136,7 @@ void set_border_style(struct css_border* border, char* value){
             set_border_top_style(border, values[0]);
             set_border_left_style(border, values[3]);
             set_border_right_style(border, values[1]);
+            break;
         default:
             break;
     }
@@ -1126,7 +1127,10 @@ void border_image_outset_property_set_value(struct css_properties* current_widge
             current_widget->border->borderImage->imageOutset->valueBottom = 0;
             current_widget->border->borderImage->imageOutset->valueLeft = 0;
             current_widget->border->borderImage->imageOutset->valueRight = 0;
-            current_widget->border->borderImage->imageOutset->borderImageOutsetType = CSS_BORDER_IMAGE_OUTSET_TYPE_LENGTH;
+            current_widget->border->borderImage->imageOutset->borderImageOutsetTypeTop = CSS_BORDER_IMAGE_OUTSET_TYPE_LENGTH;
+            current_widget->border->borderImage->imageOutset->borderImageOutsetTypeBottom = CSS_BORDER_IMAGE_OUTSET_TYPE_LENGTH;
+            current_widget->border->borderImage->imageOutset->borderImageOutsetTypeLeft = CSS_BORDER_IMAGE_OUTSET_TYPE_LENGTH;
+            current_widget->border->borderImage->imageOutset->borderImageOutsetTypeRight = CSS_BORDER_IMAGE_OUTSET_TYPE_LENGTH;
         }
         else{
             set_border_image_outset(current_widget->border, value);
