@@ -19,5 +19,6 @@
 #include "properties/background.h"
 #include "properties/border.h"
 #include "properties/font.h"
+#include "properties/text.h"
 
 #endif //UNTITLED_CSS_ALL_PROPERTIES_H

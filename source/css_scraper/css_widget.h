@@ -29,7 +29,7 @@ struct css_properties{
     bool text_align_inherit;
     bool text_align_last_inherit;
     bool text_decoration_inherit;
-    bool text_indent;
+    bool text_indent_inherit;
     bool text_justify_inherit;
     bool text_overflow_inherit;
     bool text_shadow_inherit;
@@ -51,6 +51,7 @@ struct css_properties{
     struct text_indent* textIndent;
     css_text_justify_type textJustify;
     css_text_overflow_type textOverflow;
+    css_text_transform_type textTransformType;
     struct text_shadow* textShadow;
     struct edge_position* edgePosition;
     css_box_decoration_break_type boxDecorationBreakType;

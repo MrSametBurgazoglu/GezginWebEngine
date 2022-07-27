@@ -7,7 +7,7 @@
 #include "css_properties_searcher.h"
 #include "css_all_properties.h"
 
-#define CSS_PROPERTY_COUNT 68
+#define CSS_PROPERTY_COUNT 80
 
 //TODO WILL "ALL" ADDED
 char* css_properties_list[CSS_PROPERTY_COUNT] = {
@@ -69,6 +69,7 @@ char* css_properties_list[CSS_PROPERTY_COUNT] = {
         "border-top-style",
         "border-top-width",
         "border-width",
+        "color",
         "font",
         "font-family",
         "font-kerning",
@@ -78,7 +79,18 @@ char* css_properties_list[CSS_PROPERTY_COUNT] = {
         "font-variant",
         "font-variant-caps",
         "font-weight",
-        "color",
+        "text-align",
+        "text-align-last",
+        "text-decoration",
+        "text-decoration-color",
+        "text-decoration-line",
+        "text-decoration-style",
+        "text-decoration-thickness",
+        "text-indent",
+        "text-justify",
+        "text-overflow",
+        "text-shadow",
+        "text-transform",
 };
 
 
@@ -146,6 +158,7 @@ struct css_property_function css_property_function_list[CSS_PROPERTY_COUNT] = {
         border_top_style_property_set_value,
         border_top_width_property_set_value,
         border_width_property_set_value,
+        color_property_set_value,
         font_property_set_value,
         font_family_property_set_value,
         font_kerning_property_set_value,
@@ -155,7 +168,18 @@ struct css_property_function css_property_function_list[CSS_PROPERTY_COUNT] = {
         font_variant_property_set_value,
         font_variant_caps_property_set_value,
         font_weight_property_set_value,
-        color_property_set_value,
+        text_align_property_set_value,
+        text_align_last_property_set_value,
+        text_decoration_property_set_value,
+        text_decoration_color_property_set_value,
+        text_decoration_line_property_set_value,
+        text_decoration_style_property_set_value,
+        text_decoration_thickness_property_set_value,
+        text_indent_property_set_value,
+        text_justify_property_set_value,
+        text_overflow_property_set_value,
+        text_shadow_property_set_value,
+        text_transform_property_set_value,
 };
 
 

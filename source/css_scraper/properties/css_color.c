@@ -70,7 +70,7 @@ void get_color_by_hex(struct color_rgba* color_struct, char* value){
     color_struct->blue = 0;
 }
 
-
+//TODO CHECK IS STRUCT NULL
 void get_color(struct color_rgba* colorRgba, char* value){
     char* start_index = strchr(value, '(');
     char* end_index = strchr(value, ')');

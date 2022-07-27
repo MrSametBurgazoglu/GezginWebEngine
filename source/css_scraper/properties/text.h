@@ -9,6 +9,16 @@
 #include "css_color.h"
 #include "../css_widget.h"
 
+struct text_decoration_thickness{
+    css_text_thickness_type textThicknessType;
+    int value;
+};
+
+struct text_indent{
+    css_value_type valueType;
+    int value;
+};
+
 struct text_decoration{
     bool text_decoration_color_inherit;
     bool text_decoration_line_inherit;
@@ -17,14 +27,7 @@ struct text_decoration{
     struct color_rgba* textDecorationColor;
     css_text_decoration_line_type textDecorationLine;
     css_text_decoration_style textDecorationStyle;
-    css_text_thickness_type textThicknessType;
-    int text_thickness_value;
-
-};
-
-struct text_indent{
-    css_value_type valueType;
-    int value;
+    struct text_decoration_thickness* textDecorationThickness;
 };
 
 //if this property is none free its struct
