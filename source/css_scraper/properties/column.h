@@ -7,33 +7,33 @@
 
 #include "css_enum_variables.h"
 #include "css_color.h"
-
-struct column{
-    css_property_value_type column_width_type;
-    css_property_value_type column_count_type;
-    int column_width;
-    int column_count;
-};
+#include "../css_widget.h"
 
 struct column_rule_width{
     css_column_rule_width_type columnRuleWidthType;
     int value;
 };
 
-struct column_rule_color{
-    css_column_rule_color_type columnRuleColorType;
-    struct color_rgba* color;
-};
-
 struct column_rule{
-    css_column_rule_type columnRuleType;
-    struct column_rule_width columnRuleWidth;
-    struct column_rule_color columnRuleColor;
+    bool column_rule_style_inherit;
+    bool column_rule_width_inherit;
+    bool column_rule_color_inherit;
+    css_column_rule_style_type columnRuleStyleType;
+    struct column_rule_width* columnRuleWidth;
+    struct color_rgba* columnRuleColor;
 };
 
-struct column_width{
-    css_property_value_type column_width_type;
-    int value;
-};
+
+void column_count_property_set_value(struct css_properties*, char*);
+void column_fill_property_set_value(struct css_properties*, char*);
+void column_gap_property_set_value(struct css_properties*, char*);
+void column_rule_property_set_value(struct css_properties*, char*);
+void column_rule_color_property_set_value(struct css_properties*, char*);
+void column_rule_style_property_set_value(struct css_properties*, char*);
+void column_rule_width_property_set_value(struct css_properties*, char*);
+void column_span_property_set_value(struct css_properties*, char*);
+void column_width_property_set_value(struct css_properties*, char*);
+void columns_property_set_value(struct css_properties*, char*);
+
 
 #endif //UNTITLED_COLUMN_H

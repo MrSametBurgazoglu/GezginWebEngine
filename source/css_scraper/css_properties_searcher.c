@@ -7,7 +7,7 @@
 #include "css_properties_searcher.h"
 #include "css_all_properties.h"
 
-#define CSS_PROPERTY_COUNT 80
+#define CSS_PROPERTY_COUNT 90
 
 //TODO WILL "ALL" ADDED
 char* css_properties_list[CSS_PROPERTY_COUNT] = {
@@ -70,6 +70,16 @@ char* css_properties_list[CSS_PROPERTY_COUNT] = {
         "border-top-width",
         "border-width",
         "color",
+        "column-count",
+        "column-fill",
+        "column-gap",
+        "column-rule",
+        "column-rule-color",
+        "column-rule-style",
+        "column-rule-width",
+        "column-span",
+        "column-width",
+        "columns",
         "font",
         "font-family",
         "font-kerning",
@@ -159,6 +169,16 @@ struct css_property_function css_property_function_list[CSS_PROPERTY_COUNT] = {
         border_top_width_property_set_value,
         border_width_property_set_value,
         color_property_set_value,
+        column_count_property_set_value,
+        column_fill_property_set_value,
+        column_gap_property_set_value,
+        column_rule_property_set_value,
+        column_rule_color_property_set_value,
+        column_rule_style_property_set_value,
+        column_rule_width_property_set_value,
+        column_span_property_set_value,
+        column_width_property_set_value,
+        columns_property_set_value,
         font_property_set_value,
         font_family_property_set_value,
         font_kerning_property_set_value,

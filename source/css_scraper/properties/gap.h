@@ -12,14 +12,8 @@ struct row_gap{
     int value;
 };
 
-struct column_gap{
-    css_property_value_type propertyValueType;
-    int value;
-};
-
 struct gap{
     struct row_gap rowGap;
-    struct column_gap columnGap;
 };
 
 #endif //UNTITLED_GAP_H

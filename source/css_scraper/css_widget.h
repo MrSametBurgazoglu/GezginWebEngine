@@ -9,7 +9,6 @@
 #include "properties/css_color.h"
 #include "properties/box_shadow.h"
 #include "properties/clip.h"
-#include "properties/column.h"
 #include "properties/edge.h"
 #include "properties/flex.h"
 #include "properties/gap.h"
@@ -34,17 +33,32 @@ struct css_properties{
     bool text_overflow_inherit;
     bool text_shadow_inherit;
     bool text_transform_inherit;
+    bool column_count_inherit;
+    bool column_fill_inherit;
+    bool column_gap_inherit;
+    bool column_rule_inherit;
+    bool column_span_inherit;
+    bool column_width_inherit;
+
     struct color_rgba* accent_color;
+
     css_align align_content;
     css_align align_items;
     css_align align_self;
+
     struct css_animation* animation;
+
     css_filter_type backdropFilterType;
     void* backdrop_filter;
+
     css_visibility backfaceVisibility;
+
     struct css_background* background;
+
     struct css_border* border;
+
     struct font* font;
+
     css_text_align_type textAlign;
     css_text_align_type textAlignLast;
     struct text_decoration* textDecoration;
@@ -53,6 +67,7 @@ struct css_properties{
     css_text_overflow_type textOverflow;
     css_text_transform_type textTransformType;
     struct text_shadow* textShadow;
+
     struct edge_position* edgePosition;
     css_box_decoration_break_type boxDecorationBreakType;
     struct box_shadow* boxShadow;
@@ -67,12 +82,13 @@ struct css_properties{
     struct clip* clip;
     //TODO CLIP_PATH
     struct color_rgba *color;
-    struct column columns;
     css_column_fill_type column_fill;
-    struct column_gap columnGap;
-    struct column_rule columnRule;
+    int column_gap;
+    struct column_rule* columnRule;
     css_column_span_type columnSpanType;
-    struct column_width columnWidth;
+    int column_width;
+    int column_count;
+
     //TODO CONTENT
     char* counter_increment;
     char* counter_reset;
