@@ -10,7 +10,6 @@
 #include "properties/box_shadow.h"
 #include "properties/clip.h"
 #include "properties/edge.h"
-#include "properties/flex.h"
 #include "properties/gap.h"
 
 //MAKE IT ALPHABETIC AFTER FINISHED
@@ -82,12 +81,26 @@ struct css_properties{
     struct clip* clip;
     //TODO CLIP_PATH
     struct color_rgba *color;
+
     css_column_fill_type column_fill;
     int column_gap;
     struct column_rule* columnRule;
     css_column_span_type columnSpanType;
     int column_width;
     int column_count;
+
+    int width;
+    int height;
+    int top;
+    int left;
+    int right;
+    int bottom;
+    css_property_value_type widthValueType;
+    css_property_value_type heightValueType;
+    css_property_value_type topValueType;
+    css_property_value_type leftValueType;
+    css_property_value_type rightValueType;
+    css_property_value_type bottomValueType;
 
     //TODO CONTENT
     char* counter_increment;

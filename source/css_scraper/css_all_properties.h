@@ -19,6 +19,7 @@
 #include "properties/background.h"
 #include "properties/border.h"
 #include "properties/column.h"
+#include "properties/flex.h"
 #include "properties/font.h"
 #include "properties/text.h"
 
