@@ -7,7 +7,7 @@
 #include <string.h>
 #include "../../functools/index_founder.h"
 
-#define COLUMN_RULE_STYLE_STRING_COUNT 4
+#define TEXT_ALIGN_STRING_COUNT 4
 #define TEXT_ALIGN_LAST_STRING_COUNT 6
 #define TEXT_DECORATION_LINE_STRING_COUNT 4
 #define TEXT_DECORATION_STYLE_STRING_COUNT 5
@@ -15,7 +15,7 @@
 #define TEXT_OVERFLOW_STRING_COUNT 3
 #define TEXT_TRANSFORM_STRING_COUNT 4
 
-char* text_align_strings[COLUMN_RULE_STYLE_STRING_COUNT] = {
+char* text_align_strings[TEXT_ALIGN_STRING_COUNT] = {
         "center",
         "justify",
         "left",
@@ -66,7 +66,7 @@ char* text_transform_strings[TEXT_TRANSFORM_STRING_COUNT] = {
         "uppercase"
 };
 
-css_text_align_type textAlignTypeList[COLUMN_RULE_STYLE_STRING_COUNT] = {
+css_text_align_type textAlignTypeList[TEXT_ALIGN_STRING_COUNT] = {
         CSS_TEXT_ALIGN_CENTER,
         CSS_TEXT_ALIGN_JUSTIFY,
         CSS_TEXT_ALIGN_LEFT,
@@ -118,7 +118,7 @@ css_text_transform_type textTransformTypeList[TEXT_TRANSFORM_STRING_COUNT] = {
 };
 
 void set_text_align(struct css_properties* current_widget, char* value){
-    int index = get_index_from_list_by_string(text_align_strings, value, COLUMN_RULE_STYLE_STRING_COUNT);
+    int index = get_index_from_list_by_string(text_align_strings, value, TEXT_ALIGN_STRING_COUNT);
     if (index != -1){
         current_widget->textAlign = textAlignTypeList[index];
     }
