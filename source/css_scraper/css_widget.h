@@ -40,8 +40,13 @@ struct css_properties{
     bool column_width_inherit;
     bool flex_inherit;
     bool flex_flow_inherit;
+    bool position_inherit;
     bool width_inherit;
+    bool min_width_inherit;
+    bool max_width_inherit;
     bool height_inherit;
+    bool min_height_inherit;
+    bool max_height_inherit;
     bool top_inherit;
     bool left_inherit;
     bool right_inherit;
@@ -98,17 +103,26 @@ struct css_properties{
     int column_count;
 
     int width;
+    int min_width;
+    int max_width;
     int height;
+    int min_height;
+    int max_height;
     int top;
     int left;
     int right;
     int bottom;
     css_property_value_type widthValueType;
+    css_property_value_type minWidthValueType;
+    css_property_value_type maxWidthValueType;
     css_property_value_type heightValueType;
+    css_property_value_type minHeightValueType;
+    css_property_value_type maxHeightValueType;
     css_property_value_type topValueType;
     css_property_value_type leftValueType;
     css_property_value_type rightValueType;
     css_property_value_type bottomValueType;
+    css_position_type position;
 
     //TODO CONTENT
     char* counter_increment;

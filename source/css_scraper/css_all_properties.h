@@ -22,5 +22,8 @@
 #include "properties/flex.h"
 #include "properties/font.h"
 #include "properties/text.h"
+#include "properties/position.h"
+#include "properties/height.h"
+#include "properties/width.h"
 
 #endif //UNTITLED_CSS_ALL_PROPERTIES_H

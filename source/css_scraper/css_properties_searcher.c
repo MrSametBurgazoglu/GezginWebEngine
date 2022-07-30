@@ -7,7 +7,7 @@
 #include "css_properties_searcher.h"
 #include "css_all_properties.h"
 
-#define CSS_PROPERTY_COUNT 97
+#define CSS_PROPERTY_COUNT 108
 
 //TODO WILL "ALL" ADDED
 char* css_properties_list[CSS_PROPERTY_COUNT] = {
@@ -69,6 +69,7 @@ char* css_properties_list[CSS_PROPERTY_COUNT] = {
         "border-top-style",
         "border-top-width",
         "border-width",
+        "bottom",
         "color",
         "column-count",
         "column-fill",
@@ -96,6 +97,14 @@ char* css_properties_list[CSS_PROPERTY_COUNT] = {
         "font-variant",
         "font-variant-caps",
         "font-weight",
+        "height",
+        "left",
+        "max-height",
+        "max-width",
+        "min-height",
+        "min-width",
+        "position",
+        "right",
         "text-align",
         "text-align-last",
         "text-decoration",
@@ -108,6 +117,8 @@ char* css_properties_list[CSS_PROPERTY_COUNT] = {
         "text-overflow",
         "text-shadow",
         "text-transform",
+        "top",
+        "width"
 };
 
 
@@ -175,6 +186,7 @@ struct css_property_function css_property_function_list[CSS_PROPERTY_COUNT] = {
         border_top_style_property_set_value,
         border_top_width_property_set_value,
         border_width_property_set_value,
+        bottom_property_set_value,
         color_property_set_value,
         column_count_property_set_value,
         column_fill_property_set_value,
@@ -202,6 +214,14 @@ struct css_property_function css_property_function_list[CSS_PROPERTY_COUNT] = {
         font_variant_property_set_value,
         font_variant_caps_property_set_value,
         font_weight_property_set_value,
+        height_property_set_value,
+        left_property_set_value,
+        max_height_property_set_value,
+        max_width_property_set_value,
+        min_height_property_set_value,
+        min_width_property_set_value,
+        position_property_set_value,
+        right_property_set_value,
         text_align_property_set_value,
         text_align_last_property_set_value,
         text_decoration_property_set_value,
@@ -214,6 +234,8 @@ struct css_property_function css_property_function_list[CSS_PROPERTY_COUNT] = {
         text_overflow_property_set_value,
         text_shadow_property_set_value,
         text_transform_property_set_value,
+        top_property_set_value,
+        width_property_set_value,
 };
 
 

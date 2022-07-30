@@ -92,7 +92,7 @@ void set_flex(struct css_properties* current_widget, char* value){
         value2 = strtok(NULL, " ");
     }
 
-    switch (index) {
+    switch (index) {//TODO FIX HERE
         case 3:
             set_flex_grow(current_widget, values[0]);
             set_flex_shrink(current_widget, values[1]);
