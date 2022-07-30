@@ -9,6 +9,9 @@
 #include "../css_widget.h"
 
 struct flex{
+    bool flex_basis_inherit;
+    bool flex_grow_inherit;
+    bool flex_shrink_inherit;
     css_property_value_type flex_basis_valueType;
     int flex_grow_value;
     int flex_shrink_value;
@@ -16,6 +19,8 @@ struct flex{
 };
 
 struct flex_flow{
+    bool flex_direction_inherit;
+    bool flex_wrap_inherit;
     css_flex_direction_type flexDirection;
     css_flex_wrap_type flexWrap;
 };

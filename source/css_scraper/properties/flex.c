@@ -81,6 +81,7 @@ void set_flex_shrink(struct css_properties* current_widget, char* value){
     current_widget->flex->flex_shrink_value = int_value;
 }
 
+//all three value must be used in this order flex-grow flex-shrink flex-basis
 void set_flex(struct css_properties* current_widget, char* value){
     char* values[3];
     char* value2;
@@ -90,36 +91,12 @@ void set_flex(struct css_properties* current_widget, char* value){
         values[index++] = value2;
         value2 = strtok(NULL, " ");
     }
-    char* end_ptr;
-    int int_value;
+
     switch (index) {
-        case 1:
-            break;
-        case 2:
-            int_value = (int) strtol(values[0], &end_ptr, 10);
-            current_widget->textShadow->h_shadow = int_value;
-            int_value = (int) strtol(values[1], &end_ptr, 10);
-            current_widget->textShadow->v_shadow = int_value;
-            break;
         case 3:
-            int_value = (int) strtol(values[0], &end_ptr, 10);
-            current_widget->textShadow->h_shadow = int_value;
-            int_value = (int) strtol(values[1], &end_ptr, 10);
-            current_widget->textShadow->v_shadow = int_value;
-            int_value = (int) strtol(values[2], &end_ptr, 10);
-            current_widget->textShadow->blur_radius = int_value;
-            break;
-        case 4:
-            int_value = (int) strtol(values[0], &end_ptr, 10);
-            current_widget->textShadow->h_shadow = int_value;
-            int_value = (int) strtol(values[1], &end_ptr, 10);
-            current_widget->textShadow->v_shadow = int_value;
-            int_value = (int) strtol(values[2], &end_ptr, 10);
-            current_widget->textShadow->blur_radius = int_value;
-            if(current_widget->textShadow->colorRgba == NULL){
-                current_widget->textShadow->colorRgba = malloc(sizeof(struct color_rgba));
-            }
-            get_color(current_widget->textShadow->colorRgba, values[3]);
+            set_flex_grow(current_widget, values[0]);
+            set_flex_shrink(current_widget, values[1]);
+            set_flex_grow(current_widget, values[2]);
             break;
         default:
             break;
@@ -127,29 +104,123 @@ void set_flex(struct css_properties* current_widget, char* value){
 }
 
 void flex_property_set_value(struct css_properties* current_widget, char* value){
-    
+    if (!strcmp(value, "inherit")){
+        current_widget->flex_inherit = true;
+    }
+    else{
+        if (current_widget->flex == NULL){
+            current_widget->flex = malloc(sizeof(struct flex));
+        }
+        if (!strcmp(value, "initial")){
+            current_widget->flex->flex_grow_value = 0;
+            current_widget->flex->flex_shrink_value = 0;
+            current_widget->flex->flex_basis_valueType = CSS_PROPERTY_VALUE_TYPE_AUTO;
+        }
+        else{
+            set_flex(current_widget, value);
+        }
+    }
 }
 
 void flex_basis_property_set_value(struct css_properties* current_widget, char* value){
-    
+    if (current_widget->flex == NULL){
+        current_widget->flex = malloc(sizeof(struct flex));
+    }
+    if (!strcmp(value, "inherit")){
+        current_widget->flex->flex_basis_inherit = true;
+    }
+    else{
+        if (!strcmp(value, "initial")){
+            current_widget->flex->flex_basis_valueType = CSS_PROPERTY_VALUE_TYPE_AUTO;
+        }
+        else{
+            set_flex_basis(current_widget, value);
+        }
+    }
 }
 
 void flex_direction_property_set_value(struct css_properties* current_widget, char* value){
-    
+    if (current_widget->flexFlow == NULL){
+        current_widget->flexFlow = malloc(sizeof(struct flex_flow));
+    }
+    if (!strcmp(value, "inherit")){
+        current_widget->flexFlow->flex_direction_inherit = true;
+    }
+    else{
+        if (!strcmp(value, "initial")){
+            current_widget->flexFlow->flexDirection = CSS_FLEX_DIRECTION_TYPE_ROW;
+        }
+        else{
+            set_flex_direction(current_widget, value);
+        }
+    }
 }
 
 void flex_flow_property_set_value(struct css_properties* current_widget, char* value){
-    
+    if (!strcmp(value, "inherit")){
+        current_widget->flex_flow_inherit = true;
+    }
+    else{
+        if (current_widget->flexFlow == NULL){
+            current_widget->flexFlow = malloc(sizeof(struct flex_flow));
+        }
+        if (!strcmp(value, "initial")){
+            current_widget->flexFlow->flexDirection = CSS_FLEX_DIRECTION_TYPE_ROW;
+            current_widget->flexFlow->flexWrap = CSS_FLEX_WRAP_TYPE_NOWRAP;
+        }
+        else{
+            set_flex_flow(current_widget, value);
+        }
+    }
 }
 
 void flex_grow_property_set_value(struct css_properties* current_widget, char* value){
-    
+    if (current_widget->flex == NULL){
+        current_widget->flex = malloc(sizeof(struct flex));
+    }
+    if (!strcmp(value, "inherit")){
+        current_widget->flex->flex_grow_inherit = true;
+    }
+    else{
+        if (!strcmp(value, "initial")){
+            current_widget->flex->flex_grow_value = 0;
+        }
+        else{
+            set_flex_grow(current_widget, value);
+        }
+    }
 }
 
 void flex_shrink_property_set_value(struct css_properties* current_widget, char* value){
-    
+    if (current_widget->flex == NULL){
+        current_widget->flex = malloc(sizeof(struct flex));
+    }
+    if (!strcmp(value, "inherit")){
+        current_widget->flex->flex_shrink_inherit = true;
+    }
+    else{
+        if (!strcmp(value, "initial")){
+            current_widget->flex->flex_shrink_value = 1;
+        }
+        else{
+            set_flex_shrink(current_widget, value);
+        }
+    }
 }
 
 void flex_wrap_property_set_value(struct css_properties* current_widget, char* value){
-    
+    if (current_widget->flexFlow == NULL){
+        current_widget->flexFlow = malloc(sizeof(struct flex_flow));
+    }
+    if (!strcmp(value, "inherit")){
+        current_widget->flexFlow->flex_wrap_inherit = true;
+    }
+    else{
+        if (!strcmp(value, "initial")){
+            current_widget->flexFlow->flexWrap = CSS_FLEX_WRAP_TYPE_NOWRAP;
+        }
+        else{
+            set_flex_wrap(current_widget, value);
+        }
+    }
 }

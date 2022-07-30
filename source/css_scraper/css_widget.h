@@ -38,6 +38,14 @@ struct css_properties{
     bool column_rule_inherit;
     bool column_span_inherit;
     bool column_width_inherit;
+    bool flex_inherit;
+    bool flex_flow_inherit;
+    bool width_inherit;
+    bool height_inherit;
+    bool top_inherit;
+    bool left_inherit;
+    bool right_inherit;
+    bool bottom_inherit;
 
     struct color_rgba* accent_color;
 
@@ -110,8 +118,10 @@ struct css_properties{
     css_display_type display;
     css_empty_cells_type empty_cells;
     struct filter* filter;
+
     struct flex* flex;
     struct flex_flow* flexFlow;
+
     css_float_type floatType;
     struct gap* gap;
 
