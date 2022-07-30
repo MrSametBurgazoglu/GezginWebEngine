@@ -7,7 +7,7 @@
 #include "css_properties_searcher.h"
 #include "css_all_properties.h"
 
-#define CSS_PROPERTY_COUNT 90
+#define CSS_PROPERTY_COUNT 97
 
 //TODO WILL "ALL" ADDED
 char* css_properties_list[CSS_PROPERTY_COUNT] = {
@@ -80,6 +80,13 @@ char* css_properties_list[CSS_PROPERTY_COUNT] = {
         "column-span",
         "column-width",
         "columns",
+        "flex",
+        "flex-basis",
+        "flex-direction",
+        "flex-flow",
+        "flex-grow",
+        "flex-shrink",
+        "flex-wrap",
         "font",
         "font-family",
         "font-kerning",
@@ -179,6 +186,13 @@ struct css_property_function css_property_function_list[CSS_PROPERTY_COUNT] = {
         column_span_property_set_value,
         column_width_property_set_value,
         columns_property_set_value,
+        flex_property_set_value,
+        flex_basis_property_set_value,
+        flex_direction_property_set_value,
+        flex_flow_property_set_value,
+        flex_grow_property_set_value,
+        flex_shrink_property_set_value,
+        flex_wrap_property_set_value,
         font_property_set_value,
         font_family_property_set_value,
         font_kerning_property_set_value,
