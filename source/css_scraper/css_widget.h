@@ -139,6 +139,8 @@ struct css_properties{
     css_float_type floatType;
     struct gap* gap;
 
+    struct margin* margin;
+
 };
 
 #endif //UNTITLED_CSS_WIDGET_H

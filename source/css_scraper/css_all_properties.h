@@ -25,5 +25,7 @@
 #include "properties/position.h"
 #include "properties/height.h"
 #include "properties/width.h"
+#include "properties/grid.h"
+#include "properties/margin.h"
 
 #endif //UNTITLED_CSS_ALL_PROPERTIES_H
