@@ -38,7 +38,7 @@ void animation_timing_function_property_set_value(struct css_properties* current
         else if(!strcmp(function_name, "cubic-bezier")){
             char* value2;
             int index2 = 0;//must be maximum 3
-            while ((value2 = strtok(NULL, ",")) != NULL){
+            while ((value2 = strtok(NULL, ",")) != NULL){//NEED BUGFIX
                 current_widget->animation->animationTimingFunction.cubic_bezier.values[index2++] = (int) strtol(value2, NULL, 10);
             }
             current_widget->animation->which_animation_timing_part_active = 0;
