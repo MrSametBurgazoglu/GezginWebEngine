@@ -31,5 +31,4 @@ void margin_bottom_property_set_value(struct css_properties*, char*);
 void margin_left_property_set_value(struct css_properties*, char*);
 void margin_right_property_set_value(struct css_properties*, char*);
 
-
 #endif //UNTITLED_MARGIN_H

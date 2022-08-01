@@ -8,7 +8,7 @@
 #include <stdlib.h>
 
 void set_margin(struct margin* margin, char* value){
-
+//TODO IMPLEMENT THIS FUNCTION
 }
 
 void set_margin_top(struct margin* margin, char* value){
