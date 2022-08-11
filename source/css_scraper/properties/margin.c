@@ -203,7 +203,7 @@ void margin_property_set_value(struct css_properties* current_widget, char* valu
             current_widget->margin->marginRightValueType = CSS_PROPERTY_VALUE_TYPE_PIXEL;
         }
         else{
-            set_margin_right(current_widget->margin, value);
+            set_margin(current_widget->margin, value);
         }
     }
 }
