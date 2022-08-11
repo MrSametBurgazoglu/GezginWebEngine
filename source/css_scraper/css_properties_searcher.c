@@ -7,7 +7,7 @@
 #include "css_properties_searcher.h"
 #include "css_all_properties.h"
 
-#define CSS_PROPERTY_COUNT 144
+#define CSS_PROPERTY_COUNT 145
 
 //TODO WILL "ALL" ADDED
 char* css_properties_list[CSS_PROPERTY_COUNT] = {
@@ -154,6 +154,7 @@ char* css_properties_list[CSS_PROPERTY_COUNT] = {
         "text-shadow",
         "text-transform",
         "top",
+        "visibility",
         "width"
 };
 
@@ -307,6 +308,7 @@ struct css_property_function css_property_function_list[CSS_PROPERTY_COUNT] = {
         text_shadow_property_set_value,
         text_transform_property_set_value,
         top_property_set_value,
+        visibility_property_set_value,
         width_property_set_value,
 };
 

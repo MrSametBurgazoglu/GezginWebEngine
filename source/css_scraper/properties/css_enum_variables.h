@@ -52,6 +52,7 @@ typedef enum {
 typedef enum {
     CSS_VISIBILITY_VISIBLE,
     CSS_VISIBILITY_HIDDEN,
+    CSS_VISIBILITY_COLLAPSE,
 } css_visibility;
 
 typedef enum {
@@ -532,5 +533,7 @@ typedef enum {
     CSS_OVERFLOW_WRAP_ANYWHERE,
     CSS_OVERFLOW_WRAP_BREAK_WORD,
 } css_overflow_wrap_type;
+
+
 
 #endif //UNTITLED_CSS_ENUM_VARIABLES_H
