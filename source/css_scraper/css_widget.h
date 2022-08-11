@@ -53,6 +53,7 @@ struct css_properties{
     bool bottom_inherit;
     bool margin_inherit;
     bool outline_inherit;
+    bool overflow_inherit;
 
     struct color_rgba* accent_color;
 
@@ -145,6 +146,7 @@ struct css_properties{
 
     struct outline* outline;
 
+    struct overflow* overflow;
 };
 
 #endif //UNTITLED_CSS_WIDGET_H

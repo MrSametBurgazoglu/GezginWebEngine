@@ -7,7 +7,7 @@
 #include "css_properties_searcher.h"
 #include "css_all_properties.h"
 
-#define CSS_PROPERTY_COUNT 135
+#define CSS_PROPERTY_COUNT 140
 
 //TODO WILL "ALL" ADDED
 char* css_properties_list[CSS_PROPERTY_COUNT] = {
@@ -125,11 +125,16 @@ char* css_properties_list[CSS_PROPERTY_COUNT] = {
         "max-width",
         "min-height",
         "min-width",
+        "position",
         "outline",
         "outline-color",
         "outline-offset",
         "outline-style",
         "outline-width",
+        "overflow",
+        "overflow-wrap",
+        "overflow-x",
+        "overflow-y",
         "position",
         "right",
         "text-align",
@@ -275,6 +280,10 @@ struct css_property_function css_property_function_list[CSS_PROPERTY_COUNT] = {
         outline_offset_property_set_value,
         outline_style_property_set_value,
         outline_width_property_set_value,
+        overflow_property_set_value,
+        overflow_wrap_property_set_value,
+        overflow_x_property_set_value,
+        overflow_y_property_set_value,
         right_property_set_value,
         text_align_property_set_value,
         text_align_last_property_set_value,

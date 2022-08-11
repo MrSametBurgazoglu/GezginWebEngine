@@ -159,17 +159,22 @@ void outline_property_set_value(struct css_properties* current_widget, char* val
     if (!strcmp(value, "inherit")){
         current_widget->outline_inherit = true;
     }
-    else if(!strcmp(value, "initial")){
-        current_widget->outline_inherit = false;
-        current_widget->outline->outlineWidth = CSS_OUTLINE_WIDTH_TYPE_MEDIUM;
-        current_widget->outline->outlineStyleType = CSS_OUTLINE_STYLE_TYPE_INSET;
-        if (current_widget->outline->colorRgba == NULL){
-            current_widget->outline->colorRgba = malloc(sizeof(struct color_rgba));
-        }
-        sync_color(current_widget->color, current_widget->outline->colorRgba);
-    }
     else{
-        set_outline(current_widget->outline, value);
+        current_widget->outline_inherit = false;
+        if (current_widget->outline == NULL){
+            current_widget->outline = malloc(sizeof(struct outline));
+        }
+        if(!strcmp(value, "initial")){
+            current_widget->outline->outlineWidth = CSS_OUTLINE_WIDTH_TYPE_MEDIUM;
+            current_widget->outline->outlineStyleType = CSS_OUTLINE_STYLE_TYPE_INSET;
+            if (current_widget->outline->colorRgba == NULL){
+                current_widget->outline->colorRgba = malloc(sizeof(struct color_rgba));
+            }
+            sync_color(current_widget->color, current_widget->outline->colorRgba);
+        }
+        else{
+            set_outline(current_widget->outline, value);
+        }
     }
 }
 
@@ -177,12 +182,20 @@ void outline_color_property_set_value(struct css_properties* current_widget, cha
     if (!strcmp(value, "inherit")){
         current_widget->outline->outline_color_inherit = true;
     }
-    else if(!strcmp(value, "initial")){
-        current_widget->outline->outline_color_inherit = false;
-        sync_color(current_widget->color, current_widget->outline->colorRgba);
-    }
     else{
-        set_outline_color(current_widget->outline, value);
+        current_widget->outline->outline_color_inherit = false;
+        if (current_widget->outline == NULL){
+            current_widget->outline = malloc(sizeof(struct outline));
+        }
+        if (current_widget->outline->colorRgba == NULL){
+            current_widget->outline->colorRgba = malloc(sizeof(struct color_rgba));
+        }
+        if(!strcmp(value, "initial")){
+            sync_color(current_widget->color, current_widget->outline->colorRgba);
+        }
+        else{
+            set_outline_color(current_widget->outline, value);
+        }
     }
 }
 
@@ -190,12 +203,17 @@ void outline_offset_property_set_value(struct css_properties* current_widget, ch
     if (!strcmp(value, "inherit")){
         current_widget->outline->outline_offset_inherit = true;
     }
-    else if(!strcmp(value, "initial")){
-        current_widget->outline->outline_offset_inherit = false;
-        current_widget->outline->offset = 0;
-    }
     else{
-        set_outline_offset(current_widget->outline, value);
+        current_widget->outline->outline_offset_inherit = false;
+        if (current_widget->outline == NULL){
+            current_widget->outline = malloc(sizeof(struct outline));
+        }
+        if(!strcmp(value, "initial")){
+            current_widget->outline->offset = 0;
+        }
+        else{
+            set_outline_offset(current_widget->outline, value);
+        }
     }
 }
 
@@ -203,12 +221,17 @@ void outline_style_property_set_value(struct css_properties* current_widget, cha
     if (!strcmp(value, "inherit")){
         current_widget->outline->outline_style_inherit = true;
     }
-    else if(!strcmp(value, "initial")){
-        current_widget->outline->outline_style_inherit = false;
-        current_widget->outline->outlineStyleType = CSS_OUTLINE_STYLE_TYPE_NONE;
-    }
     else{
-        set_outline_style(current_widget->outline, value);
+        current_widget->outline->outline_style_inherit = false;
+        if (current_widget->outline == NULL){
+            current_widget->outline = malloc(sizeof(struct outline));
+        }
+        if(!strcmp(value, "initial")){
+            current_widget->outline->outlineStyleType = CSS_OUTLINE_STYLE_TYPE_NONE;
+        }
+        else{
+            set_outline_style(current_widget->outline, value);
+        }
     }
 }
 
@@ -216,11 +239,16 @@ void outline_width_property_set_value(struct css_properties* current_widget, cha
     if (!strcmp(value, "inherit")){
         current_widget->outline->outline_width_inherit = true;
     }
-    else if(!strcmp(value, "initial")){
-        current_widget->outline->outline_width_inherit = false;
-        current_widget->outline->outlineWidth = CSS_OUTLINE_WIDTH_TYPE_MEDIUM;
-    }
     else{
-        set_outline_color(current_widget->outline, value);
+        current_widget->outline->outline_style_inherit = false;
+        if (current_widget->outline == NULL){
+            current_widget->outline = malloc(sizeof(struct outline));
+        }
+        if(!strcmp(value, "initial")){
+            current_widget->outline->outlineWidth = CSS_OUTLINE_WIDTH_TYPE_MEDIUM;
+        }
+        else{
+            set_outline_color(current_widget->outline, value);
+        }
     }
 }

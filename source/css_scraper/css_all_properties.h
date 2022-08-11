@@ -28,5 +28,6 @@
 #include "properties/grid.h"
 #include "properties/margin.h"
 #include "properties/outline.h"
+#include "properties/overflow.h"
 
 #endif //UNTITLED_CSS_ALL_PROPERTIES_H

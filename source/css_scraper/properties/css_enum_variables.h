@@ -519,4 +519,18 @@ typedef enum {
     CSS_OUTLINE_STYLE_TYPE_OUTSET,
 } css_outline_style_type;
 
+typedef enum {
+    CSS_OVERFLOW_VISIBLE,
+    CSS_OVERFLOW_HIDDEN,
+    CSS_OVERFLOW_CLIP,
+    CSS_OVERFLOW_SCROLL,
+    CSS_OVERFLOW_AUTO,
+} css_overflow_type;
+
+typedef enum {
+    CSS_OVERFLOW_WRAP_NORMAL,
+    CSS_OVERFLOW_WRAP_ANYWHERE,
+    CSS_OVERFLOW_WRAP_BREAK_WORD,
+} css_overflow_wrap_type;
+
 #endif //UNTITLED_CSS_ENUM_VARIABLES_H
