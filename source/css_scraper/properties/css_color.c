@@ -2,28 +2,26 @@
 // Created by samet on 15.04.2022.
 //
 
-#include <malloc.h>
+
 #include "css_color.h"
+#include "css_color_names.h"
+#include "../../functools/index_founder.h"
+
 #include <string.h>
 #include <stdlib.h>
-
-char* predefined_color_name_list[] = {
-        "black",
-};
-
-int predefined_color_value_list[][4] = {
-        {255, 255, 255, 255},
-};
+#include <malloc.h>
 
 void get_color_by_name(struct color_rgba* color_struct, char* name){
-    if (strcmp(name, "red") == 0){
-        color_struct->alpha = 255;
-        color_struct->red = 255;
-        color_struct->green = 0;
-        color_struct->blue = 0;
+    int index = get_index_from_list_by_string(css_color_strings, name, CSS_COLOR_NAME_STRING_COUNT);
+    if (index != -1){
+        int* values = css_color_name_rgb[index];
+        color_struct->alpha = 0;
+        color_struct->red = values[0];
+        color_struct->green = values[1];
+        color_struct->blue = values[2];
     }
-    else{// return default color
-        color_struct->alpha = 255;
+    else{
+        color_struct->alpha = 0;
         color_struct->red = 0;
         color_struct->green = 0;
         color_struct->blue = 0;
