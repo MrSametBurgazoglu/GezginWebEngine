@@ -31,5 +31,6 @@
 #include "properties/overflow.h"
 #include "properties/padding.h"
 #include "properties/visibility.h"
+#include "properties/opacity.h"
 
 #endif //UNTITLED_CSS_ALL_PROPERTIES_H

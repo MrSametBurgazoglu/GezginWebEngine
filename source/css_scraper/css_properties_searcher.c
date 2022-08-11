@@ -7,7 +7,7 @@
 #include "css_properties_searcher.h"
 #include "css_all_properties.h"
 
-#define CSS_PROPERTY_COUNT 145
+#define CSS_PROPERTY_COUNT 146
 
 //TODO WILL "ALL" ADDED
 char* css_properties_list[CSS_PROPERTY_COUNT] = {
@@ -125,7 +125,7 @@ char* css_properties_list[CSS_PROPERTY_COUNT] = {
         "max-width",
         "min-height",
         "min-width",
-        "position",
+        "opacity",
         "outline",
         "outline-color",
         "outline-offset",
@@ -139,7 +139,8 @@ char* css_properties_list[CSS_PROPERTY_COUNT] = {
         "padding-bottom",
         "padding-left",
         "padding-right",
-        "position-top",
+        "padding-top",
+        "position",
         "right",
         "text-align",
         "text-align-last",
@@ -279,7 +280,7 @@ struct css_property_function css_property_function_list[CSS_PROPERTY_COUNT] = {
         max_width_property_set_value,
         min_height_property_set_value,
         min_width_property_set_value,
-        position_property_set_value,
+        opacity_property_set_value,
         outline_property_set_value,
         outline_color_property_set_value,
         outline_offset_property_set_value,
@@ -294,6 +295,7 @@ struct css_property_function css_property_function_list[CSS_PROPERTY_COUNT] = {
         padding_left_property_set_value,
         padding_right_property_set_value,
         padding_top_property_set_value,
+        position_property_set_value,
         right_property_set_value,
         text_align_property_set_value,
         text_align_last_property_set_value,
