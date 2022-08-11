@@ -71,7 +71,7 @@ void get_color_by_hex(struct color_rgba* color_struct, char* value){
 }
 
 //TODO CHECK IS STRUCT NULL
-void get_color(struct color_rgba* colorRgba, char* value){
+bool get_color(struct color_rgba* colorRgba, char* value){
     char* start_index = strchr(value, '(');
     char* end_index = strchr(value, ')');
     if (start_index != NULL && end_index != NULL){
@@ -124,7 +124,7 @@ void get_color(struct color_rgba* colorRgba, char* value){
             get_color_by_hsla(colorRgba, function_parameters[0], function_parameters[1], function_parameters[2], function_parameters[3]);
         }
         else{
-            return get_color_by_rgb(0, 0, 0);
+            return false;
         }
     }
     else if(start_index == NULL && end_index == NULL){
@@ -133,8 +133,9 @@ void get_color(struct color_rgba* colorRgba, char* value){
         }
     }
     else{//TODO this must be default value
-        get_color_by_rgb(colorRgba, 0, 0, 0);
+        return false;
     }
+    return true;
 }
 //TODO CHECK COLOR STRUCT IS EMPTY HERE
 void sync_color(struct color_rgba* source, struct color_rgba* dest){

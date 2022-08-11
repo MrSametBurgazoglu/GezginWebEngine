@@ -9,6 +9,11 @@
 #include "../css_widget.h"
 
 struct outline{
+    bool outline_color_inherit;
+    bool outline_offset_inherit;
+    bool outline_style_inherit;
+    bool outline_width_inherit;
+
     struct color_rgba* colorRgba;
     int offset;
     css_outline_style_type outlineStyleType;

@@ -50,57 +50,177 @@ css_outline_style_type outlineStyleTypeList[OUTLINE_STYLE_STRING_COUNT] = {
         CSS_OUTLINE_STYLE_TYPE_SOLID,
 };
 
-void set_outline_color(struct outline* outline, char* value){
-    get_color(outline->colorRgba, value);
+bool set_outline_color(struct outline* outline, char* value){
+    return get_color(outline->colorRgba, value);
 }
 
-void set_outline_offset(struct outline* outline, char* value){
-    int int_value = (int) strtol(value, NULL, 10);
+bool set_outline_offset(struct outline* outline, char* value){
+    char * endptr;
+    int int_value = (int) strtol(value, &endptr, 10);
     outline->offset = int_value;
+    if (value == endptr){
+        return false;
+    }
+    return true;
 }
 
-void set_outline_style(struct outline* outline, char* value){
+bool set_outline_style(struct outline* outline, char* value){
     int index = get_index_from_list_by_string(outline_style_strings, value, OUTLINE_STYLE_STRING_COUNT);
     if (index != -1){
         outline->outlineStyleType = outlineStyleTypeList[index];
+        return true;
     }
     else{
         outline->outlineStyleType = CSS_OUTLINE_STYLE_TYPE_NONE;
+        return false;
     }
 }
 
-void set_outline_width(struct outline* outline, char* value){
+bool set_outline_width(struct outline* outline, char* value){
     int index = get_index_from_list_by_string(outline_width_strings, value, OUTLINE_WIDTH_STRING_COUNT);
     if (index != -1){
         outline->outlineWidth = outlineWidthList[index];
+        return true;
     }
     else{
-        int first_value = (int) strtol(value, NULL, 10);
+        char* endptr;
+        int first_value = (int) strtol(value, &endptr, 10);
         outline->outline_width = first_value;
         outline->outlineWidth = CSS_OUTLINE_WIDTH_TYPE_LENGTH;
+        if (value == endptr){
+            return false;
+        }
+        return true;
     }
 }
 
 void set_outline(struct outline* outline, char* value){
-
+    char* values[4];
+    char* value2;
+    int index = 0;
+    value2 = strtok(value, " ");
+    while (value2 != NULL && index < 5){
+        values[index++] = value2;
+        value2 = strtok(NULL, " ");
+    }
+    switch (index) {
+        case 1:
+            set_outline_style(outline, values[0]);
+            break;
+        case 2:
+            if (set_outline_style(outline, values[0])){
+                if (!set_outline_color(outline, values[1])){
+                    set_outline_width(outline, values[1]);
+                }
+            }
+            else{
+                if (!set_outline_color(outline, values[0])){
+                    set_outline_width(outline, values[0]);
+                }
+                set_outline_style(outline, values[1]);
+            }
+            break;
+        case 3:
+            if (set_outline_style(outline, values[0])){
+                if (set_outline_color(outline, values[1])){
+                    set_outline_width(outline, values[2]);
+                }
+                else{
+                    set_outline_width(outline, values[1]);
+                    set_outline_color(outline, values[2]);
+                }
+            }
+            else if(set_outline_color(outline, values[0])){
+                if (set_outline_style(outline, values[1])){
+                    set_outline_width(outline, values[2]);
+                }
+                else{
+                    set_outline_width(outline, values[1]);
+                    set_outline_style(outline, values[2]);
+                }
+            }
+            else{
+                set_outline_width(outline, values[0]);
+                if (set_outline_style(outline, values[1])){
+                    set_outline_color(outline, values[2]);
+                }
+                else{
+                    set_outline_color(outline, values[1]);
+                    set_outline_style(outline, values[2]);
+                }
+            }
+            break;
+        default:
+            break;
+    }
 }
 
 void outline_property_set_value(struct css_properties* current_widget, char* value){
-
+    if (!strcmp(value, "inherit")){
+        current_widget->outline_inherit = true;
+    }
+    else if(!strcmp(value, "initial")){
+        current_widget->outline_inherit = false;
+        current_widget->outline->outlineWidth = CSS_OUTLINE_WIDTH_TYPE_MEDIUM;
+        current_widget->outline->outlineStyleType = CSS_OUTLINE_STYLE_TYPE_INSET;
+        if (current_widget->outline->colorRgba == NULL){
+            current_widget->outline->colorRgba = malloc(sizeof(struct color_rgba));
+        }
+        sync_color(current_widget->color, current_widget->outline->colorRgba);
+    }
+    else{
+        set_outline(current_widget->outline, value);
+    }
 }
 
 void outline_color_property_set_value(struct css_properties* current_widget, char* value){
-
+    if (!strcmp(value, "inherit")){
+        current_widget->outline->outline_color_inherit = true;
+    }
+    else if(!strcmp(value, "initial")){
+        current_widget->outline->outline_color_inherit = false;
+        sync_color(current_widget->color, current_widget->outline->colorRgba);
+    }
+    else{
+        set_outline_color(current_widget->outline, value);
+    }
 }
 
 void outline_offset_property_set_value(struct css_properties* current_widget, char* value){
-
+    if (!strcmp(value, "inherit")){
+        current_widget->outline->outline_offset_inherit = true;
+    }
+    else if(!strcmp(value, "initial")){
+        current_widget->outline->outline_offset_inherit = false;
+        current_widget->outline->offset = 0;
+    }
+    else{
+        set_outline_offset(current_widget->outline, value);
+    }
 }
 
 void outline_style_property_set_value(struct css_properties* current_widget, char* value){
-
+    if (!strcmp(value, "inherit")){
+        current_widget->outline->outline_style_inherit = true;
+    }
+    else if(!strcmp(value, "initial")){
+        current_widget->outline->outline_style_inherit = false;
+        current_widget->outline->outlineStyleType = CSS_OUTLINE_STYLE_TYPE_NONE;
+    }
+    else{
+        set_outline_style(current_widget->outline, value);
+    }
 }
 
 void outline_width_property_set_value(struct css_properties* current_widget, char* value){
-
+    if (!strcmp(value, "inherit")){
+        current_widget->outline->outline_width_inherit = true;
+    }
+    else if(!strcmp(value, "initial")){
+        current_widget->outline->outline_width_inherit = false;
+        current_widget->outline->outlineWidth = CSS_OUTLINE_WIDTH_TYPE_MEDIUM;
+    }
+    else{
+        set_outline_color(current_widget->outline, value);
+    }
 }

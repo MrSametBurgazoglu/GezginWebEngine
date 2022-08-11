@@ -7,10 +7,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-void set_margin(struct margin* margin, char* value){
-//TODO IMPLEMENT THIS FUNCTION
-}
-
 void set_margin_top(struct margin* margin, char* value){
     if (!strcmp(value, "auto")){
         margin->marginTopValueType = CSS_PROPERTY_VALUE_TYPE_AUTO;
@@ -83,6 +79,46 @@ void set_margin_right(struct margin* margin, char* value){
     }
 }
 
+
+void set_margin(struct margin* margin, char* value){
+    char* values[4];
+    char* value2;
+    int index = 0;
+    value2 = strtok(value, " ");
+    while (value2 != NULL && index < 5){
+        values[index++] = value2;
+        value2 = strtok(NULL, " ");
+    }
+    switch (index) {
+        case 1:
+            set_margin_top(margin, values[0]);
+            set_margin_right(margin, values[0]);
+            set_margin_bottom(margin, values[0]);
+            set_margin_left(margin, values[0]);
+            break;
+        case 2:
+            set_margin_top(margin, values[0]);
+            set_margin_right(margin, values[1]);
+            set_margin_bottom(margin, values[0]);
+            set_margin_left(margin, values[1]);
+            break;
+        case 3:
+            set_margin_top(margin, values[0]);
+            set_margin_right(margin, values[1]);
+            set_margin_bottom(margin, values[2]);
+            set_margin_left(margin, values[1]);
+            break;
+        case 4:
+            set_margin_top(margin, values[0]);
+            set_margin_right(margin, values[1]);
+            set_margin_bottom(margin, values[2]);
+            set_margin_left(margin, values[3]);
+            break;
+        default:
+            break;
+    }
+}
+
 void margin_top_property_set_value(struct css_properties* current_widget, char* value){
     if (!strcmp(value, "inherit")){
         current_widget->margin->margin_top_inherit = true;
@@ -148,40 +184,26 @@ void margin_right_property_set_value(struct css_properties* current_widget, char
 }
 
 void margin_property_set_value(struct css_properties* current_widget, char* value){
-    char* values[4];
-    char* value2;
-    int index = 0;
-    value2 = strtok(value, " ");
-    while (value2 != NULL && index < 5){
-        values[index++] = value2;
-        value2 = strtok(NULL, " ");
+    if (!strcmp(value, "inherit")){
+        current_widget->margin_inherit = true;
     }
-    switch (index) {
-        case 1:
-            set_margin_top(current_widget->margin, values[0]);
-            set_margin_right(current_widget->margin, values[0]);
-            set_margin_bottom(current_widget->margin, values[0]);
-            set_margin_left(current_widget->margin, values[0]);
-            break;
-        case 2:
-            set_margin_top(current_widget->margin, values[0]);
-            set_margin_right(current_widget->margin, values[1]);
-            set_margin_bottom(current_widget->margin, values[0]);
-            set_margin_left(current_widget->margin, values[1]);
-            break;
-        case 3:
-            set_margin_top(current_widget->margin, values[0]);
-            set_margin_right(current_widget->margin, values[1]);
-            set_margin_bottom(current_widget->margin, values[2]);
-            set_margin_left(current_widget->margin, values[1]);
-            break;
-        case 4:
-            set_margin_top(current_widget->margin, values[0]);
-            set_margin_right(current_widget->margin, values[1]);
-            set_margin_bottom(current_widget->margin, values[2]);
-            set_margin_left(current_widget->margin, values[3]);
-            break;
-        default:
-            break;
+    else{
+        current_widget->margin_inherit = false;
+        if(current_widget->margin == NULL){
+            current_widget->margin = malloc(sizeof(struct margin));
+        }
+        if (!strcmp(value, "initial")){//do nothing
+            current_widget->margin->margin_top = 0;
+            current_widget->margin->margin_bottom = 0;
+            current_widget->margin->margin_left = 0;
+            current_widget->margin->margin_right = 0;
+            current_widget->margin->marginTopValueType = CSS_PROPERTY_VALUE_TYPE_PIXEL;
+            current_widget->margin->marginBottomValueType = CSS_PROPERTY_VALUE_TYPE_PIXEL;
+            current_widget->margin->marginLeftValueType = CSS_PROPERTY_VALUE_TYPE_PIXEL;
+            current_widget->margin->marginRightValueType = CSS_PROPERTY_VALUE_TYPE_PIXEL;
+        }
+        else{
+            set_margin_right(current_widget->margin, value);
+        }
     }
 }

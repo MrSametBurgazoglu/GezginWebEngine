@@ -51,6 +51,8 @@ struct css_properties{
     bool left_inherit;
     bool right_inherit;
     bool bottom_inherit;
+    bool margin_inherit;
+    bool outline_inherit;
 
     struct color_rgba* accent_color;
 
@@ -140,6 +142,8 @@ struct css_properties{
     struct gap* gap;
 
     struct margin* margin;
+
+    struct outline* outline;
 
 };
 

@@ -27,5 +27,6 @@
 #include "properties/width.h"
 #include "properties/grid.h"
 #include "properties/margin.h"
+#include "properties/outline.h"
 
 #endif //UNTITLED_CSS_ALL_PROPERTIES_H
