@@ -57,6 +57,7 @@ struct css_properties{
     bool padding_inherit;
     bool visibility_inherit;
     bool opacity_inherit;
+    bool resize_inherit;
 
     struct color_rgba* accent_color;
 
@@ -156,6 +157,8 @@ struct css_properties{
     css_visibility visibility;
 
     float opacity;
+
+    css_resize_type resize;
 };
 
 #endif //UNTITLED_CSS_WIDGET_H

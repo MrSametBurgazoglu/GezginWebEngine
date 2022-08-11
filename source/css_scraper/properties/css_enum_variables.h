@@ -534,6 +534,11 @@ typedef enum {
     CSS_OVERFLOW_WRAP_BREAK_WORD,
 } css_overflow_wrap_type;
 
-
+typedef enum {
+    CSS_RESIZE_NONE,
+    CSS_RESIZE_BOTH,
+    CSS_RESIZE_HORIZONTAL,
+    CSS_RESIZE_VERTICAL,
+} css_resize_type;
 
 #endif //UNTITLED_CSS_ENUM_VARIABLES_H
