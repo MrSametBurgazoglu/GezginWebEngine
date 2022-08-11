@@ -29,5 +29,6 @@
 #include "properties/margin.h"
 #include "properties/outline.h"
 #include "properties/overflow.h"
+#include "properties/padding.h"
 
 #endif //UNTITLED_CSS_ALL_PROPERTIES_H

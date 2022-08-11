@@ -7,7 +7,7 @@
 #include "css_properties_searcher.h"
 #include "css_all_properties.h"
 
-#define CSS_PROPERTY_COUNT 140
+#define CSS_PROPERTY_COUNT 144
 
 //TODO WILL "ALL" ADDED
 char* css_properties_list[CSS_PROPERTY_COUNT] = {
@@ -135,7 +135,11 @@ char* css_properties_list[CSS_PROPERTY_COUNT] = {
         "overflow-wrap",
         "overflow-x",
         "overflow-y",
-        "position",
+        "padding",
+        "padding-bottom",
+        "padding-left",
+        "padding-right",
+        "position-top",
         "right",
         "text-align",
         "text-align-last",
@@ -284,6 +288,11 @@ struct css_property_function css_property_function_list[CSS_PROPERTY_COUNT] = {
         overflow_wrap_property_set_value,
         overflow_x_property_set_value,
         overflow_y_property_set_value,
+        padding_property_set_value,
+        padding_bottom_property_set_value,
+        padding_left_property_set_value,
+        padding_right_property_set_value,
+        padding_top_property_set_value,
         right_property_set_value,
         text_align_property_set_value,
         text_align_last_property_set_value,
