@@ -5,6 +5,8 @@
 #ifndef UNTITLED_ALIGN_H
 #define UNTITLED_ALIGN_H
 
+#include "../css_widget.h"
+
 void align_content_property_set_value(struct css_properties*, char*);
 void align_items_property_set_value(struct css_properties*, char*);
 void align_self_property_set_value(struct css_properties*, char*);

@@ -6,38 +6,8 @@
 #define UNTITLED_ANIMATION_H
 
 #include <stdbool.h>
-//#include "css_enum_variables.h"
+#include "css_enum_variables.h"
 #include "../css_widget.h"
-
-typedef enum {
-    CSS_ANIMATION_TIMING_FUNCTION_LINEAR,
-    CSS_ANIMATION_TIMING_FUNCTION_EASE,
-    CSS_ANIMATION_TIMING_FUNCTION_EASE_IN,
-    CSS_ANIMATION_TIMING_FUNCTION_EASE_OUT,
-    CSS_ANIMATION_TIMING_FUNCTION_EASE_IN_OUT,
-    CSS_ANIMATION_TIMING_FUNCTION_STEP_START,
-    CSS_ANIMATION_TIMING_FUNCTION_STEP_END,
-} css_animation_timing_function;
-
-typedef enum {
-    CSS_ANIMATION_DIRECTION_NORMAL,
-    CSS_ANIMATION_DIRECTION_REVERSE,
-    CSS_ANIMATION_DIRECTION_ALTERNATE,
-    CSS_ANIMATION_DIRECTION_ALTERNATE_REVERSE,
-} css_animation_direction;
-
-typedef enum {
-    CSS_ANIMATION_FILL_MODE_NONE,
-    CSS_ANIMATION_FILL_MODE_FORWARDS,
-    CSS_ANIMATION_FILL_MODE_BACKWARDS,
-    CSS_ANIMATION_FILL_MODE_BOTH,
-} css_animation_fill_mode;
-
-
-typedef enum {
-    CSS_ANIMATION_PLAY_STATE_PAUSED,
-    CSS_ANIMATION_PLAY_STATE_RUNNING,
-} css_animation_play_state;
 
 
 struct cubic_bezier_function{
@@ -55,22 +25,23 @@ union CSS_ANIMATION_TIMING_FUNCTION{
     css_animation_timing_function timing_function_type;
 };
 
-struct css_animation{
+struct animation{
+    bool animation_delay_inherit;
+    bool animation_duration_inherit;
+    bool animation_iteration_count_inherit;
+    bool animation_direction_inherit;
+    bool animation_fill_mode_inherit;
+    bool animation_play_state_inherit;
+    bool animation_timing_function_inherit;
+
     char* animation_name;
     int animation_delay;
-    bool animation_delay_inherit;
     int animation_duration;
-    bool animation_duration_inherit;
-    int animation_iteration_count;
-    bool animation_iteration_count_inherit;
+    int animation_iteration_count;;
     css_animation_direction animationDirection;
-    bool animation_direction_inherit;
     css_animation_fill_mode animationFillMode;
-    bool animation_fill_mode_inherit;
     css_animation_play_state animationPlayState;
-    bool animation_play_state_inherit;
     union CSS_ANIMATION_TIMING_FUNCTION animationTimingFunction;
-    bool animation_timing_function_inherit;
     int which_animation_timing_part_active;//0,1,2
 };
 

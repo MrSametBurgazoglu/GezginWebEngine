@@ -65,7 +65,7 @@ struct css_properties{
     css_align align_items;
     css_align align_self;
 
-    struct css_animation* animation;
+    struct animation* animation;
 
     css_filter_type backdropFilterType;
     void* backdrop_filter;
