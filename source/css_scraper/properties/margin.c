@@ -207,3 +207,7 @@ void margin_property_set_value(struct css_properties* current_widget, char* valu
         }
     }
 }
+
+void free_margin(struct css_properties* current_widget){
+    free(current_widget->margin);
+}

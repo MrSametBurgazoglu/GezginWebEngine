@@ -6,6 +6,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../../functools/index_founder.h"
+/*
+ * Grid properties will not be supported for first version.
+ * But it will be supported later
+ * */
 
 #define GRID_AUTO_FLOW_STRING_COUNT 5
 

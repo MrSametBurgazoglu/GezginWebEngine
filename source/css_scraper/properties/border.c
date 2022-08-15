@@ -1696,3 +1696,18 @@ void border_width_property_set_value(struct css_properties* current_widget, char
         }
     }
 }
+
+void free_border(struct css_properties* current_widget){
+    free(current_widget->border->borderWidth);
+    free(current_widget->border->borderStyle);
+    free(current_widget->border->borderColor->bottomBorderColor);
+    free(current_widget->border->borderColor->leftBorderColor);
+    free(current_widget->border->borderColor->rightBorderColor);
+    free(current_widget->border->borderColor->topBorderColor);
+    free(current_widget->border->borderColor);
+    free(current_widget->border->borderSpacing);
+    free(current_widget->border->borderImage->imageOutset);
+    free(current_widget->border->borderImage->imageSlice);
+    free(current_widget->border->borderImage->imageWidth);
+    free(current_widget->border->borderImage);
+}

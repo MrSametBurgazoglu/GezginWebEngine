@@ -154,3 +154,7 @@ void overflow_y_property_set_value(struct css_properties* current_widget, char* 
         }
     }
 }
+
+void free_overflow(struct css_properties* current_widget){
+    free(current_widget->overflow);
+}

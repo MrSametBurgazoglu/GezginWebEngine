@@ -508,3 +508,11 @@ void text_transform_property_set_value(struct css_properties* current_widget, ch
         set_text_transform(current_widget, value);
     }
 }
+
+void free_text(struct css_properties* current_widget){
+    free(current_widget->textDecoration->textDecorationThickness);
+    free(current_widget->textDecoration->textDecorationColor);
+    free(current_widget->textDecoration);
+    free(current_widget->textShadow);
+    free(current_widget->textIndent);
+}

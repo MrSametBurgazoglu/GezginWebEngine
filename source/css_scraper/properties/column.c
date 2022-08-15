@@ -4,6 +4,7 @@
 
 #include "column.h"
 #include "../../functools/index_founder.h"
+
 #include <stdlib.h>
 #include <string.h>
 
@@ -327,4 +328,10 @@ void columns_property_set_value(struct css_properties* current_widget, char* val
     else{
         set_columns(current_widget, value);
     }
+}
+
+void free_column(struct css_properties* current_widget){
+    free(current_widget->columnRule->columnRuleWidth);
+    free(current_widget->columnRule->columnRuleColor);
+    free(current_widget->columnRule);
 }

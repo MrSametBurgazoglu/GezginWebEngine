@@ -207,3 +207,7 @@ void padding_property_set_value(struct css_properties* current_widget, char* val
         }
     }
 }
+
+void free_padding(struct css_properties* current_widget){
+    free(current_widget->padding);
+}

@@ -224,3 +224,8 @@ void flex_wrap_property_set_value(struct css_properties* current_widget, char* v
         }
     }
 }
+
+void free_flex(struct css_properties* current_widget){
+    free(current_widget->flex);
+    free(current_widget->flexFlow);
+}

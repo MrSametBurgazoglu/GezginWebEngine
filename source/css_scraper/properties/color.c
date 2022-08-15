@@ -7,12 +7,19 @@
 #include <string.h>
 #include <stdlib.h>
 
-// for now this value will be only color name
-void color_property_set_value(struct css_properties* current_css_widget, char* value){
-    if(current_css_widget->color == NULL){
-        current_css_widget->color = malloc(sizeof(struct color_rgba));
+void color_property_set_value(struct css_properties* current_widget, char* value){
+    if(!strcmp(value, "inherit")){
+        current_widget->color_inherit = true;
     }
-    //TODO IMPLEMENT THIS
-    if(!strcmp(value, "initial"))
-    get_color(current_css_widget->color, value);
+    else{
+        current_widget->color_inherit = true;
+        if(current_widget->color == NULL){
+            current_widget->color = malloc(sizeof(struct color_rgba));
+        }
+        get_color(current_widget->color, value);
+    }
+}
+
+void free_color(struct css_properties* current_widget){
+    free(current_widget->color);
 }

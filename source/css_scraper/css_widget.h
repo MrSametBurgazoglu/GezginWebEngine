@@ -7,10 +7,7 @@
 
 #include <stdbool.h>
 #include "properties/css_color.h"
-#include "properties/box_shadow.h"
-#include "properties/clip.h"
-#include "properties/edge.h"
-#include "properties/gap.h"
+#include "properties/css_enum_variables.h"
 
 //MAKE IT ALPHABETIC AFTER FINISHED
 struct css_properties{
@@ -23,6 +20,7 @@ struct css_properties{
     bool backface_visibility_inherit;
     bool background_inherit;
     bool border_inherit;
+    bool color_inherit;
     bool font_inherit;
     bool text_align_inherit;
     bool text_align_last_inherit;

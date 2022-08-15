@@ -252,3 +252,8 @@ void outline_width_property_set_value(struct css_properties* current_widget, cha
         }
     }
 }
+
+void free_outline(struct css_properties* current_widget){
+    free(current_widget->outline->colorRgba);
+    free(current_widget->outline);
+}

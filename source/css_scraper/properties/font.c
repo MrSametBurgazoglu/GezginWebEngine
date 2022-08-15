@@ -470,3 +470,11 @@ void font_weight_property_set_value(struct css_properties* current_widget, char*
         }
     }
 }
+
+void free_font(struct css_properties* current_widget){
+    for (int i = 0; i < current_widget->font->font_family_count; ++i) {
+        free(current_widget->font->font_family[i]);
+    }
+    free(current_widget->font->font_family);
+    free(current_widget->font);
+}

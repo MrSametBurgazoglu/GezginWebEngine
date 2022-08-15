@@ -331,3 +331,7 @@ void animation_property_set_value(struct css_properties *current_widget, char* v
         }
     }
 }
+
+void free_animation(struct css_properties* current_widget){
+    free(current_widget->animation);
+}

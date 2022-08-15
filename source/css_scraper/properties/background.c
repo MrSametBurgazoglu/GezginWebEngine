@@ -518,3 +518,14 @@ void background_property_set_value(struct css_properties* current_widget, char *
         }
     }
 }
+
+void free_background(struct css_properties* current_widget){
+    free(current_widget->background->backgroundPosition);
+    free(current_widget->background->background_color);
+    for (int i = 0; i < current_widget->background->background_image_count; ++i) {
+        free(current_widget->background->background_image_color_list[i]->color);
+        free(current_widget->background->background_image_color_list[i]);
+    }
+    free(current_widget->background->background_image_color_list);
+    free(current_widget->background->background_image_list);
+}
