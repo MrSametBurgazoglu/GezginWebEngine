@@ -6,13 +6,12 @@
 
 SDL_Surface *main_surface;
 SDL_Texture *main_texture;
-void *renderer;
 
-void initialize_drawer(){
+void initialize_drawer(void* rend){
     //init_sdl_drawer();
 }
 
-void render_document(struct widget* document){
+void render_document(struct widget* document, SDL_Renderer* renderer){
     struct widget** widget_list = malloc(sizeof(struct widget*));
     int *widget_index_list = malloc(sizeof(int));
     widget_list[0] = document;
@@ -36,12 +35,12 @@ void render_document(struct widget* document){
                 widget_index_list[widget_count-1] = 0;
                 current_index++;
                 if(widget_list[current_index]->draw == true){
-                    widget_list[current_index]->render_widget(widget_list[current_index]);
+                    widget_list[current_index]->render_widget(widget_list[current_index], renderer);
                 }
             }
             else{
                 if(widget_list[current_index]->children[widget_index_list[current_index]]->draw == true){
-                    widget_list[current_index]->render_widget(widget_list[current_index]);
+                    widget_list[current_index]->render_widget(widget_list[current_index], renderer);
                 }
                 widget_index_list[current_index]++;
             }
@@ -52,7 +51,7 @@ void render_document(struct widget* document){
 
 //TODO MAKE UNTAGGED TEXT NOT DRAW, BUT RENDER THEIR TEXTURE IN SELF AND LET PARENT DRAW THEM
 //Some widgets need render function because of create texture is a performance problem
-void draw_document(struct widget* document){
+void draw_document(struct widget* document, SDL_Renderer * renderer){
     //for every widget, use rects and textures
     struct widget** widget_list = malloc(sizeof(struct widget*));
     int *widget_index_list = malloc(sizeof(int));
@@ -77,7 +76,7 @@ void draw_document(struct widget* document){
                 widget_index_list[widget_count-1] = 0;
                 current_index++;
                 if(widget_list[current_index]->draw == true){
-                    widget_list[current_index]->draw_widget(widget_list[current_index], renderer);
+                    //widget_list[current_index]->draw_widget(widget_list[current_index], renderer);
                 }
             }
             else{

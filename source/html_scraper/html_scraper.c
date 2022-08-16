@@ -9,6 +9,7 @@
 #include "html_tags.h"
 #include "html_scraper.h"
 #include "html_tag_searcher.h"
+#include "../drawer/tags/untagged_text_drawer.h"
 
 /*
  * free widget tree
@@ -22,7 +23,9 @@ void free_tree(struct widget* document){
         else{//if element don't have any child we can delete it
             //TODO DELETE EVERYTHING ABOUT ELEMENT
             free(current_widget->html_variables);
-            free(current_widget->widget_properties);
+            if (current_widget->widget_properties != NULL){
+                free(current_widget->widget_properties);
+            }
             free(current_widget->children);
             current_widget = current_widget->parent;
             free(current_widget->children[current_widget->children_count - 1]);
@@ -121,14 +124,24 @@ struct widget* scrape_html_from_file(char* file_name){
                 //TODO iplement new_widget->draw_widget, new_widget->render_widget
                 new_widget->parent = current_widget;
                 current_widget->children_count = current_widget->children_count + 1;
-                current_widget->children = realloc(current_widget->children, current_widget->children_count * sizeof(struct widget*));
+                if (current_widget->children_count == 1){
+                    current_widget->children = malloc(sizeof(struct widget*));
+                }
+                else{
+                    current_widget->children = realloc(current_widget->children, current_widget->children_count * sizeof(struct widget*));
+                }
                 current_widget->children[current_widget->children_count-1] = new_widget;
                 struct text_untagged *text = new_widget->widget_properties;
+                new_widget->html_variables = NULL;
+                new_widget->children = NULL;
+                new_widget->draw_properties = NULL;
                 text->value = malloc(current_count * sizeof(char )+1);
                 text->value[current_count] = '\0';
                 strncpy(text->value, context, current_count);
                 printf("\ntag:text_tag,value:%s\n", text->value);
                 memset(context, 0, current_count);
+                new_widget->draw_widget = untagged_text_drawer_function;
+                new_widget->render_widget = untagged_text_render_function;
             }
             current_count = 0;
             current_character = fgetc(fp);
@@ -152,6 +165,7 @@ struct widget* scrape_html_from_file(char* file_name){
                 struct widget *new_widget = (struct widget*) malloc(sizeof(struct widget));
                 new_widget->html_variables = (struct standart_html_objects*) malloc(sizeof(struct standart_html_objects));
                 new_widget->parent = current_widget;
+                new_widget->children_count = 0;
                 current_widget->children_count = current_widget->children_count + 1;
                 current_widget->children = realloc(current_widget->children, current_widget->children_count * sizeof(struct widget*));
                 current_widget->children[current_widget->children_count-1] = new_widget;
@@ -162,6 +176,8 @@ struct widget* scrape_html_from_file(char* file_name){
                 current_widget->html_variables->class_count = 0;
                 current_widget->html_variables->draggable = false;
                 current_widget->html_variables->contenteditable = false;
+                current_widget->html_variables->style = NULL;
+                current_widget->children = NULL;
                 bool tag_found = false;
                 context[0] = (char) current_character;
                 current_count = 1;

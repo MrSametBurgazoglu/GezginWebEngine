@@ -7,7 +7,7 @@
 
 #include "../../widget.h"
 
-void html_drawer_function(struct widget* html_widget, void* renderer);
-void html_render_function(struct widget* html_widget, void* renderer);
+void html_drawer_function(struct widget* html_widget, SDL_Renderer * renderer);
+void html_render_function(struct widget* html_widget, SDL_Renderer* renderer);
 
 #endif //UNTITLED_HTML_DRAWER_H

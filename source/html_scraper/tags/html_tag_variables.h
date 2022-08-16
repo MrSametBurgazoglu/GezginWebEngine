@@ -13,6 +13,7 @@
  * */
 
 typedef enum {
+    HTML_DOCUMENT,
     HTML_DOCTYPE,
     HTML_A,
     HTML_ABBR,

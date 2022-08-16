@@ -13,8 +13,8 @@
 struct html_tag_variables{
     html_tags tag;
     void (*widget_property_function) (struct widget*);//it's unique to html element some of them doesn't have this function
-    void (*widget_draw_function) (struct widget*, void*);//for drawing rendered object
-    void (*widget_render_function) (struct widget*, void*);//render element
+    void (*widget_draw_function) (struct widget*, SDL_Renderer*);//for drawing rendered object
+    void (*widget_render_function) (struct widget*, SDL_Renderer*);//render element
     bool end_tag;//is this element need end tag. something like '</div>'
     bool draw;//is this function
 };

@@ -20,7 +20,7 @@ struct widget {
     struct widget* parent;
     int (*var_reader_func)(struct widget*, char*, char*);//reading html parameters use '=' for assigning
     void (*context_reader_func)(struct widget*, char*);//reading html parameters assign by parameter itself
-    void (*render_widget) (struct widget*, void* renderer_source);//render function for preparing to draw
+    void (*render_widget) (struct widget*,  SDL_Renderer* renderer_source);//render function for preparing to draw
     void (*draw_widget) (struct widget*, void* renderer_source);//draw rendering object to screen
     bool draw;// is this widget has drawing function
 };

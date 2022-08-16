@@ -15,9 +15,14 @@ void open_web_page(char* file_url){
     scrape_css_from_document(document);
 }
 
-void draw_page(void ){
-    draw_document(document);
+void draw_page(void* renderer){
+    draw_document(document, renderer);
 }
+
+void render_page(SDL_Renderer* renderer){
+    render_document(document, renderer);
+}
+
 /*
 void give_input(Input input){
     //make changes

@@ -8,10 +8,9 @@
 // some ordinary window nothing speacial
 int main(int argc, char *argv[])
 {
-    open_web_page("example.html");
     SDL_Event event;
     SDL_Rect rect1, rect2;
-    SDL_Renderer *renderer;
+    SDL_Renderer* renderer;
     SDL_Texture *texture1, *texture2;
     SDL_Window *window;
     int quit;
@@ -26,6 +25,8 @@ int main(int argc, char *argv[])
         exit(EXIT_FAILURE);
     }
 
+    open_web_page("example.html");
+
     quit = 0;
     while (!quit) {
         while (SDL_PollEvent(&event) == 1) {
@@ -33,12 +34,10 @@ int main(int argc, char *argv[])
                 quit = 1;
             }
         }
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+        SDL_SetRenderDrawColor(renderer, 250, 250, 250, 0);
         SDL_RenderClear(renderer);
-
-        /* Use TTF textures. */
-        SDL_RenderCopy(renderer, texture1, NULL, &rect1);
-        SDL_RenderCopy(renderer, texture2, NULL, &rect2);
+        render_page(renderer);
+        //draw_page(renderer);
 
         SDL_RenderPresent(renderer);
     }

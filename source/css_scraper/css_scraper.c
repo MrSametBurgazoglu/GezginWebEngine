@@ -82,7 +82,8 @@ void set_css_properties(struct widget* current_widget, struct widget* parent_wid
         sync_css_properties(current_widget->css_properties, current_css_properties);
     }
     if(current_widget->html_variables->style != NULL){
-        scrape_css_from_inline_style(current_widget->css_properties, current_widget->html_variables->style);
+        printf("WOW:%s:WOW", current_widget->html_variables->style);
+        //scrape_css_from_inline_style(current_widget->css_properties, current_widget->html_variables->style);
     }
 
 }

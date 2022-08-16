@@ -8,7 +8,8 @@
 #include "../widget.h"
 #include "drawer_backend/sdl_drawer.h"
 
-void render_document(struct widget*);
-void draw_document(struct widget*);
+void initialize_drawer(void *);
+void render_document(struct widget*, SDL_Renderer*);
+void draw_document(struct widget*, SDL_Renderer *);
 
 #endif //UNTITLED_MAIN_DRAWER_H

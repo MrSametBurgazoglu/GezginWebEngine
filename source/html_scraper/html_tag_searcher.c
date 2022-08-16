@@ -125,8 +125,6 @@ struct html_tag_variables htmlTagVariables[105] = {
         [0].end_tag = true,
         [1].tag = HTML_A,
         [1].widget_property_function = set_widget_properties_for_a_tag,
-        [1].widget_draw_function = html_drawer_function,
-        [1].widget_render_function = html_render_function,
         [1].draw = true,
         [2].tag = HTML_ABBR,
         [2].draw = true,
@@ -233,6 +231,8 @@ struct html_tag_variables htmlTagVariables[105] = {
         [46].draw = true,
         [47].tag = HTML_HTML,
         [47].draw = true,
+        [47].widget_draw_function = html_drawer_function,
+        [47].widget_render_function = html_render_function,
         [48].tag = HTML_I,
         [48].draw = true,
         [49].tag = HTML_IFRAME,
@@ -395,9 +395,14 @@ bool set_html_tag(struct widget* current_widget, char* tag_name){
     if(htmlTagVariables[result].widget_property_function != NULL){
         htmlTagVariables[result].widget_property_function(current_widget);
     }
+    else{
+        current_widget->widget_properties = NULL;
+    }
     if (htmlTagVariables[result].draw == true){
         current_widget->css_properties = malloc(sizeof(struct css_properties));//if the element isn't drawn it doesn't need css properties
         current_widget->draw = true;
+        current_widget->render_widget = htmlTagVariables[result].widget_render_function;
+        current_widget->draw_widget = htmlTagVariables[result].widget_draw_function;
     }
     if (htmlTagVariables[result].end_tag == true){
         return true;//if element don't have ending tag like '</div>'
