@@ -123,6 +123,7 @@ struct widget* scrape_html_from_file(char* file_name){
                 new_widget->widget_properties = malloc(sizeof(struct text_untagged));
                 //TODO iplement new_widget->draw_widget, new_widget->render_widget
                 new_widget->parent = current_widget;
+                new_widget->children_count = 0;
                 current_widget->children_count = current_widget->children_count + 1;
                 if (current_widget->children_count == 1){
                     current_widget->children = malloc(sizeof(struct widget*));

@@ -31,13 +31,13 @@ int main(int argc, char *argv[])
     while (!quit) {
         while (SDL_PollEvent(&event) == 1) {
             if (event.type == SDL_QUIT) {
+                printf("quit by click");
                 quit = 1;
             }
         }
         SDL_SetRenderDrawColor(renderer, 250, 250, 250, 0);
         SDL_RenderClear(renderer);
         render_page(renderer);
-        //draw_page(renderer);
 
         SDL_RenderPresent(renderer);
     }

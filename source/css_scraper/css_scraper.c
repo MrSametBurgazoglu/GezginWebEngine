@@ -81,7 +81,7 @@ void set_css_properties(struct widget* current_widget, struct widget* parent_wid
     if(current_css_properties != NULL){
         sync_css_properties(current_widget->css_properties, current_css_properties);
     }
-    if(current_widget->html_variables->style != NULL){
+    if(current_widget->html_variables->style != NULL){//TODO BUGFIX
         printf("WOW:%s:WOW", current_widget->html_variables->style);
         //scrape_css_from_inline_style(current_widget->css_properties, current_widget->html_variables->style);
     }
@@ -89,7 +89,7 @@ void set_css_properties(struct widget* current_widget, struct widget* parent_wid
 }
 
 //last call
-void scrape_css_from_document(struct widget* document){
+void scrape_css_from_document(struct widget* document){//TODO THERE IS A BUG HERE I DON'T KNOW WHERE
     // search drawable tags and set css properties
     // malloc css properties
     // connect childrens to each other this needs double linked list
@@ -128,6 +128,7 @@ void scrape_css_from_document(struct widget* document){
             }
         }
     }
+
 }
 
 struct css_properties* get_current_css_widget(char* selector){
@@ -218,9 +219,9 @@ void scrape_css_from_file(char* file_name){
         }
         memset(context, 0, current_count);
         current_count = 0;
-        do {
+        do {//TODO CHECK THIS SECTION
             if (current_character == '}'){//finish this block
-                if(property != NULL && current_count > 0){
+                if(property != NULL){
                     value = malloc(current_count * sizeof(char) + 1);
                     value[current_count] = '\0';
                     strncpy(value, context, current_count);

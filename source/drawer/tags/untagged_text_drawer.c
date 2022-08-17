@@ -18,7 +18,6 @@ void untagged_text_drawer_function(struct widget* text_widget, void* renderer){
 void untagged_text_render_function(struct widget* text_widget, SDL_Renderer* renderer){
     if (text_widget->draw_properties == NULL){
         text_widget->draw_properties = malloc(sizeof(struct draw_properties));
-        printf("heyyyo123");
     }
     /*
     else if (text_widget->draw_properties->texture != NULL){
@@ -32,10 +31,12 @@ void untagged_text_render_function(struct widget* text_widget, SDL_Renderer* ren
     colorRgba->blue = 0;
     colorRgba->alpha = 0;
     SDL_Rect* rect;
+    /*
     get_text_texture(renderer,
                      properties->value,
                      colorRgba,
                      font,
                      &text_widget->draw_properties->texture,
                      rect);
+                     */
 }
