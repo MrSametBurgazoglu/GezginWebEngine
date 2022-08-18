@@ -7,8 +7,10 @@
 #include <string.h>
 #include "css_scraper.h"
 #include "css_properties_searcher.h"
+#include "css_synchronizer.h"
 #include "../html_scraper/tags/html_untagged_text.h"
 #include "../html_scraper/html_tag_searcher.h"
+
 
 //TODO we can set only first character to zero in memset functions when clear context
 //TODO make clear function for every css tree
@@ -16,13 +18,6 @@
 //init variables
 void initialize_css_scraper(void){
     initialize_css_tree();
-}
-
-//TODO IMPLEMENT THIS FOR EVERY CSS PROPERTIES HAS INHERIT
-void sync_css_properties(struct css_properties* dest, struct css_properties* source){
-    if(source->accent_color != NULL){
-        dest->accent_color = source->accent_color;
-    }
 }
 
 //for element itself

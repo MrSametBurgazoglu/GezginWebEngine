@@ -1,0 +1,13 @@
+//
+// Created by samet on 18.08.2022.
+//
+
+#ifndef UNTITLED_CSS_SYNCHRONIZER_H
+#define UNTITLED_CSS_SYNCHRONIZER_H
+
+#include "../widget.h"
+
+void sync_css_properties(struct css_properties* dest, struct css_properties* source);
+void sync_all_html_tree(struct widget*);
+
+#endif //UNTITLED_CSS_SYNCHRONIZER_H

@@ -43,6 +43,10 @@ void add_new_tag_to_list(struct widget** html_widget){
     style_tag_list = (struct widget**) realloc(style_tag_list, sizeof(struct widget*) * style_tag_list_size);
     style_tag_list[style_tag_list_size-1] = *html_widget;
 }
+//use calloc instead of malloc
+void initialize_css_properties_widget(struct css_properties* css_widget){
+    memset(css_widget, 0, sizeof(struct css_properties));
+}
 
 struct css_properties* create_new_css_widget_by_id(char* id){
     css_properties_by_id_list_size++;
@@ -50,6 +54,7 @@ struct css_properties* create_new_css_widget_by_id(char* id){
     cssWidgetByIDList[css_properties_by_id_list_size-1] =  malloc(sizeof(struct css_properties_list_item));
     cssWidgetByIDList[css_properties_by_id_list_size-1]->identifier1 = id;
     cssWidgetByIDList[css_properties_by_id_list_size-1]->css_widget = malloc(sizeof(struct css_properties));
+    initialize_css_properties_widget(cssWidgetByIDList[css_properties_by_id_list_size-1]->css_widget);
     return cssWidgetByIDList[css_properties_by_id_list_size-1]->css_widget;
 }
 
@@ -59,6 +64,7 @@ struct css_properties* create_new_css_widget_by_class(char* class_name){
     cssWidgetByClassList[css_properties_by_class_list_size-1] = malloc(sizeof(struct css_properties_list_item));
     cssWidgetByClassList[css_properties_by_class_list_size-1]->identifier1 = class_name;
     cssWidgetByClassList[css_properties_by_class_list_size-1]->css_widget = malloc(sizeof(struct css_properties));
+    initialize_css_properties_widget(cssWidgetByClassList[css_properties_by_class_list_size-1]->css_widget);
     return cssWidgetByClassList[css_properties_by_class_list_size-1]->css_widget;
 }
 
@@ -69,6 +75,7 @@ struct css_properties* create_new_css_widget_by_element(char* tag){
     cssWidgetByElementList[css_properties_by_element_list_size-1] = malloc(sizeof(struct css_properties_list_item));
     cssWidgetByElementList[css_properties_by_element_list_size-1]->identifier2 = element;
     cssWidgetByElementList[css_properties_by_element_list_size-1]->css_widget = malloc(sizeof(struct css_properties));
+    initialize_css_properties_widget(cssWidgetByElementList[css_properties_by_element_list_size-1]->css_widget);
     return cssWidgetByElementList[css_properties_by_element_list_size-1]->css_widget;
 }
 
@@ -80,6 +87,7 @@ struct css_properties* create_new_css_widget_by_element_and_class(char* tag, cha
     cssWidgetByClassList[css_properties_by_class_list_size-1]->identifier1 = class_name;
     cssWidgetByClassList[css_properties_by_class_list_size-1]->identifier2 = element;
     cssWidgetByClassList[css_properties_by_class_list_size-1]->css_widget = malloc(sizeof(struct css_properties));
+    initialize_css_properties_widget(cssWidgetByClassList[css_properties_by_class_list_size-1]->css_widget);
     return cssWidgetByClassList[css_properties_by_class_list_size-1]->css_widget;
 }
 

@@ -15,7 +15,7 @@ void open_web_page(char* file_url){
     scrape_css_from_document(document);
 }
 
-void draw_page(void* renderer){
+void draw_page(SDL_Renderer* renderer){
     draw_document(document, renderer);
 }
 

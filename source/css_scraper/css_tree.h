@@ -30,5 +30,6 @@ struct css_properties* get_css_widget_by_id(char *id);
 struct css_properties* get_css_widget_by_class(char *class_name);
 struct css_properties* get_css_widget_by_element(html_tags tag);
 struct css_properties* get_css_widget_by_element_and_class(html_tags tag, char* class_name);
+void initialize_css_properties_widget(struct css_properties* css_widget);
 
 #endif //UNTITLED_CSS_TREE_H

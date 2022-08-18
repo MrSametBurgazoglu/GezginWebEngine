@@ -8,12 +8,13 @@
 #include "drawer_backend/sdl_drawer.h"
 #include "draw_structs.h"
 
+//TODO MAYBE WE CAN MAKE SPECIAL TO ELEMENTS NEEDS
+
 struct draw_properties{
     TTF_Font *font;//for text_drawer and child elements
-    SDL_Rect *rect;
-    SDL_Texture *texture;
-    struct background_drawer* backgroundDrawer;
-    struct border_drawer* borderDrawer;
+    SDL_Rect rect;
+    SDL_Texture *texture;//this will be removed
+    struct background_image* backgroundImage;
     struct text_drawer* textDrawer;
 };
 /*

@@ -38,6 +38,7 @@ int main(int argc, char *argv[])
         SDL_SetRenderDrawColor(renderer, 250, 250, 250, 0);
         SDL_RenderClear(renderer);
         render_page(renderer);
+        draw_page(renderer);
 
         SDL_RenderPresent(renderer);
     }

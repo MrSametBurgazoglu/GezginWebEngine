@@ -7,8 +7,9 @@
 
 #include "../../css_scraper/css_widget.h"
 #include "../draw_properties.h"
+#include "sdl_drawer.h"
 
-void draw_background(struct css_properties*, struct draw_properties*);
-void render_background(struct css_properties*, struct draw_properties*);
+void draw_background(struct css_properties*, struct draw_properties*, SDL_Renderer*);
+void render_background_image(struct css_properties*, struct draw_properties*, SDL_Renderer*);
 
 #endif //UNTITLED_BACKGROUND_DRAWER_H

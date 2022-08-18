@@ -7,7 +7,7 @@
 
 #include "../../widget.h"
 
-void untagged_text_drawer_function(struct widget* text_widget, void* renderer);
+void untagged_text_drawer_function(struct widget* text_widget, SDL_Renderer* renderer);
 void untagged_text_render_function(struct widget* text_widget, SDL_Renderer* renderer);
 
 #endif //UNTITLED_UNTAGGED_TEXT_DRAWER_H

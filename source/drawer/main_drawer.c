@@ -76,7 +76,7 @@ void draw_document(struct widget* document, SDL_Renderer * renderer){
                 widget_index_list[widget_count-1] = 0;
                 current_index++;
                 if(widget_list[current_index]->draw == true){
-                    //widget_list[current_index]->draw_widget(widget_list[current_index], renderer);
+                    widget_list[current_index]->draw_widget(widget_list[current_index], renderer);
                 }
             }
             else{

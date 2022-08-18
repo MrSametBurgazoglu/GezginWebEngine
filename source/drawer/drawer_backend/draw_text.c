@@ -19,5 +19,4 @@ void get_text_texture(SDL_Renderer *renderer, char *text, struct color_rgba* col
     rect->y = 0;
     rect->w = text_width + 10;
     rect->h = text_height + 10;
-    SDL_RenderCopy(renderer, *texture, NULL, rect);
 }

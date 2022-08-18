@@ -400,9 +400,10 @@ bool set_html_tag(struct widget* current_widget, char* tag_name){
     }
     if (htmlTagVariables[result].draw == true){
         current_widget->css_properties = malloc(sizeof(struct css_properties));//if the element isn't drawn it doesn't need css properties
+        initialize_css_properties_widget(current_widget->css_properties);
         current_widget->draw = true;
         current_widget->render_widget = htmlTagVariables[result].widget_render_function;
-        //current_widget->draw_widget = htmlTagVariables[result].widget_draw_function;
+        current_widget->draw_widget = htmlTagVariables[result].widget_draw_function;
     }
     if (htmlTagVariables[result].end_tag == true){
         return true;//if element don't have ending tag like '</div>'
