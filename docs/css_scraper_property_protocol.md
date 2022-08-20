@@ -31,6 +31,7 @@ else:
         css_widget->top_property = malloc(size of top_property)
     if css_widget->top_property is inherit:
         set all sub_properties to inherit except the property
+        css_widget->top_property_inherit = false
     css_widget->property_inherit = false
     if property is also a top property:
       malloc property and its sub properties
@@ -46,6 +47,7 @@ else:
 if value is "inherit":
     css_widget->property_inherit = true
 else:
+    css_widget->property_inherit = false
     if value is "initial":
         set property to default value
     else:
