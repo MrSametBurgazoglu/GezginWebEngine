@@ -39,3 +39,15 @@ else:
     else:
         set_property()
 ```
+
+## Scraping values for Css Property Type 3:
+
+```
+if value is "inherit":
+    css_widget->property_inherit = true
+else:
+    if value is "initial":
+        set property to default value
+    else:
+        set_property()
+```
