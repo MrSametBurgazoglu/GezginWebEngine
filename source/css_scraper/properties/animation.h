@@ -26,6 +26,7 @@ union CSS_ANIMATION_TIMING_FUNCTION{
 };
 
 struct animation{
+    bool animation_name_inherit;
     bool animation_delay_inherit;
     bool animation_duration_inherit;
     bool animation_iteration_count_inherit;

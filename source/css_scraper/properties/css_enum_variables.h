@@ -174,6 +174,7 @@ typedef enum {
 } css_border_radius_type;
 
 typedef enum {
+    CSS_BORDER_COLLAPSE_TYPE_EMPTY,//not setted value
     CSS_BORDER_COLLAPSE_TYPE_SEPARATE,
     CSS_BORDER_COLLAPSE_TYPE_COLLAPSE,
 } css_border_collapse_type;
@@ -391,17 +392,20 @@ typedef enum {
 } css_float_type;
 
 typedef enum {
+    CSS_FONT_STYLE_EMPTY,
     CSS_FONT_STYLE_NORMAL,
     CSS_FONT_STYLE_ITALIC,
     CSS_FONT_STYLE_OBLIQUE,
 } css_font_style;
 
 typedef enum {
+    CSS_FONT_VARIANT_EMPTY,
     CSS_FONT_VARIANT_NORMAL,
     CSS_FONT_VARIANT_SMALL_CAPS,
 } css_font_variant_type;
 
 typedef enum {
+    CSS_FONT_WEIGHT_EMPTY,
     CSS_FONT_WEIGHT_NORMAL,
     CSS_FONT_WEIGHT_BOLD,
     CSS_FONT_WEIGHT_BOLDER,
@@ -410,6 +414,7 @@ typedef enum {
 } css_font_weight_type;
 
 typedef enum {
+    CSS_FONT_SIZE_TYPE_EMPTY,
     CSS_FONT_SIZE_TYPE_MEDIUM,
     CSS_FONT_SIZE_TYPE_XX_SMALL,
     CSS_FONT_SIZE_TYPE_X_SMALL,
@@ -424,6 +429,7 @@ typedef enum {
 } css_font_size_type;
 
 typedef enum {
+    CSS_FONT_STRETCH_TYPE_EMPTY,
     CSS_FONT_STRETCH_TYPE_ULTRA_CONDENSED,
     CSS_FONT_STRETCH_TYPE_EXTRA_CONDENSED,
     CSS_FONT_STRETCH_TYPE_CONDENSED,
@@ -433,11 +439,10 @@ typedef enum {
     CSS_FONT_STRETCH_TYPE_EXPANDED,
     CSS_FONT_STRETCH_TYPE_EXTRA_EXPANDED,
     CSS_FONT_STRETCH_TYPE_ULTRA_EXPANDED,
-    CSS_FONT_STRETCH_TYPE_INITIAL,
-    CSS_FONT_STRETCH_TYPE_INHERIT,
 } css_font_stretch_type;
 
 typedef enum {
+    CSS_FONT_VARIANT_CAPS_TYPE_EMPTY,
     CSS_FONT_VARIANT_CAPS_TYPE_NORMAL,
     CSS_FONT_VARIANT_CAPS_TYPE_SMALL_CAPS,
     CSS_FONT_VARIANT_CAPS_TYPE_ALL_SMALL_CAPS,

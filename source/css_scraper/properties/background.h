@@ -44,6 +44,7 @@ struct css_background{
     bool background_origin_inherit;
     bool background_clip_inherit;
     bool background_attachment_inherit;
+    bool background_size_inherit;
     struct css_background_position* backgroundPosition;
     css_background_repeat_type backgroundRepeatType;
     struct css_background_size* backgroundSize;

@@ -167,7 +167,18 @@ void animation_name_property_set_value(struct css_properties *current_widget, ch
     if(current_widget->animation == NULL){
         current_widget->animation = malloc(sizeof(struct animation));
     }
-    set_animation_name(current_widget->animation, value);
+    if(!strcmp(value, "inherit")){
+        current_widget->animation->animation_name_inherit = true;
+    }
+    else{
+        current_widget->animation->animation_name_inherit = false;
+        if(!strcmp(value, "initial")){
+            current_widget->animation->animation_name = "none";//TODO CHECK THIS VALUE
+        }
+        else{
+            set_animation_name(current_widget->animation, value);
+        }
+    }
 }
 
 
