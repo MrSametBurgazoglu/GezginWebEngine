@@ -143,16 +143,62 @@ void set_animation_name(struct animation* animation, char* value){
     animation->animation_name = name;
 }
 
-
+void set_animation(struct animation* animation, char* value){
+    char* value2 = strtok(value, " ");//animation name
+    const char* delim = " ";
+    set_animation_name(animation, value2);
+    value2 = strtok(NULL, delim);//animation duration
+    if(value2 != NULL){
+        set_animation_duration(animation, value2);
+        value2 = strtok(NULL, delim);
+        if(value2 != NULL){
+            set_animation_timing_function(animation, value2);
+            value2 = strtok(NULL, delim);
+            if(value2 != NULL){
+                set_animation_delay(animation, value2);
+                value2 = strtok(NULL, delim);
+                if(value2 != NULL){
+                    set_animation_iteration_count(animation, value2);
+                    value2 = strtok(NULL, delim);
+                    if(value2 != NULL){
+                        set_animation_direction(animation, value2);
+                        value2 = strtok(NULL, delim);
+                        if(value2 != NULL){
+                            set_animation_fill_mode(animation, value2);
+                            value2 = strtok(NULL, delim);
+                            if(value2 != NULL){
+                                set_animation_play_state(animation, value2);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 void animation_timing_function_property_set_value(struct css_properties* current_widget, char* value){
-    if(current_widget->animation == NULL){
-        current_widget->animation = malloc(sizeof(struct animation));
-    }
     if (!strcmp(value, "inherit")){
-        current_widget->animation->animation_timing_function_inherit = true;
+        if (!current_widget->animation_inherit){
+            if (current_widget->animation == NULL){
+                current_widget->animation = malloc(sizeof(struct animation));
+            }
+            current_widget->animation->animation_timing_function_inherit = true;
+        }
     }
     else{
+        if (current_widget->animation == NULL){
+            current_widget->animation = malloc(sizeof(struct animation));
+        }
+        if (current_widget->animation_inherit){
+            current_widget->animation->animation_direction_inherit = true;
+            current_widget->animation->animation_play_state_inherit = true;
+            current_widget->animation->animation_name_inherit = true;
+            current_widget->animation->animation_iteration_count_inherit = true;
+            current_widget->animation->animation_fill_mode_inherit = true;
+            current_widget->animation->animation_duration_inherit = true;
+            current_widget->animation->animation_delay_inherit = true;
+        }
         current_widget->animation->animation_timing_function_inherit = false;
         if (!strcmp(value, "initial")){
             current_widget->animation->animationTimingFunction.timing_function_type = CSS_ANIMATION_TIMING_FUNCTION_EASE;
@@ -164,15 +210,29 @@ void animation_timing_function_property_set_value(struct css_properties* current
 }
 
 void animation_name_property_set_value(struct css_properties *current_widget, char* value){
-    if(current_widget->animation == NULL){
-        current_widget->animation = malloc(sizeof(struct animation));
-    }
-    if(!strcmp(value, "inherit")){
-        current_widget->animation->animation_name_inherit = true;
+    if (!strcmp(value, "inherit")){
+        if (!current_widget->animation_inherit){
+            if (current_widget->animation == NULL){
+                current_widget->animation = malloc(sizeof(struct animation));
+            }
+            current_widget->animation->animation_name_inherit = true;
+        }
     }
     else{
+        if (current_widget->animation == NULL){
+            current_widget->animation = malloc(sizeof(struct animation));
+        }
+        if (current_widget->animation_inherit){
+            current_widget->animation->animation_direction_inherit = true;
+            current_widget->animation->animation_play_state_inherit = true;
+            current_widget->animation->animation_timing_function_inherit = true;
+            current_widget->animation->animation_iteration_count_inherit = true;
+            current_widget->animation->animation_fill_mode_inherit = true;
+            current_widget->animation->animation_duration_inherit = true;
+            current_widget->animation->animation_delay_inherit = true;
+        }
         current_widget->animation->animation_name_inherit = false;
-        if(!strcmp(value, "initial")){
+        if (!strcmp(value, "initial")){
             current_widget->animation->animation_name = "none";//TODO CHECK THIS VALUE
         }
         else{
@@ -184,13 +244,27 @@ void animation_name_property_set_value(struct css_properties *current_widget, ch
 
 
 void animation_duration_property_set_value(struct css_properties* current_widget, char* value){
-    if(current_widget->animation == NULL){
-        current_widget->animation = malloc(sizeof(struct animation));
-    }
-    if(!strcmp(value, "inherit")){
-        current_widget->animation->animation_duration_inherit = true;
+    if (!strcmp(value, "inherit")){
+        if (!current_widget->animation_inherit){
+            if (current_widget->animation == NULL){
+                current_widget->animation = malloc(sizeof(struct animation));
+            }
+            current_widget->animation->animation_duration_inherit = true;
+        }
     }
     else{
+        if (current_widget->animation == NULL){
+            current_widget->animation = malloc(sizeof(struct animation));
+        }
+        if (current_widget->animation_inherit){
+            current_widget->animation->animation_direction_inherit = true;
+            current_widget->animation->animation_play_state_inherit = true;
+            current_widget->animation->animation_timing_function_inherit = true;
+            current_widget->animation->animation_iteration_count_inherit = true;
+            current_widget->animation->animation_fill_mode_inherit = true;
+            current_widget->animation->animation_name_inherit = true;
+            current_widget->animation->animation_delay_inherit = true;
+        }
         current_widget->animation->animation_duration_inherit = false;
         if(!strcmp(value, "initial")){
             current_widget->animation->animation_duration = 0;
@@ -202,13 +276,27 @@ void animation_duration_property_set_value(struct css_properties* current_widget
 }
 
 void animation_delay_property_set_value(struct css_properties* current_widget, char* value){
-    if(current_widget->animation == NULL){
-        current_widget->animation = malloc(sizeof(struct animation));
-    }
-    if(!strcmp(value, "inherit")){
-        current_widget->animation->animation_delay_inherit = true;
+    if (!strcmp(value, "inherit")){
+        if (!current_widget->animation_inherit){
+            if (current_widget->animation == NULL){
+                current_widget->animation = malloc(sizeof(struct animation));
+            }
+            current_widget->animation->animation_delay_inherit = true;
+        }
     }
     else{
+        if (current_widget->animation == NULL){
+            current_widget->animation = malloc(sizeof(struct animation));
+        }
+        if (current_widget->animation_inherit){
+            current_widget->animation->animation_direction_inherit = true;
+            current_widget->animation->animation_play_state_inherit = true;
+            current_widget->animation->animation_timing_function_inherit = true;
+            current_widget->animation->animation_iteration_count_inherit = true;
+            current_widget->animation->animation_fill_mode_inherit = true;
+            current_widget->animation->animation_name_inherit = true;
+            current_widget->animation->animation_duration_inherit = true;
+        }
         current_widget->animation->animation_delay_inherit = false;
         if (!strcmp(value, "initial")){
             current_widget->animation->animation_delay = 0;
@@ -220,13 +308,27 @@ void animation_delay_property_set_value(struct css_properties* current_widget, c
 }
 
 void animation_iteration_count_property_set_value(struct css_properties* current_widget, char* value){
-    if(current_widget->animation == NULL){
-        current_widget->animation = malloc(sizeof(struct animation));
-    }
-    if(!strcmp(value, "inherit")){
-        current_widget->animation->animation_iteration_count_inherit = true;
+    if (!strcmp(value, "inherit")){
+        if (!current_widget->animation_inherit){
+            if (current_widget->animation == NULL){
+                current_widget->animation = malloc(sizeof(struct animation));
+            }
+            current_widget->animation->animation_iteration_count_inherit = true;
+        }
     }
     else{
+        if (current_widget->animation == NULL){
+            current_widget->animation = malloc(sizeof(struct animation));
+        }
+        if (current_widget->animation_inherit){
+            current_widget->animation->animation_direction_inherit = true;
+            current_widget->animation->animation_play_state_inherit = true;
+            current_widget->animation->animation_timing_function_inherit = true;
+            current_widget->animation->animation_delay_inherit = true;
+            current_widget->animation->animation_fill_mode_inherit = true;
+            current_widget->animation->animation_name_inherit = true;
+            current_widget->animation->animation_duration_inherit = true;
+        }
         current_widget->animation->animation_iteration_count_inherit = false;
         if (!strcmp(value, "initial")){
             current_widget->animation->animation_iteration_count = 1;
@@ -238,14 +340,28 @@ void animation_iteration_count_property_set_value(struct css_properties* current
 }
 
 void animation_direction_property_set_value(struct css_properties* current_widget, char* value){
-    if(current_widget->animation == NULL){
-        current_widget->animation = malloc(sizeof(struct animation));
-    }
-    if(!strcmp(value, "inherit")){
-        current_widget->animation->animation_direction_inherit = true;
+    if (!strcmp(value, "inherit")){
+        if (!current_widget->animation_inherit){
+            if (current_widget->animation == NULL){
+                current_widget->animation = malloc(sizeof(struct animation));
+            }
+            current_widget->animation->animation_direction_inherit = true;
+        }
     }
     else{
-        current_widget->animation->animation_direction_inherit = true;
+        if (current_widget->animation == NULL){
+            current_widget->animation = malloc(sizeof(struct animation));
+        }
+        if (current_widget->animation_inherit){
+            current_widget->animation->animation_iteration_count_inherit = true;
+            current_widget->animation->animation_play_state_inherit = true;
+            current_widget->animation->animation_timing_function_inherit = true;
+            current_widget->animation->animation_delay_inherit = true;
+            current_widget->animation->animation_fill_mode_inherit = true;
+            current_widget->animation->animation_name_inherit = true;
+            current_widget->animation->animation_duration_inherit = true;
+        }
+        current_widget->animation->animation_direction_inherit = false;
         if(!strcmp(value, "initial")){
             current_widget->animation->animation_direction_inherit = true;
         }
@@ -256,13 +372,27 @@ void animation_direction_property_set_value(struct css_properties* current_widge
 }
 
 void animation_fill_mode_property_set_value(struct css_properties* current_widget, char* value){
-    if(current_widget->animation == NULL){
-        current_widget->animation = malloc(sizeof(struct animation));
-    }
-    if(!strcmp(value, "inherit")){
-        current_widget->animation->animation_fill_mode_inherit = true;
+    if (!strcmp(value, "inherit")){
+        if (!current_widget->animation_inherit){
+            if (current_widget->animation == NULL){
+                current_widget->animation = malloc(sizeof(struct animation));
+            }
+            current_widget->animation->animation_fill_mode_inherit = true;
+        }
     }
     else{
+        if (current_widget->animation == NULL){
+            current_widget->animation = malloc(sizeof(struct animation));
+        }
+        if (current_widget->animation_inherit){
+            current_widget->animation->animation_iteration_count_inherit = true;
+            current_widget->animation->animation_play_state_inherit = true;
+            current_widget->animation->animation_timing_function_inherit = true;
+            current_widget->animation->animation_delay_inherit = true;
+            current_widget->animation->animation_direction_inherit = true;
+            current_widget->animation->animation_name_inherit = true;
+            current_widget->animation->animation_duration_inherit = true;
+        }
         current_widget->animation->animation_fill_mode_inherit = false;
         if(!strcmp(value, "initial")){
             current_widget->animation->animationFillMode = CSS_ANIMATION_FILL_MODE_NONE;
@@ -274,13 +404,27 @@ void animation_fill_mode_property_set_value(struct css_properties* current_widge
 }
 
 void animation_play_state_property_set_value(struct css_properties* current_widget, char* value){
-    if(current_widget->animation == NULL){
-        current_widget->animation = malloc(sizeof(struct animation));
-    }
-    if(!strcmp(value, "inherit")){
-        current_widget->animation->animation_play_state_inherit = true;
+    if (!strcmp(value, "inherit")){
+        if (!current_widget->animation_inherit){
+            if (current_widget->animation == NULL){
+                current_widget->animation = malloc(sizeof(struct animation));
+            }
+            current_widget->animation->animation_play_state_inherit = true;
+        }
     }
     else{
+        if (current_widget->animation == NULL){
+            current_widget->animation = malloc(sizeof(struct animation));
+        }
+        if (current_widget->animation_inherit){
+            current_widget->animation->animation_iteration_count_inherit = true;
+            current_widget->animation->animation_fill_mode_inherit = true;
+            current_widget->animation->animation_timing_function_inherit = true;
+            current_widget->animation->animation_delay_inherit = true;
+            current_widget->animation->animation_direction_inherit = true;
+            current_widget->animation->animation_name_inherit = true;
+            current_widget->animation->animation_duration_inherit = true;
+        }
         current_widget->animation->animation_play_state_inherit = false;
         if(!strcmp(value, "initial")){
             current_widget->animation->animationPlayState = CSS_ANIMATION_PLAY_STATE_RUNNING;
@@ -292,53 +436,26 @@ void animation_play_state_property_set_value(struct css_properties* current_widg
 }
 
 void animation_property_set_value(struct css_properties *current_widget, char* value){
-    if(current_widget->animation == NULL){
-        current_widget->animation = malloc(sizeof(struct animation));
-    }
-    char* value2 = strtok(value, " ");//animation name
-    if(!strcmp(value2, "initial")){
-        current_widget->animation->animation_name = "none";
-        current_widget->animation->animation_duration = 0;
-        current_widget->animation->animationTimingFunction.timing_function_type = CSS_ANIMATION_TIMING_FUNCTION_EASE;
-        current_widget->animation->animation_delay = 0;
-        current_widget->animation->animation_iteration_count = 1;
-        current_widget->animation->animationDirection = CSS_ANIMATION_DIRECTION_NORMAL;
-        current_widget->animation->animationFillMode = CSS_ANIMATION_FILL_MODE_NONE;
-        current_widget->animation->animationPlayState = CSS_ANIMATION_PLAY_STATE_RUNNING;
-    }
-    else if(!strcmp(value2, "inherit")){
+    if (!strcmp(value, "inherit")){
         current_widget->animation_inherit = true;
     }
     else{
-        const char* delim = " ";
-        animation_name_property_set_value(current_widget, value2);
-        value2 = strtok(NULL, delim);//animation duration
-        if(value2 != NULL){
-            animation_duration_property_set_value(current_widget, value2);
-            value2 = strtok(NULL, delim);
-            if(value2 != NULL){
-                animation_timing_function_property_set_value(current_widget, value2);
-                value2 = strtok(NULL, delim);
-                if(value2 != NULL){
-                    animation_delay_property_set_value(current_widget, value2);
-                    value2 = strtok(NULL, delim);
-                    if(value2 != NULL){
-                        animation_iteration_count_property_set_value(current_widget, value2);
-                        value2 = strtok(NULL, delim);
-                        if(value2 != NULL){
-                            animation_direction_property_set_value(current_widget, value2);
-                            value2 = strtok(NULL, delim);
-                            if(value2 != NULL){
-                                animation_fill_mode_property_set_value(current_widget, value2);
-                                value2 = strtok(NULL, delim);
-                                if(value2 != NULL){
-                                    animation_play_state_property_set_value(current_widget, value2);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+        current_widget->animation_inherit = false;
+        if(current_widget->animation == NULL){
+            current_widget->animation = malloc(sizeof(struct animation));
+        }
+        if (!strcmp(value, "initial")){
+            current_widget->animation->animation_name = "none";
+            current_widget->animation->animation_duration = 0;
+            current_widget->animation->animationTimingFunction.timing_function_type = CSS_ANIMATION_TIMING_FUNCTION_EASE;
+            current_widget->animation->animation_delay = 0;
+            current_widget->animation->animation_iteration_count = 1;
+            current_widget->animation->animationDirection = CSS_ANIMATION_DIRECTION_NORMAL;
+            current_widget->animation->animationFillMode = CSS_ANIMATION_FILL_MODE_NONE;
+            current_widget->animation->animationPlayState = CSS_ANIMATION_PLAY_STATE_RUNNING;
+        }
+        else{
+            set_animation(current_widget->animation, value);
         }
     }
 }
