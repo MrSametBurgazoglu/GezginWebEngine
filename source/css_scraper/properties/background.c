@@ -128,8 +128,8 @@ void set_background_image_color(struct css_background_image_color** background_i
     }
 }
 
-
-void set_background_image(struct css_properties* current_widget,char * value){
+//TODO OPTIMIZE THIS FUNCTION
+void set_background_image(struct css_background* background,char * value){
     char* start_index = strchr(value, '(');
     char* end_index = strchr(value, ')');
     if (start_index != NULL && end_index != NULL) {
@@ -144,55 +144,55 @@ void set_background_image(struct css_properties* current_widget,char * value){
             char * text = malloc(len + 1);
             memcpy(text, start_index, len);
             text[len] = '\0';
-            current_widget->background->background_image_list[++current_widget->background->background_image_count] = text;
+            background->background_image_list[++background->background_image_count] = text;
         }
         else if(!strcmp(function_name, "conic-gradient")){
             len = end_index - start_index;
             char * text = malloc(len + 1);
             memcpy(text, start_index, len);
             text[len] = '\0';
-            set_background_image_color(current_widget->background->background_image_color_list, text);
-            current_widget->background->background_type = CSS_BACKGROUND_TYPE_CONIC_GRADIENT;
+            set_background_image_color(background->background_image_color_list, text);
+            background->background_type = CSS_BACKGROUND_TYPE_CONIC_GRADIENT;
         }
         else if(!strcmp(function_name, "linear-gradient")){
             len = end_index - start_index;
             char * text = malloc(len + 1);
             memcpy(text, start_index, len);
             text[len] = '\0';
-            set_background_image_color(current_widget->background->background_image_color_list, text);
-            current_widget->background->background_type = CSS_BACKGROUND_TYPE_LINEAR_GRADIENT;
+            set_background_image_color(background->background_image_color_list, text);
+            background->background_type = CSS_BACKGROUND_TYPE_LINEAR_GRADIENT;
         }
         else if(!strcmp(function_name, "radial-gradient")){
             len = end_index - start_index;
             char * text = malloc(len + 1);
             memcpy(text, start_index, len);
             text[len] = '\0';
-            set_background_image_color(current_widget->background->background_image_color_list, text);
-            current_widget->background->background_type = CSS_BACKGROUND_TYPE_RADIAL_GRADIENT;
+            set_background_image_color(background->background_image_color_list, text);
+            background->background_type = CSS_BACKGROUND_TYPE_RADIAL_GRADIENT;
         }
         else if(!strcmp(function_name, "repeating-conic-gradient")){
             len = end_index - start_index;
             char * text = malloc(len + 1);
             memcpy(text, start_index, len);
             text[len] = '\0';
-            set_background_image_color(current_widget->background->background_image_color_list, text);
-            current_widget->background->background_type = CSS_BACKGROUND_TYPE_REPEATING_CONIC_GRADIENT;
+            set_background_image_color(background->background_image_color_list, text);
+            background->background_type = CSS_BACKGROUND_TYPE_REPEATING_CONIC_GRADIENT;
         }
         else if(!strcmp(function_name, "repeating-linear-gradient")){
             len = end_index - start_index;
             char * text = malloc(len + 1);
             memcpy(text, start_index, len);
             text[len] = '\0';
-            set_background_image_color(current_widget->background->background_image_color_list, text);
-            current_widget->background->background_type = CSS_BACKGROUND_TYPE_REPEATING_LINEAR_GRADIENT;
+            set_background_image_color(background->background_image_color_list, text);
+            background->background_type = CSS_BACKGROUND_TYPE_REPEATING_LINEAR_GRADIENT;
         }
         else if(!strcmp(function_name, "repeating-radial-gradient")){
             len = end_index - start_index;
             char * text = malloc(len + 1);
             memcpy(text, start_index, len);
             text[len] = '\0';
-            set_background_image_color(current_widget->background->background_image_color_list, text);
-            current_widget->background->background_type = CSS_BACKGROUND_TYPE_REPEATING_RADIAL_GRADIENT;
+            set_background_image_color(background->background_image_color_list, text);
+            background->background_type = CSS_BACKGROUND_TYPE_REPEATING_RADIAL_GRADIENT;
         }
     }
 }
@@ -353,6 +353,34 @@ void set_background_attachment_property(struct css_background* background, char*
     }
 }
 
+void set_background(struct css_background* background, char* value){//TODO IMPLEMENT THIS
+    const char* delim = " ";
+    char* value2;
+    value2 = strtok(NULL, delim);//animation duration
+    if(value2 != NULL){
+        set_background_color(background, value2);
+        value2 = strtok(NULL, delim);
+        if (value2 != NULL){
+            set_background_image(background, value2);
+            value2 = strtok(NULL, delim);
+            if(value2 != NULL){// get position and get size if given
+                /*
+                char* value3;
+                value3 = strtok(value2, "/");
+                if (value3 == NULL){
+                    background_position_property_set_value(current_widget, value2);
+                }
+                else{
+                    background_position_property_set_value(current_widget, value3);
+                    value3 = strtok(NULL, "/");
+                    background_size_property_set_value(current_widget, value3);
+                }
+                */
+            }
+        }
+    }
+}
+
 void background_blend_mode_property_set_value(struct css_properties* current_widget, char* value){
     if(current_widget->background == NULL){
         current_widget->background = malloc(sizeof(struct css_background));
@@ -361,16 +389,31 @@ void background_blend_mode_property_set_value(struct css_properties* current_wid
 }
 
 void background_color_property_set_value(struct css_properties* current_widget, char* value){
-    if(current_widget->background == NULL){
-        current_widget->background = malloc(sizeof(struct css_background));
-    }
-    if(!strcmp(value, "inherit")){
-        current_widget->background->background_color_inherit = true;
+    if (!strcmp(value, "inherit")){
+        if (!current_widget->background_inherit){
+            if (current_widget->background == NULL){
+                current_widget->background = malloc(sizeof(struct css_background));
+            }
+            current_widget->background->background_color_inherit = true;
+        }
     }
     else{
-        if(current_widget->background->background_color == NULL){
+        if (current_widget->background == NULL){
+            current_widget->background = malloc(sizeof(struct css_background));
+        }
+        if (current_widget->background_inherit){
+            current_widget->background->background_size_inherit = true;
+            current_widget->background->background_position_inherit = true;
+            current_widget->background->background_origin_inherit = true;
+            current_widget->background->background_image_inherit = true;
+            current_widget->background->background_clip_inherit = true;
+            current_widget->background->background_attachment_inherit = true;
+            current_widget->background->background_repeat_inherit = true;
+        }
+        if (current_widget->background->background_color == NULL){
             current_widget->background->background_color = malloc(sizeof(struct color_rgba));
         }
+        current_widget->background->background_color_inherit = false;
         if (!strcmp(value, "initial")){
             get_color_by_rgba(current_widget->background->background_color, 0, 0, 0, 0);//transparent
         }
@@ -382,139 +425,257 @@ void background_color_property_set_value(struct css_properties* current_widget, 
 
 
 void background_image_property_set_value(struct css_properties* current_widget, char* value){
-    if(current_widget->background == NULL){
-        current_widget->background = malloc(sizeof(struct css_background));
+    if (!strcmp(value, "inherit")){
+        if (!current_widget->background_inherit){
+            if (current_widget->background == NULL){
+                current_widget->background = malloc(sizeof(struct css_background));
+            }
+            current_widget->background->background_image_inherit = true;
+        }
     }
-    set_background_image(current_widget, value);
+    else{
+        if (current_widget->background == NULL){
+            current_widget->background = malloc(sizeof(struct css_background));
+        }
+        if (current_widget->background_inherit){
+            current_widget->background->background_size_inherit = true;
+            current_widget->background->background_position_inherit = true;
+            current_widget->background->background_origin_inherit = true;
+            current_widget->background->background_color_inherit = true;
+            current_widget->background->background_clip_inherit = true;
+            current_widget->background->background_attachment_inherit = true;
+            current_widget->background->background_repeat_inherit = true;
+        }
+        current_widget->background->background_image_inherit = false;
+        if (strcmp(value, "initial") != 0){
+            set_background_image(current_widget, value);
+        }
+    }
 }
 
 void background_position_property_set_value(struct css_properties* current_widget, char* value){
-    if(current_widget->background == NULL){
-        current_widget->background = malloc(sizeof(struct css_background));
-    }
-    if (current_widget->background->backgroundPosition == NULL){
-        current_widget->background->backgroundPosition = malloc(sizeof(struct css_background_position));
-    }
     if (!strcmp(value, "inherit")){
-        current_widget->background->background_position_inherit = true;
+        if (!current_widget->background_inherit){
+            if (current_widget->background == NULL){
+                current_widget->background = malloc(sizeof(struct css_background));
+            }
+            current_widget->background->background_position_inherit = true;
+        }
     }
-    else if(!strcmp(value, "initial")){
-        current_widget->background->backgroundPosition->value1 = 0;
-        current_widget->background->backgroundPosition->value2 = 0;
-        current_widget->background->backgroundPosition->positionType = CSS_BACKGROUND_POSITION_TYPE_POS;
+    else{
+        if (current_widget->background == NULL){
+            current_widget->background = malloc(sizeof(struct css_background));
+        }
+        if (current_widget->background_inherit){
+            current_widget->background->background_size_inherit = true;
+            current_widget->background->background_color_inherit = true;
+            current_widget->background->background_origin_inherit = true;
+            current_widget->background->background_image_inherit = true;
+            current_widget->background->background_clip_inherit = true;
+            current_widget->background->background_attachment_inherit = true;
+            current_widget->background->background_repeat_inherit = true;
+        }
+        current_widget->background->background_position_inherit = false;
+        if (current_widget->background->backgroundPosition == NULL){
+            current_widget->background->backgroundPosition = malloc(sizeof(struct css_background_position));
+        }
+        if(!strcmp(value, "initial")){
+            current_widget->background->backgroundPosition->value1 = 0;
+            current_widget->background->backgroundPosition->value2 = 0;
+            current_widget->background->backgroundPosition->positionType = CSS_BACKGROUND_POSITION_TYPE_POS;
+        }
+        else{
+            set_background_position(current_widget->background->backgroundPosition, value);
+        }
+        if (!strcmp(value, "initial")){
+            get_color_by_rgba(current_widget->background->background_color, 0, 0, 0, 0);//transparent
+        }
+        else{
+            set_background_color(current_widget->background, value);
+        }
     }
-    set_background_position(current_widget->background->backgroundPosition, value);
 }
 
 void background_size_property_set_value(struct css_properties* current_widget, char* value){
-    if(current_widget->background == NULL){
-        current_widget->background = malloc(sizeof(struct css_background));
+    if (!strcmp(value, "inherit")){
+        if (!current_widget->background_inherit){
+            if (current_widget->background == NULL){
+                current_widget->background = malloc(sizeof(struct css_background));
+            }
+            current_widget->background->background_size_inherit = true;
+        }
     }
-    if (current_widget->background->backgroundSize == NULL){
-        current_widget->background->backgroundSize = malloc(sizeof(struct css_background_size));
+    else{
+        if (current_widget->background == NULL){
+            current_widget->background = malloc(sizeof(struct css_background));
+        }
+        if (current_widget->background_inherit){
+            current_widget->background->background_position_inherit = true;
+            current_widget->background->background_color_inherit = true;
+            current_widget->background->background_origin_inherit = true;
+            current_widget->background->background_image_inherit = true;
+            current_widget->background->background_clip_inherit = true;
+            current_widget->background->background_attachment_inherit = true;
+            current_widget->background->background_repeat_inherit = true;
+        }
+        current_widget->background->background_size_inherit = false;
+        if (current_widget->background->backgroundSize == NULL){
+            current_widget->background->backgroundSize = malloc(sizeof(struct css_background_size));
+        }
+        if(!strcmp(value, "initial")){
+            current_widget->background->backgroundSize->backgroundSizeType1 = CSS_BACKGROUND_SIZE_TYPE_AUTO;
+            current_widget->background->backgroundSize->backgroundSizeType2 = CSS_BACKGROUND_SIZE_TYPE_AUTO;
+        }
+        else{
+            set_background_size(current_widget->background->backgroundSize, value);
+        }
     }
-    set_background_size(current_widget->background->backgroundSize, value);
-
 }
 
 void background_repeat_property_set_value(struct css_properties* current_widget, char* value){
-    if(current_widget->background == NULL){
-        current_widget->background = malloc(sizeof(struct css_background));
-    }
     if (!strcmp(value, "inherit")){
-        current_widget->background->background_repeat_inherit = true;
-    }
-    else if(!strcmp(value, "initial")){
-        current_widget->background->backgroundRepeatType = CSS_BACKGROUND_REPEAT_TYPE_REPEAT;
+        if (!current_widget->background_inherit){
+            if (current_widget->background == NULL){
+                current_widget->background = malloc(sizeof(struct css_background));
+            }
+            current_widget->background->background_repeat_inherit = true;
+        }
     }
     else{
-        set_background_repeat_property(current_widget->background, value);
+        if (current_widget->background == NULL){
+            current_widget->background = malloc(sizeof(struct css_background));
+        }
+        if (current_widget->background_inherit){
+            current_widget->background->background_position_inherit = true;
+            current_widget->background->background_color_inherit = true;
+            current_widget->background->background_origin_inherit = true;
+            current_widget->background->background_image_inherit = true;
+            current_widget->background->background_clip_inherit = true;
+            current_widget->background->background_attachment_inherit = true;
+            current_widget->background->background_size_inherit = true;
+        }
+        current_widget->background->background_repeat_inherit = false;
+        if(!strcmp(value, "initial")){
+            current_widget->background->backgroundRepeatType = CSS_BACKGROUND_REPEAT_TYPE_REPEAT;
+        }
+        else{
+            set_background_repeat_property(current_widget->background, value);
+        }
     }
 }
 
 void background_origin_property_set_value(struct css_properties* current_widget, char* value){
-    if(current_widget->background == NULL){
-        current_widget->background = malloc(sizeof(struct css_background));
-    }
     if (!strcmp(value, "inherit")){
-        current_widget->background->background_origin_inherit = true;
-    }
-    else if(!strcmp(value, "initial")){
-        current_widget->background->backgroundOrigin = CSS_BACKGROUND_ORIGIN_PADDING_BOX;
+        if (!current_widget->background_inherit){
+            if (current_widget->background == NULL){
+                current_widget->background = malloc(sizeof(struct css_background));
+            }
+            current_widget->background->background_origin_inherit = true;
+        }
     }
     else{
-        set_background_origin_property(current_widget->background, value);
+        if (current_widget->background == NULL){
+            current_widget->background = malloc(sizeof(struct css_background));
+        }
+        if (current_widget->background_inherit){
+            current_widget->background->background_position_inherit = true;
+            current_widget->background->background_color_inherit = true;
+            current_widget->background->background_repeat_inherit = true;
+            current_widget->background->background_image_inherit = true;
+            current_widget->background->background_clip_inherit = true;
+            current_widget->background->background_attachment_inherit = true;
+            current_widget->background->background_size_inherit = true;
+        }
+        current_widget->background->background_origin_inherit = false;
+        if(!strcmp(value, "initial")){
+            current_widget->background->backgroundOrigin = CSS_BACKGROUND_ORIGIN_PADDING_BOX;
+        }
+        else{
+            set_background_origin_property(current_widget->background, value);
+        }
     }
 }
 
 void background_clip_property_set_value(struct css_properties* current_widget, char* value){
-    if(current_widget->background == NULL){
-        current_widget->background = malloc(sizeof(struct css_background));
-    }
     if (!strcmp(value, "inherit")){
-        current_widget->background->background_clip_inherit = true;
-    }
-    else if(!strcmp(value, "initial")){
-        current_widget->background->backgroundClip = CSS_BACKGROUND_CLIP_BORDER_BOX;
+        if (!current_widget->background_inherit){
+            if (current_widget->background == NULL){
+                current_widget->background = malloc(sizeof(struct css_background));
+            }
+            current_widget->background->background_clip_inherit = true;
+        }
     }
     else{
-        set_background_clip_property(current_widget->background, value);
+        if (current_widget->background == NULL){
+            current_widget->background = malloc(sizeof(struct css_background));
+        }
+        if (current_widget->background_inherit){
+            current_widget->background->background_position_inherit = true;
+            current_widget->background->background_color_inherit = true;
+            current_widget->background->background_repeat_inherit = true;
+            current_widget->background->background_image_inherit = true;
+            current_widget->background->background_origin_inherit = true;
+            current_widget->background->background_attachment_inherit = true;
+            current_widget->background->background_size_inherit = true;
+        }
+        current_widget->background->background_clip_inherit = false;
+        if(!strcmp(value, "initial")){
+            current_widget->background->backgroundClip = CSS_BACKGROUND_CLIP_BORDER_BOX;
+        }
+        else{
+            set_background_clip_property(current_widget->background, value);
+        }
     }
-
 }
 
 void background_attachment_property_set_value(struct css_properties* current_widget, char* value){
-    if(current_widget->background == NULL){
-        current_widget->background = malloc(sizeof(struct css_background));
-    }
     if (!strcmp(value, "inherit")){
-        current_widget->background->background_attachment_inherit = true;
-    }
-    else if(!strcmp(value, "initial")){
-        current_widget->background->backgroundAttachment = CSS_BACKGROUND_ATTACHMENT_SCROLL;
+        if (!current_widget->background_inherit){
+            if (current_widget->background == NULL){
+                current_widget->background = malloc(sizeof(struct css_background));
+            }
+            current_widget->background->background_attachment_inherit = true;
+        }
     }
     else{
-        set_background_attachment_property(current_widget->background, value);
+        if (current_widget->background == NULL){
+            current_widget->background = malloc(sizeof(struct css_background));
+        }
+        if (current_widget->background_inherit){
+            current_widget->background->background_position_inherit = true;
+            current_widget->background->background_color_inherit = true;
+            current_widget->background->background_repeat_inherit = true;
+            current_widget->background->background_image_inherit = true;
+            current_widget->background->background_origin_inherit = true;
+            current_widget->background->background_clip_inherit = true;
+            current_widget->background->background_size_inherit = true;
+        }
+        current_widget->background->background_attachment_inherit = false;
+        if(!strcmp(value, "initial")){
+            current_widget->background->backgroundAttachment = CSS_BACKGROUND_ATTACHMENT_SCROLL;
+        }
+        else{
+            set_background_attachment_property(current_widget->background, value);
+        }
     }
-
 }
 
 //background must be in this sort: bg-color bg-image position(2 value)/bg-size bg-repeat bg-origin bg-clip bg-attachment
+//TODO IMPLEMENT THIS FUNCTION'S INITIAL SECTION
 void background_property_set_value(struct css_properties* current_widget, char * value){
-    if(current_widget->background == NULL){
-        current_widget->background = malloc(sizeof(struct css_background));
-    }
-    else if(!strcmp(value, "inherit")){
+    if (!strcmp(value, "inherit")){
         current_widget->background_inherit = true;
     }
-    else if(!strcmp(value, "initial")){
-
-    }
     else{
-        const char* delim = " ";
-        char* value2;
-        value2 = strtok(NULL, delim);//animation duration
-        if(value2 != NULL){
-            background_color_property_set_value(current_widget, value2);
-            value2 = strtok(NULL, delim);
-            if (value2 != NULL){
-                background_image_property_set_value(current_widget, value2);
-                value2 = strtok(NULL, delim);
-                if(value2 != NULL){// get position and get size if given
-                    /*
-                    char* value3;
-                    value3 = strtok(value2, "/");
-                    if (value3 == NULL){
-                        background_position_property_set_value(current_widget, value2);
-                    }
-                    else{
-                        background_position_property_set_value(current_widget, value3);
-                        value3 = strtok(NULL, "/");
-                        background_size_property_set_value(current_widget, value3);
-                    }
-                    */
-                }
-            }
+        current_widget->background_inherit = false;
+        if(current_widget->background == NULL){
+            current_widget->background = malloc(sizeof(struct css_background));
+        }
+        if (!strcmp(value, "initial")){
+            //implement here
+        }
+        else{
+            set_background(current_widget->background, value);
         }
     }
 }
