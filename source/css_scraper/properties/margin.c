@@ -121,9 +121,22 @@ void set_margin(struct margin* margin, char* value){
 
 void margin_top_property_set_value(struct css_properties* current_widget, char* value){
     if (!strcmp(value, "inherit")){
-        current_widget->margin->margin_top_inherit = true;
+        if(!current_widget->margin_inherit){
+            if(current_widget->margin == NULL){
+                current_widget->margin = malloc(sizeof(struct margin));
+            }
+            current_widget->margin->margin_top_inherit = true;
+        }
     }
     else{
+        if(current_widget->margin == NULL){
+            current_widget->margin = malloc(sizeof(struct margin));
+        }
+        if(current_widget->margin_inherit){
+            current_widget->margin->margin_bottom_inherit = true;
+            current_widget->margin->margin_left_inherit = true;
+            current_widget->margin->margin_right_inherit = true;
+        }
         current_widget->margin->margin_top_inherit = false;
         if (!strcmp(value, "initial")){
             current_widget->margin->marginTopValueType = CSS_PROPERTY_VALUE_TYPE_LENGTH;
@@ -137,9 +150,22 @@ void margin_top_property_set_value(struct css_properties* current_widget, char* 
 
 void margin_bottom_property_set_value(struct css_properties* current_widget, char* value){
     if (!strcmp(value, "inherit")){
-        current_widget->margin->margin_bottom_inherit = true;
+        if(!current_widget->margin_inherit){
+            if(current_widget->margin == NULL){
+                current_widget->margin = malloc(sizeof(struct margin));
+            }
+            current_widget->margin->margin_bottom_inherit = true;
+        }
     }
     else{
+        if(current_widget->margin == NULL){
+            current_widget->margin = malloc(sizeof(struct margin));
+        }
+        if(current_widget->margin_inherit){
+            current_widget->margin->margin_top_inherit = true;
+            current_widget->margin->margin_left_inherit = true;
+            current_widget->margin->margin_right_inherit = true;
+        }
         current_widget->margin->margin_bottom_inherit = false;
         if (!strcmp(value, "initial")){
             current_widget->margin->marginBottomValueType = CSS_PROPERTY_VALUE_TYPE_LENGTH;
@@ -153,9 +179,22 @@ void margin_bottom_property_set_value(struct css_properties* current_widget, cha
 
 void margin_left_property_set_value(struct css_properties* current_widget, char* value){
     if (!strcmp(value, "inherit")){
-        current_widget->margin->margin_left_inherit = true;
+        if(!current_widget->margin_inherit){
+            if(current_widget->margin == NULL){
+                current_widget->margin = malloc(sizeof(struct margin));
+            }
+            current_widget->margin->margin_left_inherit = true;
+        }
     }
     else{
+        if(current_widget->margin == NULL){
+            current_widget->margin = malloc(sizeof(struct margin));
+        }
+        if(current_widget->margin_inherit){
+            current_widget->margin->margin_top_inherit = true;
+            current_widget->margin->margin_bottom_inherit = true;
+            current_widget->margin->margin_right_inherit = true;
+        }
         current_widget->margin->margin_left_inherit = false;
         if (!strcmp(value, "initial")){
             current_widget->margin->marginLeftValueType = CSS_PROPERTY_VALUE_TYPE_LENGTH;
@@ -169,9 +208,22 @@ void margin_left_property_set_value(struct css_properties* current_widget, char*
 
 void margin_right_property_set_value(struct css_properties* current_widget, char* value){
     if (!strcmp(value, "inherit")){
-        current_widget->margin->margin_right_inherit = true;
+        if(!current_widget->margin_inherit){
+            if(current_widget->margin == NULL){
+                current_widget->margin = malloc(sizeof(struct margin));
+            }
+            current_widget->margin->margin_right_inherit = true;
+        }
     }
     else{
+        if(current_widget->margin == NULL){
+            current_widget->margin = malloc(sizeof(struct margin));
+        }
+        if(current_widget->margin_inherit){
+            current_widget->margin->margin_top_inherit = true;
+            current_widget->margin->margin_bottom_inherit = true;
+            current_widget->margin->margin_left_inherit = true;
+        }
         current_widget->margin->margin_right_inherit = false;
         if (!strcmp(value, "initial")){
             current_widget->margin->marginRightValueType = CSS_PROPERTY_VALUE_TYPE_LENGTH;

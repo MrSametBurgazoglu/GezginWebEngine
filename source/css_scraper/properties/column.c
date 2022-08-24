@@ -173,11 +173,14 @@ void column_count_property_set_value(struct css_properties* current_widget, char
     if (!strcmp(value, "inherit")){
         current_widget->column_count_inherit = true;
     }
-    else if(!strcmp(value, "initial")){//not right but good enough for now
-        current_widget->column_count = 0;
-    }
     else{
-        set_column_count(current_widget, value);
+        current_widget->column_count_inherit = false;
+        if(!strcmp(value, "initial")){//not right but good enough for now
+            current_widget->column_count = 0;
+        }
+        else{
+            set_column_count(current_widget, value);
+        }
     }
 }
 
@@ -185,11 +188,14 @@ void column_fill_property_set_value(struct css_properties* current_widget, char*
     if (!strcmp(value, "inherit")){
         current_widget->column_fill_inherit = true;
     }
-    else if(!strcmp(value, "initial")){//not right but good enough for now
-        current_widget->column_fill = CSS_COLUMN_FILL_TYPE_BALANCE;
-    }
     else{
-        set_column_fill(current_widget, value);
+        current_widget->column_fill_inherit = false;
+        if(!strcmp(value, "initial")){
+            current_widget->column_fill = CSS_COLUMN_FILL_TYPE_BALANCE;
+        }
+        else{
+            set_column_fill(current_widget, value);
+        }
     }
 }
 
@@ -197,11 +203,14 @@ void column_gap_property_set_value(struct css_properties* current_widget, char* 
     if (!strcmp(value, "inherit")){
         current_widget->column_gap_inherit = true;
     }
-    else if(!strcmp(value, "initial")){//not right but good enough for now
-        current_widget->column_gap = 1;
-    }
     else{
-        set_column_gap(current_widget, value);
+        current_widget->column_gap_inherit = false;
+        if(!strcmp(value, "initial")){
+            current_widget->column_gap = 1;
+        }
+        else{
+            set_column_gap(current_widget, value);
+        }
     }
 }
 
@@ -210,6 +219,7 @@ void column_rule_property_set_value(struct css_properties* current_widget, char*
         current_widget->column_rule_inherit = true;
     }
     else{
+        current_widget->column_rule_inherit = false;
         if (current_widget->columnRule == NULL){
             current_widget->columnRule = malloc(sizeof(struct column_rule));
         }
@@ -219,7 +229,10 @@ void column_rule_property_set_value(struct css_properties* current_widget, char*
         if (current_widget->columnRule->columnRuleColor == NULL){
             current_widget->columnRule->columnRuleColor = malloc(sizeof(struct color_rgba));
         }
-        if(!strcmp(value, "initial")){//not right but good enough for now
+        current_widget->columnRule->column_rule_color_inherit = false;
+        current_widget->columnRule->column_rule_width_inherit = false;
+        current_widget->columnRule->column_rule_style_inherit = false;
+        if(!strcmp(value, "initial")){
             current_widget->columnRule->columnRuleWidth->columnRuleWidthType = CSS_COLUMN_RULE_WIDTH_TYPE_MEDIUM;
             current_widget->columnRule->columnRuleStyleType = CSS_COLUMN_RULE_STYLE_NONE;
             sync_color(current_widget->color, current_widget->columnRule->columnRuleColor);
@@ -232,38 +245,53 @@ void column_rule_property_set_value(struct css_properties* current_widget, char*
 
 void column_rule_color_property_set_value(struct css_properties* current_widget, char* value){
     if (!strcmp(value, "inherit")){
-        current_widget->column_rule_inherit = true;
+        if (!current_widget->column_rule_inherit){
+            if (current_widget->columnRule == NULL){
+                current_widget->columnRule = malloc(sizeof(struct column_rule));
+            }
+            current_widget->columnRule->column_rule_color_inherit = true;
+        }
     }
     else{
         if (current_widget->columnRule == NULL){
             current_widget->columnRule = malloc(sizeof(struct column_rule));
         }
-        if (current_widget->columnRule->columnRuleWidth == NULL){
-            current_widget->columnRule->columnRuleWidth = malloc(sizeof(struct column_rule_width));
+        if (current_widget->column_rule_inherit){
+            current_widget->columnRule->column_rule_width_inherit = true;
+            current_widget->columnRule->column_rule_style_inherit = true;
         }
+        current_widget->columnRule->column_rule_color_inherit = false;
         if (current_widget->columnRule->columnRuleColor == NULL){
             current_widget->columnRule->columnRuleColor = malloc(sizeof(struct color_rgba));
         }
-        if(!strcmp(value, "initial")){//not right but good enough for now
-            current_widget->columnRule->columnRuleWidth->columnRuleWidthType = CSS_COLUMN_RULE_WIDTH_TYPE_MEDIUM;
-            current_widget->columnRule->columnRuleStyleType = CSS_COLUMN_RULE_STYLE_NONE;
+        if(!strcmp(value, "initial")){
             sync_color(current_widget->color, current_widget->columnRule->columnRuleColor);
         }
         else{
-            set_column_rule(current_widget, value);
+            set_column_rule_color(current_widget->columnRule, value);
         }
     }
 }
 
 void column_rule_style_property_set_value(struct css_properties* current_widget, char* value){
     if (!strcmp(value, "inherit")){
-        current_widget->column_rule_inherit = true;
+        if (!current_widget->column_rule_inherit){
+            if (current_widget->columnRule == NULL){
+                current_widget->columnRule = malloc(sizeof(struct column_rule));
+            }
+            current_widget->columnRule->column_rule_style_inherit = true;
+        }
     }
     else{
         if (current_widget->columnRule == NULL){
             current_widget->columnRule = malloc(sizeof(struct column_rule));
         }
-        if(!strcmp(value, "initial")){//not right but good enough for now
+        if (current_widget->column_rule_inherit){
+            current_widget->columnRule->column_rule_width_inherit = true;
+            current_widget->columnRule->column_rule_color_inherit = true;
+        }
+        current_widget->columnRule->column_rule_style_inherit = false;
+        if(!strcmp(value, "initial")){
             current_widget->columnRule->columnRuleStyleType = CSS_COLUMN_RULE_STYLE_NONE;
         }
         else{
@@ -274,16 +302,23 @@ void column_rule_style_property_set_value(struct css_properties* current_widget,
 
 void column_rule_width_property_set_value(struct css_properties* current_widget, char* value){
     if (!strcmp(value, "inherit")){
-        current_widget->column_rule_inherit = true;
+        if (!current_widget->column_rule_inherit){
+            if (current_widget->columnRule == NULL){
+                current_widget->columnRule = malloc(sizeof(struct column_rule));
+            }
+            current_widget->columnRule->column_rule_width_inherit = true;
+        }
     }
     else{
         if (current_widget->columnRule == NULL){
             current_widget->columnRule = malloc(sizeof(struct column_rule));
         }
-        if (current_widget->columnRule->columnRuleWidth == NULL){
-            current_widget->columnRule->columnRuleWidth = malloc(sizeof(struct column_rule_width));
+        if (current_widget->column_rule_inherit){
+            current_widget->columnRule->column_rule_style_inherit = true;
+            current_widget->columnRule->column_rule_color_inherit = true;
         }
-        if(!strcmp(value, "initial")){//not right but good enough for now
+        current_widget->columnRule->column_rule_width_inherit = false;
+        if(!strcmp(value, "initial")){
             current_widget->columnRule->columnRuleWidth->columnRuleWidthType= CSS_COLUMN_RULE_WIDTH_TYPE_MEDIUM;
         }
         else{
@@ -296,11 +331,13 @@ void column_span_property_set_value(struct css_properties* current_widget, char*
     if (!strcmp(value, "inherit")){
         current_widget->column_span_inherit = true;
     }
-    else if(!strcmp(value, "initial")){
-        current_widget->columnSpanType = CSS_COLUMN_SPAN_TYPE_NONE;
-    }
     else{
-        set_column_span(current_widget, value);
+        if(!strcmp(value, "initial")){
+            current_widget->columnSpanType = CSS_COLUMN_SPAN_TYPE_NONE;
+        }
+        else{
+            set_column_span(current_widget, value);
+        }
     }
 }
 
@@ -308,11 +345,13 @@ void column_width_property_set_value(struct css_properties* current_widget, char
     if (!strcmp(value, "inherit")){
         current_widget->column_width_inherit = true;
     }
-    else if(!strcmp(value, "initial")){
-        current_widget->column_width = 1;
-    }
     else{
-        set_column_width(current_widget, value);
+        if(!strcmp(value, "initial")){
+            current_widget->column_width = 1;
+        }
+        else{
+            set_column_width(current_widget, value);
+        }
     }
 }
 
@@ -321,12 +360,16 @@ void columns_property_set_value(struct css_properties* current_widget, char* val
         current_widget->column_width_inherit = true;
         current_widget->column_count_inherit = true;
     }
-    else if(!strcmp(value, "initial")){
-        set_column_width(current_widget,"auto");
-        set_column_count(current_widget, "auto");
-    }
     else{
-        set_columns(current_widget, value);
+        current_widget->column_width_inherit = false;
+        current_widget->column_count_inherit = false;
+        if(!strcmp(value, "initial")){
+            set_column_width(current_widget,"auto");
+            set_column_count(current_widget, "auto");
+        }
+        else{
+            set_columns(current_widget, value);
+        }
     }
 }
 

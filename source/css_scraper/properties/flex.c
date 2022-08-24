@@ -123,13 +123,23 @@ void flex_property_set_value(struct css_properties* current_widget, char* value)
 }
 
 void flex_basis_property_set_value(struct css_properties* current_widget, char* value){
-    if (current_widget->flex == NULL){
-        current_widget->flex = malloc(sizeof(struct flex));
-    }
     if (!strcmp(value, "inherit")){
-        current_widget->flex->flex_basis_inherit = true;
+        if (!current_widget->flex_inherit){
+            if (current_widget->flex == NULL){
+                current_widget->flex = malloc(sizeof(struct flex));
+            }
+            current_widget->flex->flex_basis_inherit = true;
+        }
     }
     else{
+        if (current_widget->flex == NULL){
+            current_widget->flex = malloc(sizeof(struct flex));
+        }
+        if (current_widget->flex_inherit){
+            current_widget->flex->flex_shrink_inherit = true;
+            current_widget->flex->flex_grow_inherit = true;
+            current_widget->flex_inherit = false;
+        }
         if (!strcmp(value, "initial")){
             current_widget->flex->flex_basis_valueType = CSS_PROPERTY_VALUE_TYPE_AUTO;
         }
@@ -140,13 +150,22 @@ void flex_basis_property_set_value(struct css_properties* current_widget, char* 
 }
 
 void flex_direction_property_set_value(struct css_properties* current_widget, char* value){
-    if (current_widget->flexFlow == NULL){
-        current_widget->flexFlow = malloc(sizeof(struct flex_flow));
-    }
     if (!strcmp(value, "inherit")){
-        current_widget->flexFlow->flex_direction_inherit = true;
+        if (!current_widget->flex_flow_inherit){
+            if (current_widget->flexFlow == NULL){
+                current_widget->flexFlow = malloc(sizeof(struct flex));
+            }
+            current_widget->flexFlow->flex_direction_inherit = true;
+        }
     }
     else{
+        if (current_widget->flexFlow == NULL){
+            current_widget->flexFlow = malloc(sizeof(struct flex));
+        }
+        if (current_widget->flex_flow_inherit){
+            current_widget->flexFlow->flex_wrap_inherit = true;
+            current_widget->flex_flow_inherit = false;
+        }
         if (!strcmp(value, "initial")){
             current_widget->flexFlow->flexDirection = CSS_FLEX_DIRECTION_TYPE_ROW;
         }
@@ -175,13 +194,23 @@ void flex_flow_property_set_value(struct css_properties* current_widget, char* v
 }
 
 void flex_grow_property_set_value(struct css_properties* current_widget, char* value){
-    if (current_widget->flex == NULL){
-        current_widget->flex = malloc(sizeof(struct flex));
-    }
     if (!strcmp(value, "inherit")){
-        current_widget->flex->flex_grow_inherit = true;
+        if (!current_widget->flex_inherit){
+            if (current_widget->flex == NULL){
+                current_widget->flex = malloc(sizeof(struct flex));
+            }
+            current_widget->flex->flex_grow_inherit = true;
+        }
     }
     else{
+        if (current_widget->flex == NULL){
+            current_widget->flex = malloc(sizeof(struct flex));
+        }
+        if (current_widget->flex_inherit){
+            current_widget->flex->flex_basis_inherit = true;
+            current_widget->flex->flex_shrink_inherit = true;
+            current_widget->flex_inherit = false;
+        }
         if (!strcmp(value, "initial")){
             current_widget->flex->flex_grow_value = 0;
         }
@@ -192,13 +221,23 @@ void flex_grow_property_set_value(struct css_properties* current_widget, char* v
 }
 
 void flex_shrink_property_set_value(struct css_properties* current_widget, char* value){
-    if (current_widget->flex == NULL){
-        current_widget->flex = malloc(sizeof(struct flex));
-    }
     if (!strcmp(value, "inherit")){
-        current_widget->flex->flex_shrink_inherit = true;
+        if (!current_widget->flex_inherit){
+            if (current_widget->flex == NULL){
+                current_widget->flex = malloc(sizeof(struct flex));
+            }
+            current_widget->flex->flex_shrink_inherit = true;
+        }
     }
     else{
+        if (current_widget->flex == NULL){
+            current_widget->flex = malloc(sizeof(struct flex));
+        }
+        if (current_widget->flex_inherit){
+            current_widget->flex->flex_basis_inherit = true;
+            current_widget->flex->flex_grow_inherit = true;
+            current_widget->flex_inherit = false;
+        }
         if (!strcmp(value, "initial")){
             current_widget->flex->flex_shrink_value = 1;
         }
@@ -209,13 +248,22 @@ void flex_shrink_property_set_value(struct css_properties* current_widget, char*
 }
 
 void flex_wrap_property_set_value(struct css_properties* current_widget, char* value){
-    if (current_widget->flexFlow == NULL){
-        current_widget->flexFlow = malloc(sizeof(struct flex_flow));
-    }
     if (!strcmp(value, "inherit")){
-        current_widget->flexFlow->flex_wrap_inherit = true;
+        if (!current_widget->flex_flow_inherit){
+            if (current_widget->flexFlow == NULL){
+                current_widget->flexFlow = malloc(sizeof(struct flex));
+            }
+            current_widget->flexFlow->flex_wrap_inherit = true;
+        }
     }
     else{
+        if (current_widget->flexFlow == NULL){
+            current_widget->flexFlow = malloc(sizeof(struct flex));
+        }
+        if (current_widget->flex_flow_inherit){
+            current_widget->flexFlow->flex_direction_inherit = true;
+            current_widget->flex_flow_inherit = false;
+        }
         if (!strcmp(value, "initial")){
             current_widget->flexFlow->flexWrap = CSS_FLEX_WRAP_TYPE_NOWRAP;
         }

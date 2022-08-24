@@ -69,11 +69,14 @@ void height_property_set_value(struct css_properties* current_widget, char* valu
     if(!strcmp(value, "inherit")){
         current_widget->height_inherit = true;
     }
-    else if(!strcmp(value, "initial")){
-        current_widget->heightValueType = CSS_PROPERTY_VALUE_TYPE_AUTO;
-    }
     else{
-        set_height(current_widget, value);
+        current_widget->height_inherit = false;
+        if(!strcmp(value, "initial")){
+            current_widget->heightValueType = CSS_PROPERTY_VALUE_TYPE_AUTO;
+        }
+        else{
+            set_height(current_widget, value);
+        }
     }
 }
 
@@ -81,12 +84,15 @@ void min_height_property_set_value(struct css_properties* current_widget, char* 
     if(!strcmp(value, "inherit")){
         current_widget->min_height_inherit = true;
     }
-    else if(!strcmp(value, "initial")){
-        current_widget->min_height = 0;
-        current_widget->minHeightValueType = CSS_PROPERTY_VALUE_TYPE_PIXEL;
-    }
     else{
-        set_min_height(current_widget, value);
+        current_widget->min_height_inherit = false;
+        if(!strcmp(value, "initial")){
+            current_widget->min_height = 0;
+            current_widget->minHeightValueType = CSS_PROPERTY_VALUE_TYPE_PIXEL;
+        }
+        else{
+            set_min_height(current_widget, value);
+        }
     }
 }
 
@@ -94,11 +100,14 @@ void max_height_property_set_value(struct css_properties* current_widget, char* 
     if(!strcmp(value, "inherit")){
         current_widget->max_height_inherit = true;
     }
-    else if(!strcmp(value, "initial")){
-        current_widget->max_height = 0;
-        current_widget->maxHeightValueType = CSS_PROPERTY_VALUE_TYPE_PIXEL;
-    }
     else{
-        set_max_height(current_widget, value);
+        current_widget->max_height_inherit = false;
+        if(!strcmp(value, "initial")){
+            current_widget->max_height = 0;
+            current_widget->maxHeightValueType = CSS_PROPERTY_VALUE_TYPE_PIXEL;
+        }
+        else{
+            set_max_height(current_widget, value);
+        }
     }
 }

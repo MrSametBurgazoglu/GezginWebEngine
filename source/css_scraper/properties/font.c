@@ -324,19 +324,36 @@ void font_property_set_value(struct css_properties* current_widget, char* value)
 }
 
 void font_family_property_set_value(struct css_properties* current_widget, char* value){
-    if (current_widget->font == NULL){
-        current_widget->font = malloc(sizeof(struct font));
-    }
     if (!strcmp(value, "inherit")){
-        current_widget->font->font_family_inherited = true;
+        if (!current_widget->font_inherit){
+            if (current_widget->font == NULL){
+                current_widget->font = malloc(sizeof(struct font));
+            }
+            current_widget->font->font_family_inherited = true;
+        }
     }
     else{
-        current_widget->font->font_family_inherited = false;
+        if (current_widget->font == NULL){
+            current_widget->font = malloc(sizeof(struct font));
+        }
+        if (current_widget->font_inherit){
+            current_widget->font->font_size_inherited = true;
+            current_widget->font->font_stretch_inherited = true;
+            current_widget->font->font_style_inherited = true;
+            current_widget->font->font_variant_caps_inherited = true;
+            current_widget->font->font_variant_inherited = true;
+            current_widget->font->font_weight_inherited = true;
+            current_widget->font_inherit = false;
+        }
         if (current_widget->font->font_family == NULL){
             current_widget->font->font_family = malloc(sizeof(char *));
         }
         else{
-            //free all
+            for (int i = 0; i < current_widget->font->font_family_count; ++i) {
+                free(current_widget->font->font_family[i]);
+            }
+            free(current_widget->font->font_family);
+            current_widget->font->font_family_count = 0;
         }
         if (!strcmp(value, "initial")){
             current_widget->font->font_family[0] = malloc(sizeof(char ) * 5);
@@ -348,14 +365,24 @@ void font_family_property_set_value(struct css_properties* current_widget, char*
     }
 }
 
-//will not be implemented until css scraper finished
+//will not be implemented until css scraper finished may be never
 void font_feature_settings_property_set_value(struct css_properties* current_widget, char* value){
 
 }
 
 void font_kerning_property_set_value(struct css_properties* current_widget, char* value){
+    //may be we can move font kerning to current widget
     if (current_widget->font == NULL){
         current_widget->font = malloc(sizeof(struct font));
+    }
+    if (current_widget->font_inherit){
+        current_widget->font->font_size_inherited = true;
+        current_widget->font->font_stretch_inherited = true;
+        current_widget->font->font_style_inherited = true;
+        current_widget->font->font_variant_caps_inherited = true;
+        current_widget->font->font_variant_inherited = true;
+        current_widget->font->font_weight_inherited = true;
+        current_widget->font_inherit = false;
     }
     else{
         set_font_kerning(current_widget->font, value);
@@ -363,14 +390,27 @@ void font_kerning_property_set_value(struct css_properties* current_widget, char
 }
 
 void font_size_property_set_value(struct css_properties* current_widget, char* value){
-    if (current_widget->font == NULL){
-        current_widget->font = malloc(sizeof(struct font));
-    }
     if (!strcmp(value, "inherit")){
-        current_widget->font->font_size_inherited = true;
+        if (!current_widget->font_inherit){
+            if (current_widget->font == NULL){
+                current_widget->font = malloc(sizeof(struct font));
+            }
+            current_widget->font->font_size_inherited = true;
+        }
     }
     else{
-        current_widget->font->font_size_inherited = false;
+        if (current_widget->font == NULL){
+            current_widget->font = malloc(sizeof(struct font));
+        }
+        if (current_widget->font_inherit){
+            current_widget->font->font_family_inherited = true;
+            current_widget->font->font_stretch_inherited = true;
+            current_widget->font->font_style_inherited = true;
+            current_widget->font->font_variant_caps_inherited = true;
+            current_widget->font->font_variant_inherited = true;
+            current_widget->font->font_weight_inherited = true;
+            current_widget->font_inherit = false;
+        }
         if (!strcmp(value, "initial")){
             current_widget->font->fontSizeType = CSS_FONT_SIZE_TYPE_MEDIUM;
         }
@@ -382,14 +422,27 @@ void font_size_property_set_value(struct css_properties* current_widget, char* v
 
 
 void font_stretch_property_set_value(struct css_properties* current_widget, char* value){
-    if (current_widget->font == NULL){
-        current_widget->font = malloc(sizeof(struct font));
-    }
     if (!strcmp(value, "inherit")){
-        current_widget->font->font_stretch_inherited = true;
+        if (!current_widget->font_inherit){
+            if (current_widget->font == NULL){
+                current_widget->font = malloc(sizeof(struct font));
+            }
+            current_widget->font->font_stretch_inherited = true;
+        }
     }
     else{
-        current_widget->font->font_stretch_inherited = false;
+        if (current_widget->font == NULL){
+            current_widget->font = malloc(sizeof(struct font));
+        }
+        if (current_widget->font_inherit){
+            current_widget->font->font_family_inherited = true;
+            current_widget->font->font_size_inherited = true;
+            current_widget->font->font_style_inherited = true;
+            current_widget->font->font_variant_caps_inherited = true;
+            current_widget->font->font_variant_inherited = true;
+            current_widget->font->font_weight_inherited = true;
+            current_widget->font_inherit = false;
+        }
         if (!strcmp(value, "initial")){
             current_widget->font->fontStretchType = CSS_FONT_STRETCH_TYPE_NORMAL;
         }
@@ -400,14 +453,27 @@ void font_stretch_property_set_value(struct css_properties* current_widget, char
 }
 
 void font_style_property_set_value(struct css_properties* current_widget, char* value){
-    if (current_widget->font == NULL){
-        current_widget->font = malloc(sizeof(struct font));
-    }
     if (!strcmp(value, "inherit")){
-        current_widget->font->font_style_inherited = true;
+        if (!current_widget->font_inherit){
+            if (current_widget->font == NULL){
+                current_widget->font = malloc(sizeof(struct font));
+            }
+            current_widget->font->font_style_inherited = true;
+        }
     }
     else{
-        current_widget->font->font_style_inherited = false;
+        if (current_widget->font == NULL){
+            current_widget->font = malloc(sizeof(struct font));
+        }
+        if (current_widget->font_inherit){
+            current_widget->font->font_family_inherited = true;
+            current_widget->font->font_size_inherited = true;
+            current_widget->font->font_stretch_inherited = true;
+            current_widget->font->font_variant_caps_inherited = true;
+            current_widget->font->font_variant_inherited = true;
+            current_widget->font->font_weight_inherited = true;
+            current_widget->font_inherit = false;
+        }
         if (!strcmp(value, "initial")){
             current_widget->font->fontStyle = CSS_FONT_STYLE_NORMAL;
         }
@@ -418,14 +484,27 @@ void font_style_property_set_value(struct css_properties* current_widget, char* 
 }
 
 void font_variant_property_set_value(struct css_properties* current_widget, char* value){
-    if (current_widget->font == NULL){
-        current_widget->font = malloc(sizeof(struct font));
-    }
     if (!strcmp(value, "inherit")){
-        current_widget->font->font_variant_inherited = true;
+        if (!current_widget->font_inherit){
+            if (current_widget->font == NULL){
+                current_widget->font = malloc(sizeof(struct font));
+            }
+            current_widget->font->font_variant_inherited = true;
+        }
     }
     else{
-        current_widget->font->font_variant_inherited = false;
+        if (current_widget->font == NULL){
+            current_widget->font = malloc(sizeof(struct font));
+        }
+        if (current_widget->font_inherit){
+            current_widget->font->font_family_inherited = true;
+            current_widget->font->font_size_inherited = true;
+            current_widget->font->font_stretch_inherited = true;
+            current_widget->font->font_style_inherited = true;
+            current_widget->font->font_variant_caps_inherited = true;
+            current_widget->font->font_weight_inherited = true;
+            current_widget->font_inherit = false;
+        }
         if (!strcmp(value, "initial")){
             current_widget->font->fontVariantType = CSS_FONT_VARIANT_NORMAL;
         }
@@ -436,14 +515,27 @@ void font_variant_property_set_value(struct css_properties* current_widget, char
 }
 
 void font_variant_caps_property_set_value(struct css_properties* current_widget, char* value){
-    if (current_widget->font == NULL){
-        current_widget->font = malloc(sizeof(struct font));
-    }
     if (!strcmp(value, "inherit")){
-        current_widget->font->font_variant_caps_inherited = true;
+        if (!current_widget->font_inherit){
+            if (current_widget->font == NULL){
+                current_widget->font = malloc(sizeof(struct font));
+            }
+            current_widget->font->font_variant_caps_inherited = true;
+        }
     }
     else{
-        current_widget->font->font_variant_caps_inherited = false;
+        if (current_widget->font == NULL){
+            current_widget->font = malloc(sizeof(struct font));
+        }
+        if (current_widget->font_inherit){
+            current_widget->font->font_family_inherited = true;
+            current_widget->font->font_size_inherited = true;
+            current_widget->font->font_stretch_inherited = true;
+            current_widget->font->font_style_inherited = true;
+            current_widget->font->font_variant_inherited = true;
+            current_widget->font->font_weight_inherited = true;
+            current_widget->font_inherit = false;
+        }
         if (!strcmp(value, "initial")){
             current_widget->font->fontVariantCapsType = CSS_FONT_VARIANT_CAPS_TYPE_NORMAL;
         }
@@ -454,14 +546,27 @@ void font_variant_caps_property_set_value(struct css_properties* current_widget,
 }
 
 void font_weight_property_set_value(struct css_properties* current_widget, char* value){
-    if (current_widget->font == NULL){
-        current_widget->font = malloc(sizeof(struct font));
-    }
     if (!strcmp(value, "inherit")){
-        current_widget->font->font_weight_inherited = true;
+        if (!current_widget->font_inherit){
+            if (current_widget->font == NULL){
+                current_widget->font = malloc(sizeof(struct font));
+            }
+            current_widget->font->font_weight_inherited = true;
+        }
     }
     else{
-        current_widget->font->font_weight_inherited = false;
+        if (current_widget->font == NULL){
+            current_widget->font = malloc(sizeof(struct font));
+        }
+        if (current_widget->font_inherit){
+            current_widget->font->font_family_inherited = true;
+            current_widget->font->font_size_inherited = true;
+            current_widget->font->font_stretch_inherited = true;
+            current_widget->font->font_style_inherited = true;
+            current_widget->font->font_variant_inherited = true;
+            current_widget->font->font_variant_caps_inherited = true;
+            current_widget->font_inherit = false;
+        }
         if (!strcmp(value, "initial")){
             current_widget->font->fontWeightType = CSS_FONT_WEIGHT_NORMAL;
         }

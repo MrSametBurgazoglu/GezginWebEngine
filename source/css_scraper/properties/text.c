@@ -322,16 +322,19 @@ void text_align_property_set_value(struct css_properties* current_widget, char* 
     if (!strcmp(value, "inherit")){
         current_widget->text_align_inherit = true;
     }
-    else if(!strcmp(value, "initial")){
-        if(current_widget->direction == CSS_DIRECTION_TYPE_LTR){
-            current_widget->textAlign = CSS_TEXT_ALIGN_LEFT;
+    else{
+        current_widget->text_align_inherit = false;
+        if(!strcmp(value, "initial")){
+            if(current_widget->direction == CSS_DIRECTION_TYPE_LTR){
+                current_widget->textAlign = CSS_TEXT_ALIGN_LEFT;
+            }
+            else{
+                current_widget->textAlign = CSS_TEXT_ALIGN_RIGHT;
+            }
         }
         else{
-            current_widget->textAlign = CSS_TEXT_ALIGN_RIGHT;
+            set_text_align(current_widget, value);
         }
-    }
-    else{
-        set_text_align(current_widget, value);
     }
 }
 
@@ -339,11 +342,14 @@ void text_align_last_property_set_value(struct css_properties* current_widget, c
     if (!strcmp(value, "inherit")){
         current_widget->text_align_last_inherit = true;
     }
-    else if(!strcmp(value, "initial") || !strcmp(value, "auto")){
-        current_widget->textAlignLast = CSS_TEXT_ALIGN_LEFT;
-    }
     else{
-        set_text_align_last(current_widget, value);
+        current_widget->text_align_last_inherit = false;
+        if(!strcmp(value, "initial") || !strcmp(value, "auto")){
+            current_widget->textAlignLast = CSS_TEXT_ALIGN_LEFT;
+        }
+        else{
+            set_text_align_last(current_widget, value);
+        }
     }
 }
 
@@ -374,58 +380,115 @@ void text_decoration_property_set_value(struct css_properties* current_widget, c
 }
 
 void text_decoration_color_property_set_value(struct css_properties* current_widget, char* value){
-    if (current_widget->textDecoration == NULL){
-        current_widget->textDecoration = malloc(sizeof(struct text_decoration));
-    }
     if (!strcmp(value, "inherit")){
-        current_widget->textDecoration->text_decoration_color_inherit = true;
-    }
-    else if(!strcmp(value, "initial")){
-        sync_color(current_widget->color, current_widget->textDecoration->textDecorationColor);
+        if (!current_widget->text_decoration_inherit){
+            if (current_widget->textDecoration == NULL){
+                current_widget->textDecoration = malloc(sizeof(struct text_decoration));
+            }
+            current_widget->textDecoration->text_decoration_color_inherit = true;
+        }
     }
     else{
-        get_color(current_widget->textDecoration->textDecorationColor, value);
+        if (current_widget->textDecoration == NULL){
+            current_widget->textDecoration = malloc(sizeof(struct text_decoration));
+        }
+        if (current_widget->text_decoration_inherit){
+            current_widget->textDecoration->text_decoration_line_inherit = true;
+            current_widget->textDecoration->text_decoration_style_inherit = true;
+            current_widget->textDecoration->text_decoration_thickness_inherit = true;
+            current_widget->text_decoration_inherit = false;
+        }
+        current_widget->textDecoration->text_decoration_color_inherit = false;
+        if (current_widget->textDecoration->textDecorationColor == NULL){
+            current_widget->textDecoration->textDecorationColor = malloc(sizeof(struct color_rgba));
+        }
+        if(!strcmp(value, "initial")){
+            sync_color(current_widget->color, current_widget->textDecoration->textDecorationColor);
+        }
+        else{
+            get_color(current_widget->textDecoration->textDecorationColor, value);
+        }
     }
 }
 
 void text_decoration_line_property_set_value(struct css_properties* current_widget, char* value){
-    if (current_widget->textDecoration == NULL){
-        current_widget->textDecoration = malloc(sizeof(struct text_decoration));
-    }
     if (!strcmp(value, "inherit")){
-        current_widget->textDecoration->text_decoration_line_inherit = true;
-    }
-    else if(!strcmp(value, "initial")){
-        current_widget->textDecoration->textDecorationLine = CSS_TEXT_DECORATION_LINE_NONE;
+        if (!current_widget->text_decoration_inherit){
+            if (current_widget->textDecoration == NULL){
+                current_widget->textDecoration = malloc(sizeof(struct text_decoration));
+            }
+            current_widget->textDecoration->text_decoration_line_inherit = true;
+        }
     }
     else{
-        set_text_decoration_line(current_widget->textDecoration, value);
+        if (current_widget->textDecoration == NULL){
+            current_widget->textDecoration = malloc(sizeof(struct text_decoration));
+        }
+        if (current_widget->text_decoration_inherit){
+            current_widget->textDecoration->text_decoration_color_inherit = true;
+            current_widget->textDecoration->text_decoration_style_inherit = true;
+            current_widget->textDecoration->text_decoration_thickness_inherit = true;
+            current_widget->text_decoration_inherit = true;
+        }
+        current_widget->textDecoration->text_decoration_line_inherit = false;
+        if(!strcmp(value, "initial")){
+            current_widget->textDecoration->textDecorationLine = CSS_TEXT_DECORATION_LINE_NONE;
+        }
+        else{
+            set_text_decoration_line(current_widget->textDecoration, value);
+        }
     }
 }
 
 void text_decoration_style_property_set_value(struct css_properties* current_widget, char* value){
-    if (current_widget->textDecoration == NULL){
-        current_widget->textDecoration = malloc(sizeof(struct text_decoration));
-    }
     if (!strcmp(value, "inherit")){
-        current_widget->textDecoration->text_decoration_style_inherit = true;
-    }
-    else if(!strcmp(value, "initial")){
-        current_widget->textDecoration->textDecorationStyle = CSS_TEXT_DECORATION_STYLE_SOLID;
+        if (!current_widget->text_decoration_inherit){
+            if (current_widget->textDecoration == NULL){
+                current_widget->textDecoration = malloc(sizeof(struct text_decoration));
+            }
+            current_widget->textDecoration->text_decoration_style_inherit = true;
+        }
     }
     else{
-        set_text_decoration_style(current_widget->textDecoration, value);
+        if (current_widget->textDecoration == NULL){
+            current_widget->textDecoration = malloc(sizeof(struct text_decoration));
+        }
+        if (current_widget->text_decoration_inherit){
+            current_widget->textDecoration->text_decoration_line_inherit = true;
+            current_widget->textDecoration->text_decoration_color_inherit = true;
+            current_widget->textDecoration->text_decoration_thickness_inherit = true;
+            current_widget->text_decoration_inherit = true;
+        }
+        current_widget->textDecoration->text_decoration_style_inherit = false;
+        if(!strcmp(value, "initial")){
+            current_widget->textDecoration->textDecorationStyle = CSS_TEXT_DECORATION_STYLE_SOLID;
+        }
+        else{
+            set_text_decoration_style(current_widget->textDecoration, value);
+        }
     }
 }
 
 void text_decoration_thickness_property_set_value(struct css_properties* current_widget, char* value){
-    if (current_widget->textDecoration == NULL){
-        current_widget->textDecoration = malloc(sizeof(struct text_decoration));
-    }
     if (!strcmp(value, "inherit")){
-        current_widget->textDecoration->text_decoration_thickness_inherit = true;
+        if (!current_widget->text_decoration_inherit){
+            if (current_widget->textDecoration == NULL){
+                current_widget->textDecoration = malloc(sizeof(struct text_decoration));
+            }
+            current_widget->textDecoration->text_decoration_thickness_inherit = true;
+        }
     }
     else{
+        if (current_widget->textDecoration == NULL){
+            current_widget->textDecoration = malloc(sizeof(struct text_decoration));
+        }
+        if (current_widget->text_decoration_inherit){
+            current_widget->textDecoration->text_decoration_line_inherit = true;
+            current_widget->textDecoration->text_decoration_color_inherit = true;
+            current_widget->textDecoration->text_decoration_style_inherit = true;
+            current_widget->text_decoration_inherit = true;
+        }
+        current_widget->textDecoration->text_decoration_thickness_inherit = false;
         if (current_widget->textDecoration->textDecorationThickness == NULL){
             current_widget->textDecoration->textDecorationThickness = malloc(sizeof(struct text_decoration_thickness));
         }
@@ -443,6 +506,7 @@ void text_indent_property_set_value(struct css_properties* current_widget, char*
         current_widget->text_indent_inherit = true;
     }
     else{
+        current_widget->text_indent_inherit = false;
         if (current_widget->textIndent == NULL){
             current_widget->textIndent = malloc(sizeof(struct text_indent));
         }
@@ -460,11 +524,14 @@ void text_justify_property_set_value(struct css_properties* current_widget, char
     if (!strcmp(value, "inherit")){
         current_widget->text_justify_inherit = true;
     }
-    else if (!strcmp(value, "initial")){
-        current_widget->textJustify = CSS_TEXT_JUSTIFY_AUTO;
-    }
     else{
-        set_text_justify(current_widget, value);
+        current_widget->text_justify_inherit = false;
+        if (!strcmp(value, "initial")){
+            current_widget->textJustify = CSS_TEXT_JUSTIFY_AUTO;
+        }
+        else{
+            set_text_justify(current_widget, value);
+        }
     }
 }
 
@@ -472,11 +539,14 @@ void text_overflow_property_set_value(struct css_properties* current_widget, cha
     if (!strcmp(value, "inherit")){
         current_widget->text_overflow_inherit = true;
     }
-    else if (!strcmp(value, "initial")){
-        current_widget->textOverflow = CSS_TEXT_OVERFLOW_CLIP;
-    }
     else{
-        set_text_overflow(current_widget, value);
+        current_widget->text_overflow_inherit = true;
+        if (!strcmp(value, "initial")){
+            current_widget->textOverflow = CSS_TEXT_OVERFLOW_CLIP;
+        }
+        else{
+            set_text_overflow(current_widget, value);
+        }
     }
 }
 
@@ -485,8 +555,9 @@ void text_shadow_property_set_value(struct css_properties* current_widget, char*
         current_widget->text_shadow_inherit = true;
     }
     else{
+        current_widget->text_shadow_inherit = false;
         if (!strcmp(value, "initial")){
-            //do nothing or create a value for none
+            //do nothing or create a value for none also free that
         }
         else{
             if (current_widget->textShadow == NULL){
@@ -501,11 +572,14 @@ void text_transform_property_set_value(struct css_properties* current_widget, ch
     if (!strcmp(value, "inherit")){
         current_widget->text_transform_inherit = true;
     }
-    else if(!strcmp(value, "initial")){
-        current_widget->textTransformType = CSS_TEXT_TRANSFORM_NONE;
-    }
     else{
-        set_text_transform(current_widget, value);
+        current_widget->text_transform_inherit = false;
+        if(!strcmp(value, "initial")){
+            current_widget->textTransformType = CSS_TEXT_TRANSFORM_NONE;
+        }
+        else{
+            set_text_transform(current_widget, value);
+        }
     }
 }
 

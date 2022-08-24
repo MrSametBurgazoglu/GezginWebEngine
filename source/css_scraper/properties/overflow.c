@@ -102,14 +102,24 @@ void overflow_property_set_value(struct css_properties* current_widget, char* va
 }
 
 void overflow_wrap_property_set_value(struct css_properties* current_widget, char* value){
-    if (current_widget->overflow == NULL){
-        current_widget->overflow = malloc(sizeof(struct overflow));
-    }
     if (!strcmp(value, "inherit")){
-        current_widget->overflow->overflow_wrap_inherit = true;
+        if (!current_widget->overflow_inherit){
+            if (current_widget->overflow == NULL){
+                current_widget->overflow = malloc(sizeof(struct overflow));
+            }
+            current_widget->overflow->overflow_wrap_inherit = true;
+        }
     }
     else{
-        current_widget->overflow->overflow_wrap_inherit = true;
+        if (current_widget->overflow == NULL){
+            current_widget->overflow = malloc(sizeof(struct overflow));
+        }
+        if (current_widget->overflow_inherit){
+            current_widget->overflow->overflow_x_inherit = true;
+            current_widget->overflow->overflow_y_inherit = true;
+            current_widget->overflow_inherit = false;
+        }
+        current_widget->overflow->overflow_wrap_inherit = false;
         if(!strcmp(value, "initial")){
             current_widget->overflow->wrap = CSS_OVERFLOW_WRAP_NORMAL;
         }
@@ -120,14 +130,24 @@ void overflow_wrap_property_set_value(struct css_properties* current_widget, cha
 }
 
 void overflow_x_property_set_value(struct css_properties* current_widget, char* value){
-    if (current_widget->overflow == NULL){
-        current_widget->overflow = malloc(sizeof(struct overflow));
-    }
     if (!strcmp(value, "inherit")){
-        current_widget->overflow->overflow_x_inherit = true;
+        if (!current_widget->overflow_inherit){
+            if (current_widget->overflow == NULL){
+                current_widget->overflow = malloc(sizeof(struct overflow));
+            }
+            current_widget->overflow->overflow_x_inherit = true;
+        }
     }
     else{
-        current_widget->overflow->overflow_x_inherit = true;
+        if (current_widget->overflow == NULL){
+            current_widget->overflow = malloc(sizeof(struct overflow));
+        }
+        if (current_widget->overflow_inherit){
+            current_widget->overflow->overflow_wrap_inherit = true;
+            current_widget->overflow->overflow_y_inherit = true;
+            current_widget->overflow_inherit = false;
+        }
+        current_widget->overflow->overflow_x_inherit = false;
         if(!strcmp(value, "initial")){
             current_widget->overflow->overflowX = CSS_OVERFLOW_VISIBLE;
         }
@@ -138,14 +158,24 @@ void overflow_x_property_set_value(struct css_properties* current_widget, char* 
 }
 
 void overflow_y_property_set_value(struct css_properties* current_widget, char* value){
-    if (current_widget->overflow == NULL){
-        current_widget->overflow = malloc(sizeof(struct overflow));
-    }
     if (!strcmp(value, "inherit")){
-        current_widget->overflow->overflow_y_inherit = true;
+        if (!current_widget->overflow_inherit){
+            if (current_widget->overflow == NULL){
+                current_widget->overflow = malloc(sizeof(struct overflow));
+            }
+            current_widget->overflow->overflow_y_inherit = true;
+        }
     }
     else{
-        current_widget->overflow->overflow_y_inherit = true;
+        if (current_widget->overflow == NULL){
+            current_widget->overflow = malloc(sizeof(struct overflow));
+        }
+        if (current_widget->overflow_inherit){
+            current_widget->overflow->overflow_wrap_inherit = true;
+            current_widget->overflow->overflow_x_inherit = true;
+            current_widget->overflow_inherit = false;
+        }
+        current_widget->overflow->overflow_y_inherit = false;
         if(!strcmp(value, "initial")){
             current_widget->overflow->overflowY = CSS_OVERFLOW_VISIBLE;
         }

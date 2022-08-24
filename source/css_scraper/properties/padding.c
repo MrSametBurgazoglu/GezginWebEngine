@@ -121,9 +121,22 @@ void set_padding(struct padding* padding, char* value){
 
 void padding_top_property_set_value(struct css_properties* current_widget, char* value){
     if (!strcmp(value, "inherit")){
-        current_widget->padding->padding_top_inherit = true;
+        if(!current_widget->padding_inherit){
+            if(current_widget->padding == NULL){
+                current_widget->padding = malloc(sizeof(struct padding));
+            }
+            current_widget->padding->padding_top_inherit = true;
+        }
     }
     else{
+        if(current_widget->padding == NULL){
+            current_widget->padding = malloc(sizeof(struct padding));
+        }
+        if(current_widget->padding_inherit){
+            current_widget->padding->padding_bottom_inherit = true;
+            current_widget->padding->padding_left_inherit = true;
+            current_widget->padding->padding_right_inherit = true;
+        }
         current_widget->padding->padding_top_inherit = false;
         if (!strcmp(value, "initial")){
             current_widget->padding->paddingTopValueType = CSS_PROPERTY_VALUE_TYPE_LENGTH;
@@ -137,9 +150,22 @@ void padding_top_property_set_value(struct css_properties* current_widget, char*
 
 void padding_bottom_property_set_value(struct css_properties* current_widget, char* value){
     if (!strcmp(value, "inherit")){
-        current_widget->padding->padding_bottom_inherit = true;
+        if(!current_widget->padding_inherit){
+            if(current_widget->padding == NULL){
+                current_widget->padding = malloc(sizeof(struct padding));
+            }
+            current_widget->padding->padding_bottom_inherit = true;
+        }
     }
     else{
+        if(current_widget->padding == NULL){
+            current_widget->padding = malloc(sizeof(struct padding));
+        }
+        if(current_widget->padding_inherit){
+            current_widget->padding->padding_top_inherit = true;
+            current_widget->padding->padding_left_inherit = true;
+            current_widget->padding->padding_right_inherit = true;
+        }
         current_widget->padding->padding_bottom_inherit = false;
         if (!strcmp(value, "initial")){
             current_widget->padding->paddingBottomValueType = CSS_PROPERTY_VALUE_TYPE_LENGTH;
@@ -153,9 +179,22 @@ void padding_bottom_property_set_value(struct css_properties* current_widget, ch
 
 void padding_left_property_set_value(struct css_properties* current_widget, char* value){
     if (!strcmp(value, "inherit")){
-        current_widget->padding->padding_left_inherit = true;
+        if(!current_widget->padding_inherit){
+            if(current_widget->padding == NULL){
+                current_widget->padding = malloc(sizeof(struct padding));
+            }
+            current_widget->padding->padding_left_inherit = true;
+        }
     }
     else{
+        if(current_widget->padding == NULL){
+            current_widget->padding = malloc(sizeof(struct padding));
+        }
+        if(current_widget->padding_inherit){
+            current_widget->padding->padding_top_inherit = true;
+            current_widget->padding->padding_bottom_inherit = true;
+            current_widget->padding->padding_right_inherit = true;
+        }
         current_widget->padding->padding_left_inherit = false;
         if (!strcmp(value, "initial")){
             current_widget->padding->paddingLeftValueType = CSS_PROPERTY_VALUE_TYPE_LENGTH;
@@ -169,9 +208,22 @@ void padding_left_property_set_value(struct css_properties* current_widget, char
 
 void padding_right_property_set_value(struct css_properties* current_widget, char* value){
     if (!strcmp(value, "inherit")){
-        current_widget->padding->padding_right_inherit = true;
+        if(!current_widget->padding_inherit){
+            if(current_widget->padding == NULL){
+                current_widget->padding = malloc(sizeof(struct padding));
+            }
+            current_widget->padding->padding_right_inherit = true;
+        }
     }
     else{
+        if(current_widget->padding == NULL){
+            current_widget->padding = malloc(sizeof(struct padding));
+        }
+        if(current_widget->padding_inherit){
+            current_widget->padding->padding_top_inherit = true;
+            current_widget->padding->padding_bottom_inherit = true;
+            current_widget->padding->padding_left_inherit = true;
+        }
         current_widget->padding->padding_right_inherit = false;
         if (!strcmp(value, "initial")){
             current_widget->padding->paddingRightValueType = CSS_PROPERTY_VALUE_TYPE_LENGTH;
@@ -192,7 +244,7 @@ void padding_property_set_value(struct css_properties* current_widget, char* val
         if(current_widget->padding == NULL){
             current_widget->padding = malloc(sizeof(struct padding));
         }
-        if (!strcmp(value, "initial")){//do nothing
+        if (!strcmp(value, "initial")){//maybe we can do nothing
             current_widget->padding->padding_top = 0;
             current_widget->padding->padding_bottom = 0;
             current_widget->padding->padding_left = 0;
