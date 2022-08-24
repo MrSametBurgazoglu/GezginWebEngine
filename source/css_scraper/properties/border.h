@@ -117,17 +117,9 @@ struct css_border{
     bool border_width_inherit;
     bool border_style_inherit;
     bool border_color_inherit;
-    bool border_radius_inherit;
-    bool border_spacing_inherit;
-    bool border_image_inherit;
-    bool border_collapse_inherit;
     struct border_width* borderWidth;
     struct border_style* borderStyle;
     struct border_color* borderColor;
-    struct border_radius* borderRadius;
-    struct border_spacing* borderSpacing;
-    struct border_image* borderImage;
-    css_border_collapse_type borderCollapseType;
 };
 
 void border_property_set_value(struct css_properties*, char*);

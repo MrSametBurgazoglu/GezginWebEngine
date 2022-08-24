@@ -402,6 +402,7 @@ void background_color_property_set_value(struct css_properties* current_widget, 
             current_widget->background = malloc(sizeof(struct css_background));
         }
         if (current_widget->background_inherit){
+            current_widget->background = malloc(sizeof(struct css_background));
             current_widget->background->background_size_inherit = true;
             current_widget->background->background_position_inherit = true;
             current_widget->background->background_origin_inherit = true;
@@ -438,6 +439,7 @@ void background_image_property_set_value(struct css_properties* current_widget, 
             current_widget->background = malloc(sizeof(struct css_background));
         }
         if (current_widget->background_inherit){
+            current_widget->background = malloc(sizeof(struct css_background));
             current_widget->background->background_size_inherit = true;
             current_widget->background->background_position_inherit = true;
             current_widget->background->background_origin_inherit = true;
@@ -467,6 +469,7 @@ void background_position_property_set_value(struct css_properties* current_widge
             current_widget->background = malloc(sizeof(struct css_background));
         }
         if (current_widget->background_inherit){
+            current_widget->background = malloc(sizeof(struct css_background));
             current_widget->background->background_size_inherit = true;
             current_widget->background->background_color_inherit = true;
             current_widget->background->background_origin_inherit = true;
@@ -510,6 +513,7 @@ void background_size_property_set_value(struct css_properties* current_widget, c
             current_widget->background = malloc(sizeof(struct css_background));
         }
         if (current_widget->background_inherit){
+            current_widget->background = malloc(sizeof(struct css_background));
             current_widget->background->background_position_inherit = true;
             current_widget->background->background_color_inherit = true;
             current_widget->background->background_origin_inherit = true;
@@ -546,6 +550,7 @@ void background_repeat_property_set_value(struct css_properties* current_widget,
             current_widget->background = malloc(sizeof(struct css_background));
         }
         if (current_widget->background_inherit){
+            current_widget->background = malloc(sizeof(struct css_background));
             current_widget->background->background_position_inherit = true;
             current_widget->background->background_color_inherit = true;
             current_widget->background->background_origin_inherit = true;
@@ -578,6 +583,7 @@ void background_origin_property_set_value(struct css_properties* current_widget,
             current_widget->background = malloc(sizeof(struct css_background));
         }
         if (current_widget->background_inherit){
+            current_widget->background = malloc(sizeof(struct css_background));
             current_widget->background->background_position_inherit = true;
             current_widget->background->background_color_inherit = true;
             current_widget->background->background_repeat_inherit = true;
@@ -610,6 +616,7 @@ void background_clip_property_set_value(struct css_properties* current_widget, c
             current_widget->background = malloc(sizeof(struct css_background));
         }
         if (current_widget->background_inherit){
+            current_widget->background = malloc(sizeof(struct css_background));
             current_widget->background->background_position_inherit = true;
             current_widget->background->background_color_inherit = true;
             current_widget->background->background_repeat_inherit = true;
@@ -642,6 +649,7 @@ void background_attachment_property_set_value(struct css_properties* current_wid
             current_widget->background = malloc(sizeof(struct css_background));
         }
         if (current_widget->background_inherit){
+            current_widget->background = malloc(sizeof(struct css_background));
             current_widget->background->background_position_inherit = true;
             current_widget->background->background_color_inherit = true;
             current_widget->background->background_repeat_inherit = true;
@@ -667,10 +675,10 @@ void background_property_set_value(struct css_properties* current_widget, char *
         current_widget->background_inherit = true;
     }
     else{
-        current_widget->background_inherit = false;
-        if(current_widget->background == NULL){
+        if(current_widget->background == NULL || current_widget->background_inherit){
             current_widget->background = malloc(sizeof(struct css_background));
         }
+        current_widget->background_inherit = false;
         if (!strcmp(value, "initial")){
             //implement here
         }

@@ -191,6 +191,7 @@ void animation_timing_function_property_set_value(struct css_properties* current
             current_widget->animation = malloc(sizeof(struct animation));
         }
         if (current_widget->animation_inherit){
+            current_widget->animation = malloc(sizeof(struct animation));
             current_widget->animation->animation_direction_inherit = true;
             current_widget->animation->animation_play_state_inherit = true;
             current_widget->animation->animation_name_inherit = true;
@@ -223,6 +224,7 @@ void animation_name_property_set_value(struct css_properties *current_widget, ch
             current_widget->animation = malloc(sizeof(struct animation));
         }
         if (current_widget->animation_inherit){
+            current_widget->animation = malloc(sizeof(struct animation));
             current_widget->animation->animation_direction_inherit = true;
             current_widget->animation->animation_play_state_inherit = true;
             current_widget->animation->animation_timing_function_inherit = true;
@@ -257,6 +259,7 @@ void animation_duration_property_set_value(struct css_properties* current_widget
             current_widget->animation = malloc(sizeof(struct animation));
         }
         if (current_widget->animation_inherit){
+            current_widget->animation = malloc(sizeof(struct animation));
             current_widget->animation->animation_direction_inherit = true;
             current_widget->animation->animation_play_state_inherit = true;
             current_widget->animation->animation_timing_function_inherit = true;
@@ -289,6 +292,7 @@ void animation_delay_property_set_value(struct css_properties* current_widget, c
             current_widget->animation = malloc(sizeof(struct animation));
         }
         if (current_widget->animation_inherit){
+            current_widget->animation = malloc(sizeof(struct animation));
             current_widget->animation->animation_direction_inherit = true;
             current_widget->animation->animation_play_state_inherit = true;
             current_widget->animation->animation_timing_function_inherit = true;
@@ -321,6 +325,7 @@ void animation_iteration_count_property_set_value(struct css_properties* current
             current_widget->animation = malloc(sizeof(struct animation));
         }
         if (current_widget->animation_inherit){
+            current_widget->animation = malloc(sizeof(struct animation));
             current_widget->animation->animation_direction_inherit = true;
             current_widget->animation->animation_play_state_inherit = true;
             current_widget->animation->animation_timing_function_inherit = true;
@@ -353,6 +358,7 @@ void animation_direction_property_set_value(struct css_properties* current_widge
             current_widget->animation = malloc(sizeof(struct animation));
         }
         if (current_widget->animation_inherit){
+            current_widget->animation = malloc(sizeof(struct animation));
             current_widget->animation->animation_iteration_count_inherit = true;
             current_widget->animation->animation_play_state_inherit = true;
             current_widget->animation->animation_timing_function_inherit = true;
@@ -385,6 +391,7 @@ void animation_fill_mode_property_set_value(struct css_properties* current_widge
             current_widget->animation = malloc(sizeof(struct animation));
         }
         if (current_widget->animation_inherit){
+            current_widget->animation = malloc(sizeof(struct animation));
             current_widget->animation->animation_iteration_count_inherit = true;
             current_widget->animation->animation_play_state_inherit = true;
             current_widget->animation->animation_timing_function_inherit = true;
@@ -417,6 +424,7 @@ void animation_play_state_property_set_value(struct css_properties* current_widg
             current_widget->animation = malloc(sizeof(struct animation));
         }
         if (current_widget->animation_inherit){
+            current_widget->animation = malloc(sizeof(struct animation));
             current_widget->animation->animation_iteration_count_inherit = true;
             current_widget->animation->animation_fill_mode_inherit = true;
             current_widget->animation->animation_timing_function_inherit = true;
@@ -440,10 +448,10 @@ void animation_property_set_value(struct css_properties *current_widget, char* v
         current_widget->animation_inherit = true;
     }
     else{
-        current_widget->animation_inherit = false;
-        if(current_widget->animation == NULL){
+        if(current_widget->animation == NULL || current_widget->animation_inherit){
             current_widget->animation = malloc(sizeof(struct animation));
         }
+        current_widget->animation_inherit = false;
         if (!strcmp(value, "initial")){
             current_widget->animation->animation_name = "none";
             current_widget->animation->animation_duration = 0;

@@ -20,6 +20,10 @@ struct css_properties{
     bool backface_visibility_inherit;
     bool background_inherit;
     bool border_inherit;
+    bool border_collapse_inherit;
+    bool border_image_inherit;
+    bool border_radius_inherit;
+    bool border_spacing_inherit;
     bool color_inherit;
     bool font_inherit;
     bool text_align_inherit;
@@ -73,6 +77,10 @@ struct css_properties{
     struct css_background* background;
 
     struct css_border* border;
+    css_border_collapse_type borderCollapseType;
+    struct border_image* borderImage;
+    struct border_radius* borderRadius;
+    struct border_spacing* borderSpacing;
 
     struct font* font;
 

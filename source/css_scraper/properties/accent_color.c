@@ -15,7 +15,7 @@ void accent_color_property_set_value(struct css_properties* current_widget, char
     }
     else{
         current_widget->accent_color_inherit = false;
-        if(current_widget->accent_color == NULL){
+        if(current_widget->accent_color == NULL || current_widget->accent_color_inherit){
             current_widget->accent_color = malloc(sizeof(struct color_rgba));
         }
         if(!strcmp(value, "auto") || !strcmp(value ,"initial")){
