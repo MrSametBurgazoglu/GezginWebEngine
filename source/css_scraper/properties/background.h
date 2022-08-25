@@ -55,27 +55,17 @@ struct css_background{
 };
 
 void background_blend_mode_property_set_value(struct css_properties* current_widget,char * value);
-
 void background_color_property_set_value(struct css_properties* current_widget,char * value);
-
 void background_image_property_set_value(struct css_properties* current_widget,char * value);
-
 void background_position_property_set_value(struct css_properties* current_widget,char * value);
-
 void background_size_property_set_value(struct css_properties* current_widget,char * value);
-
 void background_repeat_property_set_value(struct css_properties* current_widget,char * value);
-
 void background_origin_property_set_value(struct css_properties* current_widget,char * value);
-
 void background_clip_property_set_value(struct css_properties* current_widget,char * value);
-
 void background_attachment_property_set_value(struct css_properties* current_widget,char * value);
-
 void background_property_set_value(struct css_properties* current_widget,char * value);
-
-void compute_background(struct css_properties* dest, struct css_properties* source);
-
+void compute_inherit_background(struct css_properties* dest, struct css_properties* source);
+void update_background(struct css_properties* dest, struct css_properties* source);
 void free_background(struct css_properties*);
 
 #endif //UNTITLED_BACKGROUND_H

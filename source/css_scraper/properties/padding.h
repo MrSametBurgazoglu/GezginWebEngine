@@ -30,7 +30,8 @@ void padding_top_property_set_value(struct css_properties*, char*);
 void padding_bottom_property_set_value(struct css_properties*, char*);
 void padding_left_property_set_value(struct css_properties*, char*);
 void padding_right_property_set_value(struct css_properties*, char*);
-void compute_padding(struct css_properties* dest, struct css_properties* source);
+void compute_inherit_padding(struct css_properties* dest, struct css_properties* source);
+void update_padding(struct css_properties* dest, struct css_properties* source);
 void free_padding(struct css_properties*);
 
 #endif //UNTITLED_PADDING_H

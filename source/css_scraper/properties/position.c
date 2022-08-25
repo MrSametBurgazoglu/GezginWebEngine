@@ -180,7 +180,7 @@ void right_property_set_value(struct css_properties* current_widget, char* value
     }
 }
 
-void compute_position(struct css_properties* dest, struct css_properties* source){
+void compute_inherit_position(struct css_properties* dest, struct css_properties* source){
     if (dest->position_inherit){
         dest->position = source->position;
     }

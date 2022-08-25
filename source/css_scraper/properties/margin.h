@@ -30,7 +30,8 @@ void margin_top_property_set_value(struct css_properties*, char*);
 void margin_bottom_property_set_value(struct css_properties*, char*);
 void margin_left_property_set_value(struct css_properties*, char*);
 void margin_right_property_set_value(struct css_properties*, char*);
-void compute_margin(struct css_properties* dest, struct css_properties* source);
+void compute_inherit_margin(struct css_properties* dest, struct css_properties* source);
+void update_margin(struct css_properties* dest, struct css_properties* source);
 void free_margin(struct css_properties*);
 
 #endif //UNTITLED_MARGIN_H

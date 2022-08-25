@@ -50,7 +50,8 @@ void text_justify_property_set_value(struct css_properties*, char*);
 void text_overflow_property_set_value(struct css_properties*, char*);
 void text_shadow_property_set_value(struct css_properties*, char*);
 void text_transform_property_set_value(struct css_properties*, char*);
-void compute_text(struct css_properties* dest, struct css_properties* source);
+void compute_inherit_text(struct css_properties* dest, struct css_properties* source);
+void update_text(struct css_properties* dest, struct css_properties* source);
 void free_text(struct css_properties*);
 
 #endif //UNTITLED_TEXT_H

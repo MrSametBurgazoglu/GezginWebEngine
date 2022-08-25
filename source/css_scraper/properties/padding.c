@@ -260,7 +260,7 @@ void padding_property_set_value(struct css_properties* current_widget, char* val
     }
 }
 
-void compute_padding(struct css_properties* dest, struct css_properties* source){
+void compute_inherit_padding(struct css_properties* dest, struct css_properties* source){
     if(dest->padding_inherit){
         dest->padding = source->padding;
     }

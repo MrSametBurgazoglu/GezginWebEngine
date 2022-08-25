@@ -22,7 +22,8 @@ void overflow_property_set_value(struct css_properties*, char*);
 void overflow_wrap_property_set_value(struct css_properties*, char*);
 void overflow_x_property_set_value(struct css_properties*, char*);
 void overflow_y_property_set_value(struct css_properties*, char*);
-void compute_overflow(struct css_properties* dest, struct css_properties* source);
+void compute_inherit_overflow(struct css_properties* dest, struct css_properties* source);
+void update_overflow(struct css_properties* dest, struct css_properties* source);
 void free_overflow(struct css_properties*);
 
 #endif //UNTITLED_OVERFLOW_H

@@ -34,7 +34,8 @@ void column_rule_width_property_set_value(struct css_properties*, char*);
 void column_span_property_set_value(struct css_properties*, char*);
 void column_width_property_set_value(struct css_properties*, char*);
 void columns_property_set_value(struct css_properties*, char*);
-void compute_column(struct css_properties* dest, struct css_properties* source);
+void compute_inherit_column(struct css_properties* dest, struct css_properties* source);
+void update_column(struct css_properties* dest, struct css_properties* source);
 void free_column(struct css_properties*);
 
 

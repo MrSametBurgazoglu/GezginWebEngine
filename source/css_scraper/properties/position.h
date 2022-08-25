@@ -13,6 +13,7 @@ void top_property_set_value(struct css_properties*, char*);
 void bottom_property_set_value(struct css_properties*, char*);
 void left_property_set_value(struct css_properties*, char*);
 void right_property_set_value(struct css_properties*, char*);
-void compute_position(struct css_properties* dest, struct css_properties* source);
+void compute_inherit_position(struct css_properties* dest, struct css_properties* source);
+void update_position(struct css_properties* dest, struct css_properties* source);
 
 #endif //UNTITLED_POSITION_H

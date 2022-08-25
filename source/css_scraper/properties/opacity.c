@@ -27,7 +27,7 @@ void opacity_property_set_value(struct css_properties* current_widget, char* val
     }
 }
 
-void compute_opacity(struct css_properties* dest, struct css_properties* source){
+void compute_inherit_opacity(struct css_properties* dest, struct css_properties* source){
     if (dest->opacity_inherit){
         dest->opacity = source->opacity;
     }

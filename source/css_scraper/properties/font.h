@@ -45,7 +45,8 @@ void font_style_property_set_value(struct css_properties *, char* value);
 void font_variant_property_set_value(struct css_properties *, char* value);
 void font_variant_caps_property_set_value(struct css_properties *, char* value);
 void font_weight_property_set_value(struct css_properties *, char* value);
-void compute_font(struct css_properties* dest, struct css_properties* source);
+void compute_inherit_font(struct css_properties* dest, struct css_properties* source);
+void update_font(struct css_properties* dest, struct css_properties* source);
 void free_font(struct css_properties*);
 
 #endif //UNTITLED_FONT_H

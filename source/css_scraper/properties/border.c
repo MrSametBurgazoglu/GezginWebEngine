@@ -2314,7 +2314,7 @@ void border_width_property_set_value(struct css_properties* current_widget, char
     }
 }
 
-void compute_border(struct css_properties* dest, struct css_properties* source){
+void compute_inherit_border(struct css_properties* dest, struct css_properties* source){
     if (dest->border_inherit){
         dest->border = source->border;
     }

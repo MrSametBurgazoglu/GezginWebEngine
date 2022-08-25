@@ -468,7 +468,7 @@ void animation_property_set_value(struct css_properties *current_widget, char* v
     }
 }
 
-void compute_align(struct css_properties* dest, struct css_properties* source){
+void compute_inherit_align(struct css_properties* dest, struct css_properties* source){
     if (dest->animation_inherit){
         dest->animation = source->animation;
     }

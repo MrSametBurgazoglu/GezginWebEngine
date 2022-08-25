@@ -583,7 +583,7 @@ void text_transform_property_set_value(struct css_properties* current_widget, ch
     }
 }
 
-void compute_text(struct css_properties* dest, struct css_properties* source){
+void compute_inherit_text(struct css_properties* dest, struct css_properties* source){
     if (dest->text_decoration_inherit){
         dest->textDecoration = source->textDecoration;
     }

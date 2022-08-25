@@ -55,7 +55,8 @@ void animation_delay_property_set_value(struct css_properties* current_css_widge
 void animation_duration_property_set_value(struct css_properties* current_css_widget, char * value);
 void animation_timing_function_property_set_value(struct css_properties* current_css_widget, char* value);
 void animation_name_property_set_value(struct css_properties* current_css_widget, char* value);
-void compute_animation(struct css_properties* dest, struct css_properties* source);
+void compute_inherit_animation(struct css_properties* dest, struct css_properties* source);
+void update_animation(struct css_properties* dest, struct css_properties* source);
 void free_animation(struct css_properties*);
 
 #endif //UNTITLED_ANIMATION_H

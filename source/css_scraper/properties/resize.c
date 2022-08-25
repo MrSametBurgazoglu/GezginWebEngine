@@ -50,7 +50,7 @@ void resize_property_set_value(struct css_properties* current_widget, char* valu
     }
 }
 
-void compute_resize(struct css_properties* dest, struct css_properties* source){
+void compute_inherit_resize(struct css_properties* dest, struct css_properties* source){
     if (dest->resize_inherit){
         dest->resize = source->resize;
     }

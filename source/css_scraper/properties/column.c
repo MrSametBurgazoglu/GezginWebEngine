@@ -373,7 +373,7 @@ void columns_property_set_value(struct css_properties* current_widget, char* val
     }
 }
 
-void compute_column(struct css_properties* dest, struct css_properties* source){
+void compute_inherit_column(struct css_properties* dest, struct css_properties* source){
     if (dest->column_count_inherit){
         dest->column_count = source->column_count;
     }

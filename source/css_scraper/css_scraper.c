@@ -53,7 +53,7 @@ void scrape_css_from_inline_style(struct css_properties* css_widget, char* text)
 //TODO MAKE DOCUMENT CSS PROPERTIES BY INITIAL VALUES
 void set_css_properties(struct widget* current_widget, struct widget* parent_widget){
     if(parent_widget->css_properties != NULL){
-        sync_css_properties(current_widget->css_properties, parent_widget->css_properties);
+        compute_inherit_css_properties(current_widget->css_properties, parent_widget->css_properties);
     }
     size_t class_count = current_widget->html_variables->class_count;
     struct css_properties *current_css_properties;
@@ -61,20 +61,20 @@ void set_css_properties(struct widget* current_widget, struct widget* parent_wid
         char* class_name = current_widget->html_variables->class[index];
         current_css_properties = get_css_widget_by_class(class_name);
         if(current_css_properties != NULL){
-            sync_css_properties(current_widget->css_properties, current_css_properties);
+            compute_inherit_css_properties(current_widget->css_properties, current_css_properties);
         }
         current_css_properties = get_css_widget_by_element_and_class(current_widget->html_tag, class_name);
         if(current_css_properties != NULL){
-            sync_css_properties(current_widget->css_properties, current_css_properties);
+            compute_inherit_css_properties(current_widget->css_properties, current_css_properties);
         }
     }
     current_css_properties = get_css_widget_by_element(current_widget->html_tag);
     if(current_css_properties != NULL){
-        sync_css_properties(current_widget->css_properties, current_css_properties);
+        compute_inherit_css_properties(current_widget->css_properties, current_css_properties);
     }
     current_css_properties = get_css_widget_by_id(current_widget->html_variables->id);
     if(current_css_properties != NULL){
-        sync_css_properties(current_widget->css_properties, current_css_properties);
+        compute_inherit_css_properties(current_widget->css_properties, current_css_properties);
     }
     if(current_widget->html_variables->style != NULL){//TODO BUGFIX
         printf("WOW:%s:WOW", current_widget->html_variables->style);

@@ -273,7 +273,7 @@ void flex_wrap_property_set_value(struct css_properties* current_widget, char* v
     }
 }
 
-void compute_flex(struct css_properties* dest, struct css_properties* source){
+void compute_inherit_flex(struct css_properties* dest, struct css_properties* source){
     if (dest->flex_inherit){
         dest->flex = source->flex;
     }

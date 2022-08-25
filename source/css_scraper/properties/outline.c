@@ -297,7 +297,7 @@ void outline_width_property_set_value(struct css_properties* current_widget, cha
     }
 }
 
-void compute_outline(struct css_properties* dest, struct css_properties* source){
+void compute_inherit_outline(struct css_properties* dest, struct css_properties* source){
     if (dest->outline_inherit){
         dest->outline = source->outline;
     }

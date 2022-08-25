@@ -7,7 +7,7 @@
 
 #include "../widget.h"
 
-void sync_css_properties(struct css_properties* dest, struct css_properties* source);
+void compute_inherit_css_properties(struct css_properties* dest, struct css_properties* source);
 void sync_all_html_tree(struct widget*);
 
 #endif //UNTITLED_CSS_SYNCHRONIZER_H

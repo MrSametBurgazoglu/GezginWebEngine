@@ -8,6 +8,7 @@
 #include "../css_widget.h"
 
 void backface_visibility_property_set_value(struct css_properties*, char*);
-void compute_backface_visibility(struct css_properties* dest, struct css_properties* source);
+void compute_inherit_backface_visibility(struct css_properties* dest, struct css_properties* source);
+void update_backface_visibility(struct css_properties* dest, struct css_properties* source);
 
 #endif //UNTITLED_BACKFACE_VISIBILITY_H

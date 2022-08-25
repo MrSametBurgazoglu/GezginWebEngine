@@ -27,7 +27,8 @@ void outline_color_property_set_value(struct css_properties*, char*);
 void outline_offset_property_set_value(struct css_properties*, char*);
 void outline_style_property_set_value(struct css_properties*, char*);
 void outline_width_property_set_value(struct css_properties*, char*);
-void compute_outline(struct css_properties* dest, struct css_properties* source);
+void compute_inherit_outline(struct css_properties* dest, struct css_properties* source);
+void update_outline(struct css_properties* dest, struct css_properties* source);
 void free_outline(struct css_properties*);
 
 #endif //UNTITLED_OUTLINE_H
