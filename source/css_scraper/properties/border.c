@@ -2389,3 +2389,13 @@ void free_border(struct css_properties* current_widget){
     free(current_widget->borderImage);
     free(current_widget->border);
 }
+
+void update_border(struct css_properties* current_widget, struct css_properties* source){
+    if(source->border_inherit){
+        current_widget->border_inherit = true;
+        current_widget->border = NULL;
+    }
+    else if (source->border != NULL){
+        current_widget->border = source->border;
+    }
+}

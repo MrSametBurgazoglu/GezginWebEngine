@@ -126,3 +126,27 @@ void compute_inherit_height(struct css_properties* dest, struct css_properties* 
         dest->maxHeightValueType = source->maxHeightValueType;
     }
 }
+
+void update_height(struct css_properties* current_widget, struct css_properties* source){
+    if(source->height_inherit){
+        current_widget->height_inherit = true;
+    }
+    else if (source->heightValueType != CSS_PROPERTY_VALUE_TYPE_EMPTY){
+        current_widget->height = source->height;
+        current_widget->heightValueType = source->heightValueType;
+    }
+    if(source->max_height_inherit){
+        current_widget->max_height_inherit = true;
+    }
+    else if (source->maxHeightValueType != CSS_PROPERTY_VALUE_TYPE_EMPTY){
+        current_widget->max_height = source->max_height;
+        current_widget->maxHeightValueType = source->maxHeightValueType;
+    }
+    if(source->min_height_inherit){
+        current_widget->min_height_inherit = true;
+    }
+    else if (source->minHeightValueType != CSS_PROPERTY_VALUE_TYPE_EMPTY){
+        current_widget->min_height = source->min_height;
+        current_widget->minHeightValueType = source->minHeightValueType;
+    }
+}

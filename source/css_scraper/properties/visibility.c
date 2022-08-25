@@ -39,3 +39,12 @@ void compute_inherit_visibility(struct css_properties* dest, struct css_properti
         dest->visibility = source->visibility;
     }
 }
+
+void update_visibility(struct css_properties* current_widget, struct css_properties* source){
+    if(source->visibility_inherit){
+        current_widget->visibility_inherit = true;
+    }
+    else if (source->visibility != CSS_VISIBILITY_EMPTY){
+        current_widget->visibility = source->visibility;
+    }
+}

@@ -410,3 +410,43 @@ void free_column(struct css_properties* current_widget){
     free(current_widget->columnRule->columnRuleColor);
     free(current_widget->columnRule);
 }
+
+void update_column(struct css_properties* current_widget, struct css_properties* source){
+    if(source->column_rule_inherit){
+        current_widget->column_rule_inherit = true;
+        current_widget->columnRule = NULL;
+    }
+    else if (source->columnRule != NULL){
+        current_widget->columnRule = source->columnRule;
+    }
+    if (source->column_count_inherit){
+        current_widget->column_count_inherit = true;
+    }
+    else if(source->column_count != 0){
+        current_widget->column_count = source->column_count;
+    }
+    if (source->column_fill_inherit){
+        current_widget->column_fill_inherit = true;
+    }
+    else if (source->column_fill != CSS_COLUMN_FILL_TYPE_EMPTY){
+        current_widget->column_fill = source->column_fill;
+    }
+    if (source->column_gap_inherit){
+        current_widget->column_gap_inherit = true;
+    }
+    else if (source->column_gap != 0){
+        current_widget->column_gap = source->column_gap;
+    }
+    if (source->column_span_inherit){
+        current_widget->column_span_inherit = true;
+    }
+    else if (source->columnSpanType != CSS_COLUMN_SPAN_TYPE_EMPTY){
+        current_widget->columnSpanType = source->columnSpanType;
+    }
+    if (source->column_width_inherit){
+        current_widget->column_width_inherit = true;
+    }
+    else if (source->column_width != 0){
+        current_widget->column_width = source->column_width;
+    }
+}

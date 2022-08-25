@@ -734,3 +734,13 @@ void free_background(struct css_properties* current_widget){
     free(current_widget->background->background_image_color_list);
     free(current_widget->background->background_image_list);
 }
+
+void update_background(struct css_properties* current_widget, struct css_properties* source){
+    if(source->background_inherit){
+        current_widget->background_inherit = true;
+        current_widget->background = NULL;
+    }
+    else if (source->background != NULL){
+        current_widget->background = source->background;
+    }
+}

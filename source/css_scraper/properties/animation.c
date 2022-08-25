@@ -506,3 +506,14 @@ void compute_inherit_align(struct css_properties* dest, struct css_properties* s
 void free_animation(struct css_properties* current_widget){
     free(current_widget->animation);
 }
+
+
+void update_animation(struct css_properties* current_widget, struct css_properties* source){
+    if(source->animation_inherit){
+        current_widget->animation_inherit = true;
+        current_widget->animation = NULL;
+    }
+    else if (source->animation != NULL){
+        current_widget->animation = source->animation;
+    }
+}

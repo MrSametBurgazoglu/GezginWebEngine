@@ -617,3 +617,13 @@ void free_font(struct css_properties* current_widget){
     free(current_widget->font->font_family);
     free(current_widget->font);
 }
+
+void update_font(struct css_properties* current_widget, struct css_properties* source){
+    if(source->font_inherit){
+        current_widget->font_inherit = true;
+        current_widget->font = NULL;
+    }
+    else if (source->font != NULL){
+        current_widget->font = source->font;
+    }
+}

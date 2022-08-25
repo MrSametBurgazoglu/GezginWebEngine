@@ -109,3 +109,24 @@ void compute_inherit_align(struct css_properties* dest, struct css_properties* s
         dest->align_self = source->align_self;
     }
 }
+
+void update_align(struct css_properties* current_widget, struct css_properties* source){
+    if(source->align_content_inherit){
+        current_widget->align_content_inherit = true;
+    }
+    else if(source->align_content != CSS_ALIGN_EMPTY){
+        current_widget->align_content = source->align_content;
+    }
+    if(source->align_items_inherit){
+        current_widget->align_items_inherit = true;
+    }
+    else if(source->align_items != CSS_ALIGN_EMPTY){
+        current_widget->align_items = source->align_items;
+    }
+    if(source->align_self_inherit){
+        current_widget->align_self_inherit = true;
+    }
+    else if(source->align_self != CSS_ALIGN_EMPTY){
+        current_widget->align_self = source->align_self;
+    }
+}

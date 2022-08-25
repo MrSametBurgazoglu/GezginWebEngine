@@ -306,3 +306,20 @@ void free_flex(struct css_properties* current_widget){
     free(current_widget->flex);
     free(current_widget->flexFlow);
 }
+
+void update_flex(struct css_properties* current_widget, struct css_properties* source){
+    if(source->flex_inherit){
+        current_widget->flex_inherit = true;
+        current_widget->flex = NULL;
+    }
+    else if (source->flex != NULL){
+        current_widget->flex = source->flex;
+    }
+    if(source->flex_flow_inherit){
+        current_widget->flex_flow_inherit = true;
+        current_widget->flexFlow = NULL;
+    }
+    else if (source->flexFlow != NULL){
+        current_widget->flexFlow = source->flexFlow;
+    }
+}

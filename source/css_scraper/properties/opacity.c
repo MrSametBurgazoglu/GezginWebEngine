@@ -32,3 +32,12 @@ void compute_inherit_opacity(struct css_properties* dest, struct css_properties*
         dest->opacity = source->opacity;
     }
 }
+
+void update_opacity(struct css_properties* current_widget, struct css_properties* source){
+    if(source->opacity_inherit){
+        current_widget->opacity_inherit = true;
+    }
+    else if (source->opacity != 0.0){
+        current_widget->opacity = source->opacity;
+    }
+}

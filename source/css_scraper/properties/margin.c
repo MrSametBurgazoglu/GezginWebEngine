@@ -287,3 +287,13 @@ void compute_inherit_margin(struct css_properties* dest, struct css_properties* 
 void free_margin(struct css_properties* current_widget){
     free(current_widget->margin);
 }
+
+void update_margin(struct css_properties* current_widget, struct css_properties* source){
+    if(source->margin_inherit){
+        current_widget->margin_inherit = true;
+        current_widget->margin = NULL;
+    }
+    else if (source->margin != NULL){
+        current_widget->margin = source->margin;
+    }
+}

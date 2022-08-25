@@ -36,3 +36,13 @@ void compute_inherit_accent_color(struct css_properties* dest, struct css_proper
 void free_accent_color(struct css_properties* current_widget){
     free(current_widget->accent_color);
 }
+
+void update_accent_color(struct css_properties* current_widget, struct css_properties* source){
+    if(source->accent_color_inherit){
+        current_widget->accent_color_inherit = true;
+        current_widget->accent_color = NULL;
+    }
+    else if(source->accent_color != NULL){
+        current_widget->accent_color = source->accent_color;
+    }
+}

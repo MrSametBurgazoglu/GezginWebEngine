@@ -55,3 +55,12 @@ void compute_inherit_resize(struct css_properties* dest, struct css_properties* 
         dest->resize = source->resize;
     }
 }
+
+void update_resize(struct css_properties* current_widget, struct css_properties* source){
+    if(source->resize_inherit){
+        current_widget->resize_inherit = true;
+    }
+    else if (source->resize != CSS_RESIZE_EMPTY){
+        current_widget->resize = source->resize;
+    }
+}

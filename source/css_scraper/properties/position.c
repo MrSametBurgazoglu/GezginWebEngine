@@ -196,5 +196,41 @@ void compute_inherit_position(struct css_properties* dest, struct css_properties
     if (dest->bottom_inherit){
         dest->bottom = source->bottom;
     }
+}
 
+void update_position(struct css_properties* current_widget, struct css_properties* source){
+    if(source->position_inherit){
+        current_widget->position_inherit = true;
+    }
+    else if (source->position != CSS_POSITION_TYPE_EMPTY){
+        current_widget->position = source->position;
+    }
+    if (source->top_inherit){
+        current_widget->top_inherit = true;
+    }
+    else if (source->topValueType != CSS_PROPERTY_VALUE_TYPE_EMPTY){
+        current_widget->top = source->top;
+        current_widget->topValueType = source->topValueType;
+    }
+    if (source->bottom_inherit){
+        current_widget->bottom_inherit = true;
+    }
+    else if (source->bottomValueType != CSS_PROPERTY_VALUE_TYPE_EMPTY){
+        current_widget->bottom = source->bottom;
+        current_widget->bottomValueType = source->bottomValueType;
+    }
+    if (source->left_inherit){
+        current_widget->left_inherit = true;
+    }
+    else if (source->leftValueType != CSS_PROPERTY_VALUE_TYPE_EMPTY){
+        current_widget->left = source->left;
+        current_widget->leftValueType = source->leftValueType;
+    }
+    if (source->right_inherit){
+        current_widget->right_inherit = true;
+    }
+    else if (source->rightValueType != CSS_PROPERTY_VALUE_TYPE_EMPTY){
+        current_widget->right = source->right;
+        current_widget->rightValueType = source->rightValueType;
+    }
 }

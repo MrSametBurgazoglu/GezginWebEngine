@@ -206,3 +206,13 @@ void compute_inherit_overflow(struct css_properties* dest, struct css_properties
 void free_overflow(struct css_properties* current_widget){
     free(current_widget->overflow);
 }
+
+void update_overflow(struct css_properties* current_widget, struct css_properties* source){
+    if(source->overflow_inherit){
+        current_widget->overflow_inherit = true;
+        current_widget->overflow = NULL;
+    }
+    else if (source->overflow != NULL){
+        current_widget->overflow = source->overflow;
+    }
+}

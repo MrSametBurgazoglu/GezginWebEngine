@@ -287,3 +287,13 @@ void compute_inherit_padding(struct css_properties* dest, struct css_properties*
 void free_padding(struct css_properties* current_widget){
     free(current_widget->padding);
 }
+
+void update_padding(struct css_properties* current_widget, struct css_properties* source){
+    if(source->padding_inherit){
+        current_widget->padding_inherit = true;
+        current_widget->padding = NULL;
+    }
+    else if (source->padding != NULL){
+        current_widget->padding = source->padding;
+    }
+}

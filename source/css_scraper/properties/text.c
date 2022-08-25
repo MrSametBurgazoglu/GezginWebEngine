@@ -625,3 +625,42 @@ void free_text(struct css_properties* current_widget){
     free(current_widget->textShadow);
     free(current_widget->textIndent);
 }
+
+void update_text(struct css_properties* current_widget, struct css_properties* source){
+    if(source->text_decoration_inherit){
+        current_widget->text_decoration_inherit = true;
+    }
+    else if (source->textDecoration != NULL){
+        current_widget->textDecoration = source->textDecoration;
+    }
+    if (source->text_indent_inherit){
+        current_widget->text_indent_inherit = true;
+    }
+    else if (source->textIndent != NULL){
+        current_widget->textIndent = source->textIndent;
+    }
+    if (source->text_justify_inherit){
+        current_widget->text_justify_inherit = true;
+    }
+    else if (source->textJustify != CSS_TEXT_JUSTIFY_EMPTY){
+        current_widget->textJustify = source->textJustify;
+    }
+    if (source->text_overflow_inherit){
+        current_widget->text_overflow_inherit = true;
+    }
+    else if(source->textOverflow != CSS_TEXT_OVERFLOW_EMPTY){
+        current_widget->textOverflow = source->textOverflow;
+    }
+    if (source->text_shadow_inherit){
+        current_widget->text_shadow_inherit = true;
+    }
+    else if (source->textShadow != NULL){
+        current_widget->textShadow = source->textShadow;
+    }
+    if (source->text_transform_inherit){
+        current_widget->text_transform_inherit = true;
+    }
+    else if (source->textTransformType != CSS_TEXT_TRANSFORM_EMPTY){
+        current_widget->textTransformType = source->textTransformType;
+    }
+}

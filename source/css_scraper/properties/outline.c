@@ -321,3 +321,13 @@ void free_outline(struct css_properties* current_widget){
     free(current_widget->outline->colorRgba);
     free(current_widget->outline);
 }
+
+void update_outline(struct css_properties* current_widget, struct css_properties* source){
+    if(source->outline_inherit){
+        current_widget->outline_inherit = true;
+        current_widget->outline = NULL;
+    }
+    else if (source->outline != NULL){
+        current_widget->outline = source->outline;
+    }
+}

@@ -33,3 +33,12 @@ void compute_inherit_backdrop_filter(struct css_properties* dest, struct css_pro
         dest->backdropFilterType = source->backdropFilterType;
     }
 }
+
+void update_backdrop_filter(struct css_properties* current_widget, struct css_properties* source){
+    if(source->backdropFilter_inherit){
+        current_widget->backdropFilter_inherit = true;
+    }
+    else if (source->backdropFilterType != CSS_FILTER_TYPE_EMPTY){
+        current_widget->backdropFilterType = source->backdropFilterType;
+    }
+}

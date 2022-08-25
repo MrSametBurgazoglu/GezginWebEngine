@@ -46,6 +46,7 @@ typedef enum {
 } css_animation_play_state;
 
 typedef enum {
+    CSS_FILTER_TYPE_EMPTY,
     CSS_FILTER_TYPE_NONE,
     CSS_FILTER_TYPE_BLUR,
     CSS_FILTER_TYPE_BRIGHTNESS,
@@ -61,6 +62,7 @@ typedef enum {
 } css_filter_type;
 
 typedef enum {
+    CSS_ALIGN_EMPTY,
     CSS_ALIGN_STRETCH,
     CSS_ALIGN_CENTER,
     CSS_ALIGN_FLEX_START,
@@ -211,6 +213,7 @@ typedef enum {
 } css_border_image_repeat_type;
 
 typedef enum {
+    CSS_PROPERTY_VALUE_TYPE_EMPTY,
     CSS_PROPERTY_VALUE_TYPE_AUTO,
     CSS_PROPERTY_VALUE_TYPE_LENGTH,
     CSS_PROPERTY_VALUE_TYPE_PIXEL,
@@ -270,6 +273,7 @@ typedef enum {
 } css_clip_type;
 
 typedef enum {
+    CSS_COLUMN_FILL_TYPE_EMPTY,
     CSS_COLUMN_FILL_TYPE_BALANCE,
     CSS_COLUMN_FILL_TYPE_AUTO,
 } css_column_fill_type;
@@ -295,6 +299,7 @@ typedef enum {
 } css_column_rule_width_type;
 
 typedef enum {
+    CSS_COLUMN_SPAN_TYPE_EMPTY,
     CSS_COLUMN_SPAN_TYPE_NONE,
     CSS_COLUMN_SPAN_TYPE_ALL,
 } css_column_span_type;
@@ -516,6 +521,7 @@ typedef enum {
 } css_text_justify_type;
 
 typedef enum {
+    CSS_TEXT_OVERFLOW_EMPTY,
     CSS_TEXT_OVERFLOW_CLIP,
     CSS_TEXT_OVERFLOW_ELLIPSIS,
     CSS_TEXT_OVERFLOW_STRING,
@@ -530,6 +536,7 @@ typedef enum {
 } css_text_transform_type;
 
 typedef enum {
+    CSS_POSITION_TYPE_EMPTY,
     CSS_POSITION_TYPE_STATIC,
     CSS_POSITION_TYPE_ABSOLUTE,
     CSS_POSITION_TYPE_FIXED,
@@ -573,6 +580,7 @@ typedef enum {
 } css_overflow_wrap_type;
 
 typedef enum {
+    CSS_RESIZE_EMPTY,
     CSS_RESIZE_NONE,
     CSS_RESIZE_BOTH,
     CSS_RESIZE_HORIZONTAL,

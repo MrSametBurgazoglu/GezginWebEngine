@@ -117,3 +117,27 @@ void compute_inherit_width(struct css_properties* dest, struct css_properties* s
         dest->maxWidthValueType = source->maxWidthValueType;
     }
 }
+
+void update_width(struct css_properties* current_widget, struct css_properties* source){
+    if(source->width_inherit){
+        current_widget->width_inherit = true;
+    }
+    else if (current_widget->widthValueType != CSS_PROPERTY_VALUE_TYPE_EMPTY){
+        current_widget->width = source->width;
+        current_widget->widthValueType = source->widthValueType;
+    }
+    if(source->max_width_inherit){
+        current_widget->max_width_inherit = true;
+    }
+    else if (current_widget->maxWidthValueType != CSS_PROPERTY_VALUE_TYPE_EMPTY){
+        current_widget->max_width = source->max_width;
+        current_widget->maxWidthValueType = source->maxWidthValueType;
+    }
+    if(source->min_width_inherit){
+        current_widget->min_width_inherit = true;
+    }
+    else if (current_widget->minWidthValueType != CSS_PROPERTY_VALUE_TYPE_EMPTY){
+        current_widget->min_width = source->min_width;
+        current_widget->minWidthValueType = source->minWidthValueType;
+    }
+}

@@ -29,3 +29,13 @@ void compute_inherit_color(struct css_properties* dest, struct css_properties* s
 void free_color(struct css_properties* current_widget){
     free(current_widget->color);
 }
+
+void update_color(struct css_properties* current_widget, struct css_properties* source){
+    if(source->color_inherit){
+        current_widget->color_inherit = true;
+        current_widget->color = NULL;
+    }
+    else if (source->color != NULL){
+        current_widget->color = source->color;
+    }
+}
