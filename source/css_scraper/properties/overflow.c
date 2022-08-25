@@ -185,6 +185,24 @@ void overflow_y_property_set_value(struct css_properties* current_widget, char* 
     }
 }
 
+void compute_overflow(struct css_properties* dest, struct css_properties* source){
+    if (dest->overflow != NULL && source->overflow != NULL){
+        if (dest->overflow_inherit){
+            dest->overflow->overflowX = source->overflow->overflowX;
+            dest->overflow->overflowY = source->overflow->overflowY;
+        }
+        if (dest->overflow->wrap == CSS_OVERFLOW_EMPTY || dest->overflow->overflow_wrap_inherit){
+            dest->overflow->wrap = source->overflow->wrap;
+        }
+        if (dest->overflow->overflow_x_inherit){
+            dest->overflow->overflowX = source->overflow->overflowX;
+        }
+        if (dest->overflow->overflow_y_inherit){
+            dest->overflow->overflowY = source->overflow->overflowY;
+        }
+    }
+}
+
 void free_overflow(struct css_properties* current_widget){
     free(current_widget->overflow);
 }

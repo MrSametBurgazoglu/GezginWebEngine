@@ -155,5 +155,7 @@ void border_top_right_radius_property_set_value(struct css_properties*, char*);
 void border_top_style_property_set_value(struct css_properties*, char*);
 void border_top_width_property_set_value(struct css_properties*, char*);
 void border_width_property_set_value(struct css_properties*, char*);
+void compute_border(struct css_properties* dest, struct css_properties* source);
+void free_border(struct css_properties*);
 
 #endif //UNTITLED_BORDER_H

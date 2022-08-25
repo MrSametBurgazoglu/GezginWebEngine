@@ -97,3 +97,15 @@ void align_self_property_set_value(struct css_properties* current_widget, char* 
         set_align_self(current_widget, value);
     }
 }
+
+void compute_align(struct css_properties* dest, struct css_properties* source){
+    if (dest->align_content_inherit){
+        dest->align_content = source->align_content;
+    }
+    if (dest->align_items_inherit){
+        dest->align_items = source->align_items;
+    }
+    if (dest->align_self_inherit){
+        dest->align_self = source->align_self;
+    }
+}

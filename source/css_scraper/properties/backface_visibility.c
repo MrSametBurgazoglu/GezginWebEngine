@@ -16,3 +16,9 @@ void backface_visibility_property_set_value(struct css_properties* current_widge
         current_widget->backfaceVisibility = CSS_VISIBILITY_VISIBLE;
     }
 }
+
+void compute_backface_visibility(struct css_properties* dest, struct css_properties* source){
+    if (dest->backface_visibility_inherit){
+        dest->backfaceVisibility = source->backfaceVisibility;
+    }
+}

@@ -27,3 +27,9 @@ void backdrop_filter_property_set_value(struct css_properties* current_css_widge
         }
     }
 }
+
+void compute_backdrop_filter(struct css_properties* dest, struct css_properties* source){
+    if (dest->backdropFilter_inherit){
+        dest->backdropFilterType = source->backdropFilterType;
+    }
+}

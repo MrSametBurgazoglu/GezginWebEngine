@@ -102,3 +102,18 @@ void max_width_property_set_value(struct css_properties* current_widget, char* v
         set_max_width(current_widget, value);
     }
 }
+
+void compute_width(struct css_properties* dest, struct css_properties* source){
+    if (dest->width_inherit){
+        dest->width = source->width;
+        dest->widthValueType = source->widthValueType;
+    }
+    if (dest->min_width_inherit){
+        dest->min_width = source->min_width;
+        dest->minWidthValueType = source->minWidthValueType;
+    }
+    if (dest->max_width_inherit){
+        dest->max_width = source->max_width;
+        dest->maxWidthValueType = source->maxWidthValueType;
+    }
+}

@@ -179,3 +179,22 @@ void right_property_set_value(struct css_properties* current_widget, char* value
         set_right(current_widget, value);
     }
 }
+
+void compute_position(struct css_properties* dest, struct css_properties* source){
+    if (dest->position_inherit){
+        dest->position = source->position;
+    }
+    if (dest->left_inherit){
+        dest->left = source->left;
+    }
+    if (dest->right_inherit){
+        dest->right = source->right;
+    }
+    if (dest->top_inherit){
+        dest->top = source->top;
+    }
+    if (dest->bottom_inherit){
+        dest->bottom = source->bottom;
+    }
+
+}

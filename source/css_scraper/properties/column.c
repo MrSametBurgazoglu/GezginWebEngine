@@ -373,6 +373,38 @@ void columns_property_set_value(struct css_properties* current_widget, char* val
     }
 }
 
+void compute_column(struct css_properties* dest, struct css_properties* source){
+    if (dest->column_count_inherit){
+        dest->column_count = source->column_count;
+    }
+    if (dest->column_fill_inherit){
+        dest->column_fill = source->column_fill;
+    }
+    if (dest->column_gap_inherit){
+        dest->column_gap = source->column_gap;
+    }
+    if (dest->column_rule_inherit){
+        dest->columnRule = source->columnRule;
+    }
+    else if (dest->columnRule != NULL && source->columnRule != NULL){
+        if (dest->columnRule->column_rule_color_inherit){
+            dest->columnRule->columnRuleColor = source->columnRule->columnRuleColor;
+        }
+        if (dest->columnRule->column_rule_style_inherit){
+            dest->columnRule->columnRuleStyleType = source->columnRule->columnRuleStyleType;
+        }
+        if (dest->columnRule->column_rule_width_inherit){
+            dest->columnRule->columnRuleWidth = source->columnRule->columnRuleWidth;
+        }
+    }
+    if (dest->column_span_inherit){
+        dest->columnSpanType = source->columnSpanType;
+    }
+    if (dest->column_width_inherit){
+        dest->column_width = source->column_width;
+    }
+}
+
 void free_column(struct css_properties* current_widget){
     free(current_widget->columnRule->columnRuleWidth);
     free(current_widget->columnRule->columnRuleColor);

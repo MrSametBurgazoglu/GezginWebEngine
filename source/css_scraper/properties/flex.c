@@ -273,6 +273,35 @@ void flex_wrap_property_set_value(struct css_properties* current_widget, char* v
     }
 }
 
+void compute_flex(struct css_properties* dest, struct css_properties* source){
+    if (dest->flex_inherit){
+        dest->flex = source->flex;
+    }
+    else if (dest->flex != NULL && source->flex != NULL){
+        if (dest->flex->flex_basis_inherit){
+            dest->flex->flex_basis_valueType = source->flex->flex_basis_valueType;
+            dest->flex->flex_basis_value = source->flex->flex_basis_value;
+        }
+        if (dest->flex->flex_grow_inherit){
+            dest->flex->flex_grow_value = source->flex->flex_grow_value;
+        }
+        if (dest->flex->flex_shrink_inherit){
+            dest->flex->flex_shrink_value = source->flex->flex_shrink_value;
+        }
+    }
+    if (dest->flex_flow_inherit){
+        dest->flexFlow = source->flexFlow;
+    }
+    else if(dest->flexFlow != NULL && source->flexFlow != NULL){
+        if (dest->flexFlow->flex_wrap_inherit){
+            dest->flexFlow->flexWrap = source->flexFlow->flexWrap;
+        }
+        if (dest->flexFlow->flex_direction_inherit){
+            dest->flexFlow->flexDirection = source->flexFlow->flexDirection;
+        }
+    }
+}
+
 void free_flex(struct css_properties* current_widget){
     free(current_widget->flex);
     free(current_widget->flexFlow);

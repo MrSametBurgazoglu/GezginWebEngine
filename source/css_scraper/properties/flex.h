@@ -32,5 +32,7 @@ void flex_flow_property_set_value(struct css_properties*, char*);
 void flex_grow_property_set_value(struct css_properties*, char*);
 void flex_shrink_property_set_value(struct css_properties*, char*);
 void flex_wrap_property_set_value(struct css_properties*, char*);
+void compute_flex(struct css_properties* dest, struct css_properties* source);
+void free_flex(struct css_properties*);
 
 #endif //UNTITLED_FLEX_H

@@ -79,6 +79,7 @@ typedef enum {
 } css_all_variable;
 
 typedef enum {
+    CSS_VISIBILITY_EMPTY,
     CSS_VISIBILITY_VISIBLE,
     CSS_VISIBILITY_HIDDEN,
     CSS_VISIBILITY_COLLAPSE,
@@ -507,6 +508,7 @@ typedef enum {
 } css_text_thickness_type;
 
 typedef enum {
+    CSS_TEXT_JUSTIFY_EMPTY,
     CSS_TEXT_JUSTIFY_AUTO,
     CSS_TEXT_JUSTIFY_INTER_WORD,
     CSS_TEXT_JUSTIFY_INTER_CHARACTER,
@@ -520,6 +522,7 @@ typedef enum {
 } css_text_overflow_type;
 
 typedef enum {
+    CSS_TEXT_TRANSFORM_EMPTY,
     CSS_TEXT_TRANSFORM_NONE,
     CSS_TEXT_TRANSFORM_CAPITALIZE,
     CSS_TEXT_TRANSFORM_UPPERCASE,
@@ -563,6 +566,7 @@ typedef enum {
 } css_overflow_type;
 
 typedef enum {
+    CSS_OVERFLOW_EMPTY,
     CSS_OVERFLOW_WRAP_NORMAL,
     CSS_OVERFLOW_WRAP_ANYWHERE,
     CSS_OVERFLOW_WRAP_BREAK_WORD,

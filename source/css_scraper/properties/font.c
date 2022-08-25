@@ -576,6 +576,40 @@ void font_weight_property_set_value(struct css_properties* current_widget, char*
     }
 }
 
+void compute_font(struct css_properties* dest, struct css_properties* source){
+    if (dest->font == NULL){
+        dest->font = source->font;
+    }
+    else if (source->font != NULL){
+        if (dest->font->font_family_count == 0){
+            dest->font->font_family = source->font->font_family;
+            dest->font->font_family_count = source->font->font_family_count;
+        }
+        if (source->font->font_kerning){
+            dest->font->font_kerning = true;
+        }
+        if (dest->font->fontSizeType == CSS_FONT_SIZE_TYPE_EMPTY){
+            dest->font->fontSizeType = source->font->fontSizeType;
+        }
+        if (dest->font->fontStretchType == CSS_FONT_SIZE_TYPE_EMPTY){
+            dest->font->fontStretchType = source->font->fontStretchType;
+        }
+        if (dest->font->fontStyle == CSS_FONT_STYLE_EMPTY){
+            dest->font->fontStyle = source->font->fontStyle;
+        }
+        if (dest->font->fontVariantType == CSS_FONT_VARIANT_CAPS_TYPE_EMPTY){
+            dest->font->fontVariantType = source->font->fontVariantType;
+        }
+        if (dest->font->fontVariantCapsType == CSS_FONT_VARIANT_CAPS_TYPE_EMPTY){
+            dest->font->fontVariantCapsType = source->font->fontVariantCapsType;
+        }
+        if (dest->font->fontWeightType == CSS_FONT_VARIANT_CAPS_TYPE_EMPTY){
+            dest->font->fontWeightType = source->font->fontWeightType;
+            dest->font->font_weight_value = source->font->font_weight_value;
+        }
+    }
+}
+
 void free_font(struct css_properties* current_widget){
     for (int i = 0; i < current_widget->font->font_family_count; ++i) {
         free(current_widget->font->font_family[i]);

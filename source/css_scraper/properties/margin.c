@@ -260,6 +260,30 @@ void margin_property_set_value(struct css_properties* current_widget, char* valu
     }
 }
 
+void compute_margin(struct css_properties* dest, struct css_properties* source){
+    if (dest->margin_inherit){
+        dest->margin = source->margin;
+    }
+    else if(dest->margin != NULL && source->margin != NULL){
+        if (dest->margin->margin_bottom_inherit){
+            dest->margin->margin_bottom = source->margin->margin_bottom;
+            dest->margin->marginBottomValueType = source->margin->marginBottomValueType;
+        }
+        if (dest->margin->margin_top_inherit){
+            dest->margin->margin_top = source->margin->margin_top;
+            dest->margin->marginTopValueType = source->margin->marginTopValueType;
+        }
+        if (dest->margin->margin_left_inherit){
+            dest->margin->margin_left = source->margin->margin_left;
+            dest->margin->marginLeftValueType = source->margin->marginLeftValueType;
+        }
+        if (dest->margin->margin_right_inherit){
+            dest->margin->margin_right = source->margin->margin_right;
+            dest->margin->marginRightValueType = source->margin->marginRightValueType;
+        }
+    }
+}
+
 void free_margin(struct css_properties* current_widget){
     free(current_widget->margin);
 }

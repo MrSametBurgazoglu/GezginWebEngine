@@ -2314,6 +2314,66 @@ void border_width_property_set_value(struct css_properties* current_widget, char
     }
 }
 
+void compute_border(struct css_properties* dest, struct css_properties* source){
+    if (dest->border_inherit){
+        dest->border = source->border;
+    }
+    else if (dest->border != NULL && source->border != NULL){
+        if (dest->border->border_color_inherit){
+            dest->border->borderColor = source->border->borderColor;
+        }
+        else if (dest->border->borderColor != NULL){
+            if(dest->border->borderColor->border_color_top_inherit){
+                dest->border->borderColor->topBorderColor = source->border->borderColor->topBorderColor;
+            }
+            if(dest->border->borderColor->border_color_bottom_inherit){
+                dest->border->borderColor->bottomBorderColor = source->border->borderColor->bottomBorderColor;
+            }
+            if (dest->border->borderColor->border_color_left_inherit){
+                dest->border->borderColor->leftBorderColor = source->border->borderColor->leftBorderColor;
+            }
+            if (dest->border->borderColor->border_color_right_inherit){
+                dest->border->borderColor->rightBorderColor = source->border->borderColor->rightBorderColor;
+            }
+        }
+        if (dest->borderCollapseType == CSS_BORDER_COLLAPSE_TYPE_EMPTY){
+            dest->borderCollapseType = source->borderCollapseType;
+        }
+        if (dest->border_image_inherit){
+            dest->borderImage = source->borderImage;
+        }
+        else if (dest->borderImage != NULL && source->borderImage != NULL){
+            if (dest->borderImage->border_image_outset_inherit){
+                dest->borderImage->imageOutset = source->borderImage->imageOutset;
+            }
+            if (dest->borderImage->border_image_repeat_inherit){
+                dest->borderImage->imageRepeatType = source->borderImage->imageRepeatType;
+            }
+            if (dest->borderImage->border_image_repeat_inherit){
+                dest->borderImage->imageRepeatType = source->borderImage->imageRepeatType;
+            }
+            if (dest->borderImage->border_image_slice_inherit){
+                dest->borderImage->imageSlice = source->borderImage->imageSlice;
+            }
+            if (dest->borderImage->border_image_source_inherit){
+                dest->borderImage->imageSource = source->borderImage->imageSource;
+            }
+            if (dest->borderImage->border_image_width_inherit){
+                dest->borderImage->imageWidth = source->borderImage->imageWidth;
+            }
+        }
+        if (dest->border_radius_inherit){
+            dest->borderRadius = source->borderRadius;
+        }
+        if (source->borderSpacing != NULL){
+            dest->borderSpacing = source->borderSpacing;
+        }
+        if (dest->border->border_style_inherit){
+            dest->border->borderStyle = source->border->borderStyle;
+        }
+    }
+}
+
 void free_border(struct css_properties* current_widget){
     free(current_widget->border->borderWidth);
     free(current_widget->border->borderStyle);
@@ -2327,4 +2387,5 @@ void free_border(struct css_properties* current_widget){
     free(current_widget->borderImage->imageSlice);
     free(current_widget->borderImage->imageWidth);
     free(current_widget->borderImage);
+    free(current_widget->border);
 }

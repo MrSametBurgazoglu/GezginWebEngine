@@ -260,6 +260,30 @@ void padding_property_set_value(struct css_properties* current_widget, char* val
     }
 }
 
+void compute_padding(struct css_properties* dest, struct css_properties* source){
+    if(dest->padding_inherit){
+        dest->padding = source->padding;
+    }
+    else if(dest->padding != NULL && source->padding != NULL){
+        if(dest->padding->padding_top_inherit){
+            dest->padding->padding_top = source->padding->padding_top;
+            dest->padding->paddingTopValueType = source->padding->paddingTopValueType;
+        }
+        if(dest->padding->padding_bottom_inherit){
+            dest->padding->padding_bottom = source->padding->padding_bottom;
+            dest->padding->paddingBottomValueType = source->padding->paddingBottomValueType;
+        }
+        if(dest->padding->padding_left_inherit){
+            dest->padding->padding_left = source->padding->padding_left;
+            dest->padding->paddingLeftValueType = source->padding->paddingLeftValueType;
+        }
+        if(dest->padding->padding_right_inherit){
+            dest->padding->padding_right = source->padding->padding_right;
+            dest->padding->paddingRightValueType = source->padding->paddingRightValueType;
+        }
+    }
+}
+
 void free_padding(struct css_properties* current_widget){
     free(current_widget->padding);
 }

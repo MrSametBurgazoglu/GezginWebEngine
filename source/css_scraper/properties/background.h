@@ -74,6 +74,8 @@ void background_attachment_property_set_value(struct css_properties* current_wid
 
 void background_property_set_value(struct css_properties* current_widget,char * value);
 
+void compute_background(struct css_properties* dest, struct css_properties* source);
 
+void free_background(struct css_properties*);
 
 #endif //UNTITLED_BACKGROUND_H

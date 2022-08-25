@@ -111,3 +111,18 @@ void max_height_property_set_value(struct css_properties* current_widget, char* 
         }
     }
 }
+
+void compute_height(struct css_properties* dest, struct css_properties* source){
+    if (dest->height_inherit){
+        dest->height = source->height;
+        dest->heightValueType = source->heightValueType;
+    }
+    if (dest->min_height_inherit){
+        dest->min_height = source->min_height;
+        dest->minHeightValueType = source->minHeightValueType;
+    }
+    if (dest->max_height_inherit){
+        dest->max_height = source->max_height;
+        dest->maxHeightValueType = source->maxHeightValueType;
+    }
+}

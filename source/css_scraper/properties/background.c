@@ -688,6 +688,42 @@ void background_property_set_value(struct css_properties* current_widget, char *
     }
 }
 
+void compute_background(struct css_properties* dest, struct css_properties* source){
+    if (dest->background_inherit){
+        dest->background = source->background;
+    }
+    else if (dest->background != NULL && source->background != NULL){
+        if (dest->background->background_attachment_inherit){
+            dest->background->backgroundAttachment = source->background->backgroundAttachment;
+        }
+        if (dest->background->background_attachment_inherit){
+            dest->background->backgroundAttachment = source->background->backgroundAttachment;
+        }
+        if (dest->background->background_clip_inherit){
+            dest->background->backgroundClip = source->background->backgroundClip;
+        }
+        if (dest->background->background_color_inherit){
+            dest->background->background_color= source->background->background_color;
+        }
+        if (dest->background->background_image_inherit){
+            dest->background->background_image_list = source->background->background_image_list;
+            dest->background->background_image_count = source->background->background_image_count;
+        }
+        if (dest->background->background_origin_inherit){
+            dest->background->backgroundOrigin = source->background->backgroundOrigin;
+        }
+        if (dest->background->background_position_inherit){
+            dest->background->backgroundPosition = source->background->backgroundPosition;
+        }
+        if (dest->background->background_repeat_inherit){
+            dest->background->backgroundRepeatType = source->background->backgroundRepeatType;
+        }
+        if (dest->background->background_size_inherit){
+            dest->background->backgroundSize = source->background->backgroundSize;
+        }
+    }
+}
+
 void free_background(struct css_properties* current_widget){
     free(current_widget->background->backgroundPosition);
     free(current_widget->background->background_color);

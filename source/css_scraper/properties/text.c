@@ -583,6 +583,41 @@ void text_transform_property_set_value(struct css_properties* current_widget, ch
     }
 }
 
+void compute_text(struct css_properties* dest, struct css_properties* source){
+    if (dest->text_decoration_inherit){
+        dest->textDecoration = source->textDecoration;
+    }
+    else if(dest->textDecoration != NULL && source->textDecoration != NULL){
+        if (dest->textDecoration->text_decoration_thickness_inherit){
+            dest->textDecoration->textDecorationThickness = source->textDecoration->textDecorationThickness;
+        }
+        if (dest->textDecoration->text_decoration_line_inherit){
+            dest->textDecoration->textDecorationLine = source->textDecoration->textDecorationLine;
+        }
+        if (dest->textDecoration->text_decoration_style_inherit){
+            dest->textDecoration->textDecorationStyle = source->textDecoration->textDecorationStyle;
+        }
+        if (dest->textDecoration->text_decoration_color_inherit){
+            dest->textDecoration->textDecorationColor = source->textDecoration->textDecorationColor;
+        }
+    }
+    if (dest->textIndent == NULL){
+        dest->textIndent = source->textIndent;
+    }
+    if (dest->textJustify == CSS_TEXT_JUSTIFY_EMPTY){
+        dest->textJustify = source->textJustify;
+    }
+    if (dest->text_overflow_inherit){
+        dest->textOverflow = source->textOverflow;
+    }
+    if (dest->textShadow == NULL){
+        dest->textShadow = source->textShadow;
+    }
+    if (dest->textTransformType == CSS_TEXT_TRANSFORM_EMPTY){
+        dest->textTransformType = source->textTransformType;
+    }
+}
+
 void free_text(struct css_properties* current_widget){
     free(current_widget->textDecoration->textDecorationThickness);
     free(current_widget->textDecoration->textDecorationColor);

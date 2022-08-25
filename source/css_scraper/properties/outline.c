@@ -297,6 +297,26 @@ void outline_width_property_set_value(struct css_properties* current_widget, cha
     }
 }
 
+void compute_outline(struct css_properties* dest, struct css_properties* source){
+    if (dest->outline_inherit){
+        dest->outline = source->outline;
+    }
+    else if(dest->outline != NULL && source->outline != NULL){
+        if (dest->outline->outline_width_inherit){
+            dest->outline->outlineWidth = source->outline->outlineWidth;
+        }
+        if (dest->outline->outline_offset_inherit){
+            dest->outline->offset = source->outline->offset;
+        }
+        if (dest->outline->outline_color_inherit){
+            dest->outline->colorRgba = source->outline->colorRgba;
+        }
+        if (dest->outline->outline_style_inherit){
+            dest->outline->outlineStyleType = source->outline->outlineStyleType;
+        }
+    }
+}
+
 void free_outline(struct css_properties* current_widget){
     free(current_widget->outline->colorRgba);
     free(current_widget->outline);

@@ -9,5 +9,6 @@
 #include "../css_widget.h"
 
 void resize_property_set_value(struct css_properties*, char*);
+void compute_resize(struct css_properties* dest, struct css_properties* source);
 
 #endif //UNTITLED_RESIZE_H

@@ -468,6 +468,41 @@ void animation_property_set_value(struct css_properties *current_widget, char* v
     }
 }
 
+void compute_align(struct css_properties* dest, struct css_properties* source){
+    if (dest->animation_inherit){
+        dest->animation = source->animation;
+    }
+    else if(dest->animation != NULL && source->animation != NULL){//if animation is inherit there is no need its sub properties to be inherit
+        if (dest->animation->animation_delay_inherit){
+            dest->animation->animation_delay = source->animation->animation_delay;
+        }
+        if (dest->animation->animation_direction_inherit){
+            dest->animation->animationDirection = source->animation->animationDirection;
+        }
+        if (dest->animation->animation_duration_inherit){
+            dest->animation->animation_duration = source->animation->animation_duration;
+        }
+        if (dest->animation->animation_fill_mode_inherit){
+            dest->animation->animationFillMode = source->animation->animationFillMode;
+        }
+        if (dest->animation->animation_iteration_count_inherit){
+            dest->animation->animation_iteration_count = source->animation->animation_iteration_count;
+        }
+        if (dest->animation->animation_direction_inherit){
+            dest->animation->animationDirection = source->animation->animationDirection;
+        }
+        if (dest->animation->animation_name_inherit){
+            dest->animation->animation_name = source->animation->animation_name;
+        }
+        if (dest->animation->animation_play_state_inherit){
+            dest->animation->animationPlayState = source->animation->animationPlayState;
+        }
+        if (dest->animation->animation_timing_function_inherit){
+            dest->animation->animationTimingFunction = source->animation->animationTimingFunction;//TODO CHECK THIS SET
+        }
+    }
+}
+
 void free_animation(struct css_properties* current_widget){
     free(current_widget->animation);
 }
