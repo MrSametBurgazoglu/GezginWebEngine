@@ -61,26 +61,72 @@ void set_css_properties(struct widget* current_widget, struct widget* parent_wid
         char* class_name = current_widget->html_variables->class[index];
         current_css_properties = get_css_widget_by_class(class_name);
         if(current_css_properties != NULL){
-            compute_inherit_css_properties(current_widget->css_properties, current_css_properties);
+            update_css_properties_by_another_css_properties(current_widget->css_properties, current_css_properties);
         }
         current_css_properties = get_css_widget_by_element_and_class(current_widget->html_tag, class_name);
         if(current_css_properties != NULL){
-            compute_inherit_css_properties(current_widget->css_properties, current_css_properties);
+            update_css_properties_by_another_css_properties(current_widget->css_properties, current_css_properties);
         }
     }
     current_css_properties = get_css_widget_by_element(current_widget->html_tag);
     if(current_css_properties != NULL){
-        compute_inherit_css_properties(current_widget->css_properties, current_css_properties);
+        update_css_properties_by_another_css_properties(current_widget->css_properties, current_css_properties);
     }
     current_css_properties = get_css_widget_by_id(current_widget->html_variables->id);
     if(current_css_properties != NULL){
-        compute_inherit_css_properties(current_widget->css_properties, current_css_properties);
+        update_css_properties_by_another_css_properties(current_widget->css_properties, current_css_properties);
     }
     if(current_widget->html_variables->style != NULL){//TODO BUGFIX
         printf("WOW:%s:WOW", current_widget->html_variables->style);
         //scrape_css_from_inline_style(current_widget->css_properties, current_widget->html_variables->style);
     }
 
+}
+//last call
+void set_inherit_css_widgets(struct widget* document){//TODO THERE IS A BUG HERE I DON'T KNOW WHERE
+    struct widget** widget_list = malloc(sizeof(struct widget*));
+    int *widget_index_list = malloc(sizeof(int));
+    widget_list[0] = document;
+    widget_index_list[0] = 0;
+    int current_index = 0;
+    int widget_count = 1;
+    while (widget_index_list[0] != document->children_count){
+        if(widget_index_list[current_index] == widget_list[current_index]->children_count){
+            current_index--;
+            widget_count--;
+            widget_list = realloc(widget_list, widget_count * sizeof(struct widget*));
+            widget_index_list = realloc(widget_index_list, widget_count * sizeof(int ));
+            widget_index_list[current_index]++;
+        }
+        else{
+            if(widget_list[current_index]->children[widget_index_list[current_index]]->children_count > 0){
+                widget_count++;
+                widget_list = realloc(widget_list, widget_count * sizeof(struct widget*));
+                widget_index_list = realloc(widget_index_list, widget_count * sizeof(int ));
+                widget_list[widget_count-1] = widget_list[current_index]->children[widget_index_list[current_index]];
+                widget_index_list[widget_count-1] = 0;
+                current_index++;
+                if(widget_list[current_index]->draw == true){
+                    int a = widget_list[current_index-1]->html_tag;
+                    printf("html:tag:%d\n", a);
+                    compute_inherit_css_properties(widget_list[current_index]->css_properties, widget_list[current_index-1]->css_properties);
+                }
+            }
+            else{
+                if(widget_list[current_index]->children[widget_index_list[current_index]]->draw == true){
+                    compute_inherit_css_properties(widget_list[current_index]->children[widget_index_list[current_index]]->css_properties, widget_list[current_index]->css_properties);
+                }
+                widget_index_list[current_index]++;
+            }
+        }
+    }
+}
+
+void initialize_document_object(struct widget* document){
+    document->css_properties = malloc(sizeof(struct css_properties));
+    initialize_css_properties_widget(document->css_properties);
+    document->css_properties->color = malloc(sizeof(struct color_rgba));
+    get_color_by_rgb(document->css_properties->color, 0, 0, 0);
 }
 
 //last call
@@ -91,6 +137,7 @@ void scrape_css_from_document(struct widget* document){//TODO THERE IS A BUG HER
     // add is draw and css properties from files,  style tags, inline styles
     struct widget** widget_list = malloc(sizeof(struct widget*));
     int *widget_index_list = malloc(sizeof(int));
+    initialize_document_object(document);
     widget_list[0] = document;
     widget_index_list[0] = 0;
     int current_index = 0;
@@ -123,7 +170,6 @@ void scrape_css_from_document(struct widget* document){//TODO THERE IS A BUG HER
             }
         }
     }
-
 }
 
 struct css_properties* get_current_css_widget(char* selector){

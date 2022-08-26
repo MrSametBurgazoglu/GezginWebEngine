@@ -13,6 +13,7 @@ void open_web_page(char* file_url){
     document = scrape_html_from_file(file_url);
     execute_css_scraper();
     scrape_css_from_document(document);
+    set_inherit_css_widgets(document);
 }
 
 void draw_page(SDL_Renderer* renderer){

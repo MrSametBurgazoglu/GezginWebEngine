@@ -450,7 +450,7 @@ void background_image_property_set_value(struct css_properties* current_widget, 
         }
         current_widget->background->background_image_inherit = false;
         if (strcmp(value, "initial") != 0){
-            set_background_image(current_widget, value);
+            set_background_image(current_widget->background, value);
         }
     }
 }

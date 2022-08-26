@@ -11,6 +11,7 @@
 void initialize_css_scraper(void);
 void execute_css_scraper(void );
 void scrape_css_from_document(struct widget*);
+void set_inherit_css_widgets(struct widget*);
 
 
 #endif //UNTITLED_CSS_SCRAPER_H

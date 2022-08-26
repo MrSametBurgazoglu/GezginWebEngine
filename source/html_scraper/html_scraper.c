@@ -105,6 +105,7 @@ struct widget* scrape_html_from_file(char* file_name){
     }
 
     struct widget *document = (struct widget*) malloc(sizeof(struct widget));
+    memset(document, 0, sizeof(struct widget));
     document->children = (struct widget**) malloc(0);
     document->children_count = 0;
     struct widget *current_widget = document;
