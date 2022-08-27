@@ -88,3 +88,46 @@ void draw_document(struct widget* document, SDL_Renderer * renderer){
         }
     }
 }
+
+void set_draw_properties_for_widget(struct widget* current_widget){
+
+}
+
+void set_draw_properties(struct widget* document){//TODO MAKE PARENT LAST
+    struct widget** widget_list = malloc(sizeof(struct widget*));
+    int *widget_index_list = malloc(sizeof(int));
+    widget_list[0] = document;
+    widget_index_list[0] = 0;
+    int current_index = 0;
+    int widget_count = 1;
+    while (widget_index_list[0] != document->children_count){
+        if(widget_index_list[current_index] == widget_list[current_index]->children_count){
+            if(widget_list[current_index]->draw == true){
+                printf("html_tag::%d", widget_list[current_index]->html_tag);
+                set_draw_properties_for_widget(widget_list[current_index]);
+            }
+            current_index--;
+            widget_count--;
+            widget_list = realloc(widget_list, widget_count * sizeof(struct widget*));
+            widget_index_list = realloc(widget_index_list, widget_count * sizeof(int ));
+            widget_index_list[current_index]++;
+        }
+        else{
+            if(widget_list[current_index]->children[widget_index_list[current_index]]->children_count > 0){
+                widget_count++;
+                widget_list = realloc(widget_list, widget_count * sizeof(struct widget*));
+                widget_index_list = realloc(widget_index_list, widget_count * sizeof(int ));
+                widget_list[widget_count-1] = widget_list[current_index]->children[widget_index_list[current_index]];
+                widget_index_list[widget_count-1] = 0;
+                current_index++;
+            }
+            else{
+                if(widget_list[current_index]->children[widget_index_list[current_index]]->draw == true){
+                    printf("html_tag::%d", widget_list[current_index]->children[widget_index_list[current_index]]->html_tag);
+                    set_draw_properties_for_widget(widget_list[current_index]->children[widget_index_list[current_index]]);
+                }
+                widget_index_list[current_index]++;
+            }
+        }
+    }
+}

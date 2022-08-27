@@ -11,7 +11,7 @@
 #include <stdlib.h>
 #include <malloc.h>
 
-void get_color_by_name(struct color_rgba* color_struct, char* name){
+bool get_color_by_name(struct color_rgba* color_struct, char* name){
     int index = get_index_from_list_by_string(css_color_strings, name, CSS_COLOR_NAME_STRING_COUNT);
     if (index != -1){
         int* values = css_color_name_rgb[index];
@@ -19,13 +19,9 @@ void get_color_by_name(struct color_rgba* color_struct, char* name){
         color_struct->red = values[0];
         color_struct->green = values[1];
         color_struct->blue = values[2];
+        return true;
     }
-    else{
-        color_struct->alpha = 0;
-        color_struct->red = 0;
-        color_struct->green = 0;
-        color_struct->blue = 0;
-    }
+    return false;
 }
 
 void get_color_by_rgb(struct color_rgba* color_struct, int red, int green, int blue){
@@ -99,6 +95,9 @@ void get_color_by_hex(struct color_rgba* color_struct, char* value){
 }
 
 bool get_color(struct color_rgba* colorRgba, char* value){
+    if (get_color_by_name(colorRgba, value) == true){
+        return true;
+    }
     char* start_index = strchr(value, '(');
     char* end_index = strchr(value, ')');
     if (start_index != NULL && end_index != NULL){

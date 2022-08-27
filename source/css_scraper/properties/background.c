@@ -400,6 +400,7 @@ void background_color_property_set_value(struct css_properties* current_widget, 
     else{
         if (current_widget->background == NULL){
             current_widget->background = malloc(sizeof(struct css_background));
+            memset(current_widget->background, 0, sizeof(struct css_background));
         }
         if (current_widget->background_inherit){
             current_widget->background = malloc(sizeof(struct css_background));

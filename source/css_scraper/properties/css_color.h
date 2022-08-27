@@ -14,7 +14,7 @@ struct color_rgba{
     int blue;
 };
 
-void get_color_by_name(struct color_rgba*, char*);
+bool get_color_by_name(struct color_rgba*, char*);
 
 void get_color_by_rgb(struct color_rgba*, int, int, int);
 void get_color_by_rgba(struct color_rgba*, int, int, int, int);

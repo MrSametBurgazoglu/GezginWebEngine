@@ -6,6 +6,7 @@
 #include "css_color.h"
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 void color_property_set_value(struct css_properties* current_widget, char* value){
     if(!strcmp(value, "inherit")){

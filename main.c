@@ -24,9 +24,7 @@ int main(int argc, char *argv[])
         fprintf(stderr, "error: font not found\n");
         exit(EXIT_FAILURE);
     }
-
     open_web_page("example.html");
-
     quit = 0;
     while (!quit) {
         while (SDL_PollEvent(&event) == 1) {
@@ -39,7 +37,6 @@ int main(int argc, char *argv[])
         SDL_RenderClear(renderer);
         render_page(renderer);
         draw_page(renderer);
-
         SDL_RenderPresent(renderer);
     }
 

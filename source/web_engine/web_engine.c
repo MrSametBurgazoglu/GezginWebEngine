@@ -18,6 +18,7 @@ void open_web_page(char* file_url){
 
 void draw_page(SDL_Renderer* renderer){
     draw_document(document, renderer);
+    set_draw_properties(document);
 }
 
 void render_page(SDL_Renderer* renderer){

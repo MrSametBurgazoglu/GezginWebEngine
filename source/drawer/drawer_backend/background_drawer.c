@@ -10,8 +10,23 @@ void draw_background(struct css_properties* css_widget, struct draw_properties* 
         printf("its not null\n");
     }
     if (css_widget->background != NULL && css_widget->background->background_image_count > 0) {
-        SDL_RenderCopy(renderer, draw_properties->backgroundImage->background_image, NULL,
-                       &draw_properties->backgroundImage->rect);
+        SDL_RenderCopy(renderer, draw_properties->background_image, NULL,
+                       &draw_properties->rect);
+    }
+    if (css_widget->background->background_color != NULL){
+        printf("color not null\n");
+        SDL_Rect rect;
+        rect.x = 50;
+        rect.y = 50;
+        rect.w = 50;
+        rect.h = 50;
+        SDL_SetRenderDrawColor(renderer,
+                               css_widget->background->background_color->red,
+                               css_widget->background->background_color->green,
+                               css_widget->background->background_color->blue,
+                               css_widget->background->background_color->alpha);
+        SDL_RenderFillRect(renderer, &rect);
+        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     }
 }
 

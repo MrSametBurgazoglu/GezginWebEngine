@@ -29,22 +29,26 @@ void scrape_css_from_inline_style(struct css_properties* css_widget, char* text)
     char* value;
     int property_number;
     do {
-        if(*current_character != ' ' && *current_character != '\n' && *current_character != '\t'){//unimportant characters
-            context[current_count++] = *current_character;
-        }
-        else if (*current_character == ':') {//property found
+        if (*current_character == ':') {//property found
             property = malloc(current_count * sizeof(char )+1);
             property[current_count] = '\0';
             strncpy(property, context, current_count);
             memset(context, 0, current_count);
             property_number = get_css_property_number(property);
+            property = NULL;
+            current_count = 0;
         }
-        else if (*current_character == ';') {//property found
+        else if (*current_character == ';' || *current_character == '\0') {//property finished
             value = malloc(current_count * sizeof(char )+1);
             value[current_count] = '\0';
             strncpy(value, context, current_count);
             memset(context, 0, current_count);
             set_css_property_by_number(property_number, css_widget, value);
+            value = NULL;
+            current_count = 0;
+        }
+        else if(*current_character != ' ' && *current_character != '\n' && *current_character != '\t'){//unimportant characters
+            context[current_count++] = *current_character;
         }
     }
     while (*current_character++ != '\0');
@@ -76,9 +80,8 @@ void set_css_properties(struct widget* current_widget, struct widget* parent_wid
     if(current_css_properties != NULL){
         update_css_properties_by_another_css_properties(current_widget->css_properties, current_css_properties);
     }
-    if(current_widget->html_variables->style != NULL){//TODO BUGFIX
-        printf("WOW:%s:WOW", current_widget->html_variables->style);
-        //scrape_css_from_inline_style(current_widget->css_properties, current_widget->html_variables->style);
+    if(current_widget->html_variables->style != NULL){
+        scrape_css_from_inline_style(current_widget->css_properties, current_widget->html_variables->style);
     }
 
 }
