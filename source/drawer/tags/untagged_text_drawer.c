@@ -6,6 +6,7 @@
 #include "../drawer_backend/draw_text.h"
 #include "../../html_scraper/tags/html_untagged_text.h"
 #include "../drawer_backend/sdl_drawer.h"
+#include "../drawer_backend/calculate_dimensions.h"
 
 //rect (x,y) must be defined by parent before draw or rendering
 
@@ -18,21 +19,20 @@ void untagged_text_render_function(struct widget* text_widget, SDL_Renderer* ren
     if (text_widget->draw_properties == NULL){
         text_widget->draw_properties = malloc(sizeof(struct draw_properties));
     }
-    else if (text_widget->draw_properties->text_texture != NULL) {
-        SDL_DestroyTexture(text_widget->draw_properties->text_texture);
-    }
+    //else if (text_widget->draw_properties->text_texture != NULL) {
+    //    SDL_DestroyTexture(text_widget->draw_properties->text_texture);
+    //}
     struct text_untagged* properties = (struct text_untagged*) text_widget->widget_properties;
     struct css_properties* cssProperties = (struct css_properties*) text_widget->parent->css_properties;
     TTF_Font *font = TTF_OpenFont("../docs/fonts/Sans.ttf", 24);
-    struct color_rgba* colorRgba = malloc(sizeof(struct color_rgba));
-    colorRgba->red = 0;
-    colorRgba->green = 0;
-    colorRgba->blue = 0;
-    colorRgba->alpha = 0;
     get_text_texture(renderer,
                      properties->value,
                      cssProperties->color,
                      font,
                      &text_widget->draw_properties->text_texture,
                      &text_widget->draw_properties->rect);
+    text_widget->draw_properties->rect.x = calculate_x_pos_text_widget(text_widget);
+    text_widget->draw_properties->rect.y = calculate_y_pos_text_widget(text_widget);
+    printf("rectx:%d,recty:%d\n", text_widget->draw_properties->rect.x, text_widget->draw_properties->rect.y);
+    printf("tag:%d\n", text_widget->parent->html_tag);
 }

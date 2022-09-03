@@ -11,6 +11,7 @@
 
 struct widget {
     int children_count;//total children count
+    int child_index; // index of widget on parent's children list
     html_tags html_tag;
     void *widget_properties;//properties for unique to html tag
     struct standart_html_objects *html_variables;

@@ -350,8 +350,8 @@ typedef enum {
 } css_direction_type;
 
 typedef enum {
-    CSS_DISPLAY_TYPE_INLINE,
     CSS_DISPLAY_TYPE_BLOCK,
+    CSS_DISPLAY_TYPE_INLINE,
     CSS_DISPLAY_TYPE_CONTENTS,
     CSS_DISPLAY_TYPE_FLEX,
     CSS_DISPLAY_TYPE_GRID,

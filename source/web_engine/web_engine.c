@@ -9,6 +9,7 @@
 struct widget* document;
 
 void open_web_page(char* file_url){
+    initialize_drawer(500, 500);
     initialize_css_scraper();
     document = scrape_html_from_file(file_url);
     execute_css_scraper();

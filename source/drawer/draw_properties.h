@@ -5,6 +5,8 @@
 #ifndef UNTITLED_DRAW_PROPERTIES_H
 #define UNTITLED_DRAW_PROPERTIES_H
 
+#define WEB_ENGINE_MAX_WIDTH 100
+
 #include "drawer_backend/sdl_drawer.h"
 #include "../widget.h"
 

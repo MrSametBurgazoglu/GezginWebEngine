@@ -158,7 +158,7 @@ char * css_color_strings[CSS_COLOR_NAME_STRING_COUNT] = {
         "yellowgreen",
 };
 
-int css_color_name_rgb[CSS_COLOR_NAME_STRING_COUNT][3] = {
+int css_color_name_rgb[CSS_COLOR_NAME_STRING_COUNT][3] = {//TODO FIX COLORS SOME OF THEM WRONG
         240,248,255,
         250,235,215,
         250,235,215,

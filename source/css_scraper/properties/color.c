@@ -13,7 +13,7 @@ void color_property_set_value(struct css_properties* current_widget, char* value
         current_widget->color_inherit = true;
     }
     else{
-        current_widget->color_inherit = true;
+        current_widget->color_inherit = false;
         if(current_widget->color == NULL){
             current_widget->color = malloc(sizeof(struct color_rgba));
         }

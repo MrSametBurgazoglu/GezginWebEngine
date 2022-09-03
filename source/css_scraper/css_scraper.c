@@ -56,9 +56,6 @@ void scrape_css_from_inline_style(struct css_properties* css_widget, char* text)
 }
 //TODO MAKE DOCUMENT CSS PROPERTIES BY INITIAL VALUES
 void set_css_properties(struct widget* current_widget, struct widget* parent_widget){
-    if(parent_widget->css_properties != NULL){
-        compute_inherit_css_properties(current_widget->css_properties, parent_widget->css_properties);
-    }
     size_t class_count = current_widget->html_variables->class_count;
     struct css_properties *current_css_properties;
     for (size_t index = 0; index < class_count; ++index) {
@@ -83,7 +80,6 @@ void set_css_properties(struct widget* current_widget, struct widget* parent_wid
     if(current_widget->html_variables->style != NULL){
         scrape_css_from_inline_style(current_widget->css_properties, current_widget->html_variables->style);
     }
-
 }
 //last call
 void set_inherit_css_widgets(struct widget* document){//TODO THERE IS A BUG HERE I DON'T KNOW WHERE

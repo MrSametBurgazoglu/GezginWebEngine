@@ -9,7 +9,7 @@
 #include "drawer_backend/sdl_drawer.h"
 //#include "draw_properties.h"
 
-void initialize_drawer(void *);
+void initialize_drawer(int, int);
 void render_document(struct widget*, SDL_Renderer*);
 void draw_document(struct widget*, SDL_Renderer *);
 void set_draw_properties(struct widget* document);

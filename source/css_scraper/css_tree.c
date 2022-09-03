@@ -46,6 +46,7 @@ void add_new_tag_to_list(struct widget** html_widget){
 //use calloc instead of malloc
 void initialize_css_properties_widget(struct css_properties* css_widget){
     memset(css_widget, 0, sizeof(struct css_properties));
+    css_widget->color = NULL;
 }
 
 struct css_properties* create_new_css_widget_by_id(char* id){

@@ -6,15 +6,11 @@
 #include "../../css_scraper/properties/background.h"
 
 void draw_background(struct css_properties* css_widget, struct draw_properties* draw_properties, SDL_Renderer* renderer){
-    if (css_widget->background != NULL){
-        printf("its not null\n");
-    }
     if (css_widget->background != NULL && css_widget->background->background_image_count > 0) {
         SDL_RenderCopy(renderer, draw_properties->background_image, NULL,
                        &draw_properties->rect);
     }
     if (css_widget->background->background_color != NULL){
-        printf("color not null\n");
         SDL_Rect rect;
         rect.x = 50;
         rect.y = 50;
@@ -25,7 +21,13 @@ void draw_background(struct css_properties* css_widget, struct draw_properties* 
                                css_widget->background->background_color->green,
                                css_widget->background->background_color->blue,
                                css_widget->background->background_color->alpha);
-        SDL_RenderFillRect(renderer, &rect);
+        SDL_RenderFillRect(renderer, &draw_properties->rect);
+        /*
+        printf("rect x %d\n", draw_properties->rect.x);
+        printf("rect y %d\n", draw_properties->rect.y);
+        printf("rect h %d\n", draw_properties->rect.h);
+        printf("rect w %d\n", draw_properties->rect.w);
+         */
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     }
 }

@@ -195,6 +195,8 @@ struct html_tag_variables htmlTagVariables[105] = {
         [28].widget_property_function = set_widget_properties_for_dialog_tag,
         [29].tag = HTML_DIV,
         [29].draw = true,
+        [29].widget_draw_function = div_drawer_function,
+        [29].widget_render_function = div_render_function,
         [30].tag = HTML_DL,
         [30].draw = true,
         [31].tag = HTML_DT,
@@ -406,6 +408,9 @@ bool set_html_tag(struct widget* current_widget, char* tag_name){
         current_widget->draw = true;
         current_widget->render_widget = htmlTagVariables[result].widget_render_function;
         current_widget->draw_widget = htmlTagVariables[result].widget_draw_function;
+        current_widget->draw_properties = malloc(sizeof(struct draw_properties));
+        current_widget->draw_properties->rect.x = 0;
+        current_widget->draw_properties->rect.y = 0;
     }
     if (htmlTagVariables[result].end_tag == true){
         return true;//if element don't have ending tag like '</div>'

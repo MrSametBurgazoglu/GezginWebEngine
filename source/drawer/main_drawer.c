@@ -3,12 +3,14 @@
 //
 
 #include "main_drawer.h"
+#include "drawer_backend/calculate_dimensions.h"
 
 SDL_Surface *main_surface;
 SDL_Texture *main_texture;
 
-void initialize_drawer(void* rend){
+void initialize_drawer(int width, int height){
     //init_sdl_drawer();
+    set_browser_window_size(width, height);
 }
 
 void render_document(struct widget* document, SDL_Renderer* renderer){
@@ -90,7 +92,14 @@ void draw_document(struct widget* document, SDL_Renderer * renderer){
 }
 
 void set_draw_properties_for_widget(struct widget* current_widget){
-
+    int pos_x = calculate_x_pos_of_widget(current_widget);
+    int pos_y = calculate_y_pos_of_widget(current_widget);
+    int width = calculate_width_of_widget(current_widget);
+    int height = calculate_height_of_widget(current_widget);
+    current_widget->draw_properties->rect.x = pos_x;
+    current_widget->draw_properties->rect.y = pos_y;
+    current_widget->draw_properties->rect.w = width;
+    current_widget->draw_properties->rect.h = height;
 }
 
 void set_draw_properties(struct widget* document){//TODO MAKE PARENT LAST
@@ -103,7 +112,6 @@ void set_draw_properties(struct widget* document){//TODO MAKE PARENT LAST
     while (widget_index_list[0] != document->children_count){
         if(widget_index_list[current_index] == widget_list[current_index]->children_count){
             if(widget_list[current_index]->draw == true){
-                printf("html_tag::%d", widget_list[current_index]->html_tag);
                 set_draw_properties_for_widget(widget_list[current_index]);
             }
             current_index--;
@@ -123,7 +131,6 @@ void set_draw_properties(struct widget* document){//TODO MAKE PARENT LAST
             }
             else{
                 if(widget_list[current_index]->children[widget_index_list[current_index]]->draw == true){
-                    printf("html_tag::%d", widget_list[current_index]->children[widget_index_list[current_index]]->html_tag);
                     set_draw_properties_for_widget(widget_list[current_index]->children[widget_index_list[current_index]]);
                 }
                 widget_index_list[current_index]++;

@@ -108,6 +108,9 @@ struct widget* scrape_html_from_file(char* file_name){
     memset(document, 0, sizeof(struct widget));
     document->children = (struct widget**) malloc(0);
     document->children_count = 0;
+    document->draw_properties = malloc(sizeof(struct draw_properties));
+    document->draw_properties->rect.x = 0;
+    document->draw_properties->rect.y = 0;
     struct widget *current_widget = document;
     /* first variables */
     int current_count = 0;
@@ -117,7 +120,6 @@ struct widget* scrape_html_from_file(char* file_name){
             break;
         }
         if(current_character == '<'){ // start of tag
-
             if (current_count > 0){
                 struct widget *new_widget = (struct widget*) malloc(sizeof(struct widget));
                 new_widget->html_tag = HTML_UNTAGGED_TEXT;
@@ -136,7 +138,10 @@ struct widget* scrape_html_from_file(char* file_name){
                 struct text_untagged *text = new_widget->widget_properties;
                 new_widget->html_variables = NULL;
                 new_widget->children = NULL;
-                new_widget->draw_properties = NULL;
+                new_widget->draw_properties = malloc(sizeof(struct draw_properties));
+                new_widget->draw_properties->rect.x = 0;
+                new_widget->draw_properties->rect.y = 0;
+                new_widget->child_index = current_widget->children_count-1;
                 text->value = malloc(current_count * sizeof(char )+1);
                 text->value[current_count] = '\0';
                 strncpy(text->value, context, current_count);
@@ -171,6 +176,7 @@ struct widget* scrape_html_from_file(char* file_name){
                 current_widget->children_count = current_widget->children_count + 1;
                 current_widget->children = realloc(current_widget->children, current_widget->children_count * sizeof(struct widget*));
                 current_widget->children[current_widget->children_count-1] = new_widget;
+                new_widget->child_index = current_widget->children_count-1;
                 current_widget = new_widget;
                 //TODO MAKE CURRENT WIDGET INIT FUNCTION
                 current_widget->var_reader_func = NULL;
@@ -287,7 +293,7 @@ struct widget* scrape_html_from_file(char* file_name){
             current_count = 0;
         }
         else{
-            if(current_character != '\n'){
+            if(current_character != '\n' && current_character != '\t' && current_character != ' '){
                 context[current_count] = (char)current_character;
                 current_count++;
                 //printf("%c", current_character);
